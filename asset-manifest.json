@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/dop-bike/static/css/main.7acaea2f.css",
-    "main.js": "/dop-bike/static/js/main.07d3183d.js",
+    "main.js": "/dop-bike/static/js/main.3c1ff778.js",
     "index.html": "/dop-bike/index.html",
     "main.7acaea2f.css.map": "/dop-bike/static/css/main.7acaea2f.css.map",
-    "main.07d3183d.js.map": "/dop-bike/static/js/main.07d3183d.js.map"
+    "main.3c1ff778.js.map": "/dop-bike/static/js/main.3c1ff778.js.map"
   },
   "entrypoints": [
     "static/css/main.7acaea2f.css",
-    "static/js/main.07d3183d.js"
+    "static/js/main.3c1ff778.js"
   ]
 }

@@ -1,4 +1,5 @@
 import { Header } from './Header';
+import { News } from './News';
 
 export const App = () => {
   // function here
@@ -6,6 +7,7 @@ export const App = () => {
   return (
     <>
       <Header />
+      <News />
     </>
   );
 };

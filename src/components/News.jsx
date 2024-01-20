@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import styles from './News.module.css';
 import { nanoid } from 'nanoid';
 
@@ -36,8 +37,56 @@ export const News = () => {
       text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione quasi dicta facere dolorem. Non laudantium expedita maiores in libero voluptate impedit nobis, veritatis eum enim quo illo reprehenderit, quidem laboriosam',
     },
   ];
+  const [modal, setModal] = useState(false);
+
+  const openModal = () => {
+    setModal(true);
+  };
+
+  const closeModal = () => {
+    setModal(false);
+  };
+
   return (
     <>
+      <div className={styles.newsAdminPanel}>
+        <button onClick={openModal} className={styles.addNewsBtn}>
+          +
+        </button>
+      </div>
+      {modal && (
+        <>
+          <div onClick={closeModal} className={styles.shadowBox}></div>
+          <div className={styles.addNewsModal}>
+            <h1 className={styles.addNewsModalTitle}>Dodaj nowy wpis!</h1>
+
+            <form onSubmit="">
+              <div>
+                <input
+                  type="text"
+                  name="title"
+                  placeholder="Wpisz tytuł"
+                  required
+                ></input>
+                <input type="date" name="date"></input>
+              </div>
+              <textarea
+                type="textarea"
+                maxLength="1000"
+                name="paragraf"
+                placeholder="Paragraf1"
+              ></textarea>
+            </form>
+
+            <div className={styles.addNewsModalBtns}>
+              <button className={styles.modalNewsBtn}>Dodaj</button>
+              <button className={styles.modalNewsBtn} onClick={closeModal}>
+                Zamknij
+              </button>
+            </div>
+          </div>
+        </>
+      )}
       <div className={styles.news}>
         <div className={styles.newsTitleBox}>
           <p className={styles.newscommentTitle}>Co slychac w DOP?</p>

@@ -46,6 +46,8 @@ export const News = () => {
   const closeModal = () => {
     setModal(false);
   };
+  const [count, setCount] = useState(true);
+  const handleSlider = e => setCount(!count);
 
   return (
     <>
@@ -60,30 +62,75 @@ export const News = () => {
           <div className={styles.addNewsModal}>
             <h1 className={styles.addNewsModalTitle}>Dodaj nowy wpis!</h1>
 
-            <form onSubmit="">
-              <div>
-                <input
-                  type="text"
-                  name="title"
-                  placeholder="Wpisz tytuł"
-                  required
-                ></input>
-                <input type="date" name="date"></input>
+            <form onSubmit="" className={styles.modalFormWrapper}>
+              <input
+                className={styles.modalTitle}
+                type="text"
+                name="title"
+                placeholder="Wpisz tytuł"
+                required
+              ></input>
+
+              <div className={styles.sliderContainer}>
+                {!count ? (
+                  <span className={styles.greenText}>Zdjęcie z lewej</span>
+                ) : (
+                  <span className={styles.greyText}>Zdjęcie z lewej</span>
+                )}
+                <label className={styles.switch}>
+                  <input
+                    type="checkbox"
+                    className={styles.checkbox}
+                    name="slider"
+                    value={!count ? '+' : '-'}
+                    onChange={
+                      !count ? console.log('left') : console.log('right')
+                    }
+                    onClick={handleSlider}
+                  />
+                  <span className={styles.slider}></span>
+                </label>
+                {!count ? (
+                  <span className={styles.greyText}>Zdjęcie z prawej</span>
+                ) : (
+                  <span className={styles.redText}>Zdjęcie z prawej</span>
+                )}
               </div>
+
+              <button className={styles.modalNewsBtn}>Załącz zdjęcie</button>
+              <input
+                className={styles.modalData}
+                type="date"
+                name="date"
+              ></input>
               <textarea
                 type="textarea"
                 maxLength="1000"
                 name="paragraf"
                 placeholder="Paragraf1"
+                className={styles.modalParagraf}
               ></textarea>
+              <textarea
+                type="textarea"
+                maxLength="1000"
+                name="paragraf"
+                placeholder="Paragraf1"
+                className={styles.modalParagraf}
+              ></textarea>
+              <textarea
+                type="textarea"
+                maxLength="1000"
+                name="paragraf"
+                placeholder="Paragraf1"
+                className={styles.modalParagraf}
+              ></textarea>
+              <div className={styles.addNewsModalBtns}>
+                <button className={styles.modalNewsBtn}>Dodaj</button>
+                <button className={styles.modalNewsBtn} onClick={closeModal}>
+                  Zamknij
+                </button>
+              </div>
             </form>
-
-            <div className={styles.addNewsModalBtns}>
-              <button className={styles.modalNewsBtn}>Dodaj</button>
-              <button className={styles.modalNewsBtn} onClick={closeModal}>
-                Zamknij
-              </button>
-            </div>
           </div>
         </>
       )}

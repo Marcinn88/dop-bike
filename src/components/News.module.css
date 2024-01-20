@@ -58,6 +58,30 @@ top:50px;
 .addNewsModalBtns{
     display: flex;
     gap: 50px;
+    width: 100%;
+    justify-content: center;
+}
+.modalFormWrapper{
+    /* background-color: rgb(172, 117, 117); */
+    width: 80%;
+    height: 75%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:15px;
+}
+.modalTitle{
+    width: 90%;
+    padding: 0;
+    margin: 0;
+    height: 25px;
+}
+.modalData{
+    width: 15%;
+    height: 25px;
+}
+.modalParagraf{
+    width: 90%;
 }
 .modalNewsBtn{
     display: flex;
@@ -148,3 +172,80 @@ top:50px;
     max-width: 80%;
     border-radius: 15px;
 }
+
+.sliderContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  /* The switch - the box around the slider */
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 80px;
+    height: 40px;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: white;
+    border: 1px solid #dfdfdf;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    border-radius: 34px;
+  }
+  
+  .slider:before {
+    content: '';
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 20px;
+    height: 44px;
+    width: 44px;
+    right: 0px;
+    bottom: -3px;
+    background-color: #363636;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    border-radius: 50%;
+  }
+  
+  input:checked + .slider:before {
+    transform: translateX(-36px);
+    content: '';
+    background-color: #474747;
+  }
+  
+  
+.greenText {
+    color: #1a1a1a;
+    font-weight: bold;
+  }
+  
+  .redText {
+    color: #1a1a1a;
+    font-weight: bold;
+  }
+  
+  .greyText {
+    color: #dfdfdf;
+    font-weight: bold;
+  }

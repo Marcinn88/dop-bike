@@ -27,6 +27,14 @@ export const News = () => {
       photo: 'maciek.jpg',
       text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione quasi dicta facere dolorem. Non laudantium expedita maiores in libero voluptate impedit nobis, veritatis eum enim quo illo reprehenderit, quidem laboriosam',
     },
+    {
+      _id: '4',
+      title: 'AAAaaale duzo dymu!!!!',
+      date: '25.01.2024',
+      photo_position: 'right',
+      photo: 'maciek4.jpg',
+      text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione quasi dicta facere dolorem. Non laudantium expedita maiores in libero voluptate impedit nobis, veritatis eum enim quo illo reprehenderit, quidem laboriosam',
+    },
   ];
   return (
     <>

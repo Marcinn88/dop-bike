@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/dop-bike/static/css/main.95e0f49e.css",
-    "main.js": "/dop-bike/static/js/main.235dd5df.js",
+    "main.js": "/dop-bike/static/js/main.9e9a7bc4.js",
     "static/media/maciek3.jpg": "/dop-bike/static/media/maciek3.4718815ba0777053809c.jpg",
     "static/media/maciek2.jpg": "/dop-bike/static/media/maciek2.e2062ae08f5bd63df114.jpg",
     "static/media/maciek4.jpg": "/dop-bike/static/media/maciek4.fb508a7a3e060366a133.jpg",
@@ -13,10 +13,10 @@
     "static/media/fontello.svg?86056": "/dop-bike/static/media/fontello.c5fdf3c39b8625f57845.svg",
     "index.html": "/dop-bike/index.html",
     "main.95e0f49e.css.map": "/dop-bike/static/css/main.95e0f49e.css.map",
-    "main.235dd5df.js.map": "/dop-bike/static/js/main.235dd5df.js.map"
+    "main.9e9a7bc4.js.map": "/dop-bike/static/js/main.9e9a7bc4.js.map"
   },
   "entrypoints": [
     "static/css/main.95e0f49e.css",
-    "static/js/main.235dd5df.js"
+    "static/js/main.9e9a7bc4.js"
   ]
 }

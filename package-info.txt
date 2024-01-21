@@ -1,0 +1,12 @@
+
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+
+
+or
+
+
+
+
+    "start": "cross-env NODE_ENV=production node ./app.js",
+    "start:dev": "cross-env NODE_ENV=development nodemon ./app.js",

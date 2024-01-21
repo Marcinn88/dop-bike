@@ -5,6 +5,34 @@ import leftImage from '../images/left-img.jpg';
 import rightImage from '../images/right-img.jpg';
 import { getDay, getMonth, getDefYear } from '../services/DateFunctions';
 
+// const mongoose = require('mongoose');
+// const Schema = mongoose.Schema;
+
+// const task = new Schema(
+//   {
+//     title: {
+//       type: String,
+//       minlength: 2,
+//       maxlength: 70,
+//     },
+//     text: {
+//       type: String,
+//       minlength: 3,
+//       maxlength: 170,
+//     },
+//     isDone: {
+//       type: Boolean,
+//       default: false,
+//     },
+//   },
+//   { versionKey: false, timestamps: true }
+// );
+
+// const connection = mongoose.connect(uriDb, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
+
 export const News = () => {
   const data = [
     {
@@ -210,7 +238,7 @@ export const News = () => {
               </div>
               <textarea
                 type="textarea"
-                maxLength="1000"
+                maxLength="500"
                 name="paragraf"
                 placeholder="Wpisz zawartość pierwszego Paragrafu"
                 onChange={e => setPost({ ...post, text1: e.target.value })}
@@ -219,7 +247,7 @@ export const News = () => {
               ></textarea>
               <textarea
                 type="textarea"
-                maxLength="1000"
+                maxLength="500"
                 name="paragraf"
                 placeholder="Wpisz zawartość drugiego Paragrafu (opcjonalnie)"
                 onChange={e => setPost({ ...post, text2: e.target.value })}
@@ -227,7 +255,7 @@ export const News = () => {
               ></textarea>
               <textarea
                 type="textarea"
-                maxLength="1000"
+                maxLength="500"
                 name="paragraf"
                 placeholder="Wpisz zawartość trzeciego Paragrafu (opcjonalnie)"
                 onChange={e => setPost({ ...post, text3: e.target.value })}

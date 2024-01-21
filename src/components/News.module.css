@@ -30,6 +30,7 @@
 }
 .shadowBox{
     background-color: rgba(0, 0, 0, 0.767);
+    backdrop-filter: blur(5px);
     position: fixed;
     top:0;
     left:0;
@@ -43,8 +44,9 @@ display: flex;
 align-items: center;
 flex-direction: column;
 width: 60%;
-height: 70vh;
-background-color: white;
+height: 90vh;
+background-color: rgba(255, 255, 255, 0.76);
+backdrop-filter: blur(5px);
 border: none;
 border-radius: 15px;
 z-index: 5;
@@ -64,7 +66,7 @@ top:50px;
 .modalFormWrapper{
     /* background-color: rgb(172, 117, 117); */
     width: 80%;
-    height: 75%;
+    height: 85%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -72,16 +74,36 @@ top:50px;
 }
 .modalTitle{
     width: 90%;
-    padding: 0;
+    padding: 5px;
     margin: 0;
-    height: 25px;
+    height: 40px;
+    border: 1px solid rgb(199, 199, 199);
+    border-radius: 20px;
+    text-align: center;
 }
 .modalData{
-    width: 15%;
-    height: 25px;
+    width: 130px;
+    height: 50px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.37);
+    font-family: 'Oswald';
+    text-align: center;
 }
 .modalParagraf{
     width: 90%;
+    padding: 5px;
+    margin: 0;
+    height: 80px;
+    border: 1px solid rgb(199, 199, 199);
+    border-radius: 20px;
+    text-align: center;
+}
+.modalSmallWrapper{
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    justify-content: center;
+    gap: 50px;
 }
 .modalNewsBtn{
     display: flex;
@@ -96,7 +118,7 @@ top:50px;
     color: #000000;
     padding: 0;
     margin: 0;
-    background-color: rgba(255, 255, 255, 0.411);
+    background-color: rgb(255, 255, 255);
     cursor: pointer;
 }
 .newsTitleBox{
@@ -126,6 +148,7 @@ top:50px;
     cursor: default;
     /* background-color: aqua; */
     margin: 0 20px 0 20px;
+    
 }
 .newsElement{
     padding: 20px;
@@ -155,6 +178,7 @@ top:50px;
 }
 .newsText{
     display: flex;
+    flex-direction: column;
     max-width: 50%;
     justify-content: center;
     align-items: center;
@@ -178,6 +202,12 @@ top:50px;
     justify-content: center;
     align-items: center;
     gap: 20px;
+  }
+
+  .switchImage{
+    width: 250px;
+    border: 1px solid rgb(199, 199, 199);
+    border-radius: 20px;
   }
   
   /* The switch - the box around the slider */
@@ -249,3 +279,29 @@ top:50px;
     color: #dfdfdf;
     font-weight: bold;
   }
+
+  .modalFile{
+    border: 1px solid #ccc;
+    background-color: #fff;
+    width: 150px;
+    height: 50px;
+    display: flex;
+    padding: 6px 12px;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.37);
+    font-family: 'Oswald';
+    font-style:normal;
+    font-size: 15px;
+    color: #000000;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+  }
+  .modalInputFile{
+    display: none;
+  }
+
+

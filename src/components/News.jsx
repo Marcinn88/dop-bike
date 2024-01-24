@@ -1,15 +1,37 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './News.module.css';
 import { nanoid } from 'nanoid';
 import leftImage from '../images/left-img.jpg';
 import rightImage from '../images/right-img.jpg';
 import { getDay, getMonth, getDefYear } from '../services/DateFunctions';
-import data from '../services/db.json';
+// import data from '../services/db.json';
+// import { getArticles } from '../services/operations';
+
+import axios from 'axios';
+
+axios.defaults.baseURL = 'https://65b15d5ed16d31d11bdec7f4.mockapi.io';
 
 export const News = () => {
   const [modal, setModal] = useState(false);
   const [post, setPost] = useState({});
   const [count, setCount] = useState(true);
+  const [data, setData] = useState([]);
+
+  const getArticles = async () => {
+    try {
+      const response = await axios.get('/articles');
+      setData(response.data);
+      return response.data;
+    } catch (error) {
+      return console.error(error.message);
+    }
+  };
+
+  useEffect(() => {
+    getArticles();
+  }, []);
+
+  console.log(data);
 
   const openModal = () => {
     setPost({
@@ -25,6 +47,7 @@ export const News = () => {
       text1: '',
       text2: '',
       text3: '',
+      favorite: 'false',
     });
     setModal(true);
     setCount(true);
@@ -185,20 +208,27 @@ export const News = () => {
 
         {data.map(
           ({
-            _id,
+            id,
             title,
-            date,
+            date_day,
+            date_month,
+            date_year,
             photo_position,
             photo,
             text1,
             text2,
             text3,
+            favorite,
           }) => {
             return (
-              <div className={styles.newsElement} id={_id ?? nanoid()}>
+              <div
+                className={styles.newsElement}
+                key={nanoid()}
+                id={id ?? nanoid()}
+              >
                 <p className={styles.newsSubTitle}>{title}</p>
                 <p className={styles.newsDate}>
-                  {date.day}.{date.month}.{date.year}
+                  {date_day}.{date_month}.{date_year}
                 </p>
                 <div className={styles.newsContainer}>
                   {photo_position === 'left' ? (

@@ -4,8 +4,8 @@ import { nanoid } from 'nanoid';
 import leftImage from '../images/left-img.jpg';
 import rightImage from '../images/right-img.jpg';
 import { getDay, getMonth, getDefYear } from '../services/DateFunctions';
-// import data from '../services/db.json';
-// import { getArticles } from '../services/operations';
+import { addArticle } from '../services/operations';
+// import defaultImg from '../images/'
 
 import axios from 'axios';
 
@@ -21,6 +21,7 @@ export const News = () => {
     try {
       const response = await axios.get('/articles');
       setData(response.data);
+      console.log('lodaing data....');
       return response.data;
     } catch (error) {
       return console.error(error.message);
@@ -31,19 +32,15 @@ export const News = () => {
     getArticles();
   }, []);
 
-  console.log(data);
-
   const openModal = () => {
     setPost({
       _id: nanoid(),
       title: '',
-      date: {
-        day: getDay(),
-        month: getMonth(),
-        year: getDefYear(),
-      },
+      date_day: getDay(),
+      date_month: getMonth(),
+      date_year: getDefYear(),
       photo_position: 'right',
-      photo: '',
+      photo: 'default.jpg',
       text1: '',
       text2: '',
       text3: '',
@@ -51,7 +48,7 @@ export const News = () => {
     });
     setModal(true);
     setCount(true);
-    console.log(post);
+    // console.log(post);
   };
 
   const closeModal = () => {
@@ -78,14 +75,36 @@ export const News = () => {
     const day = selectedData.substr(8, 2);
     const month = selectedData.substr(5, 2);
     const year = selectedData.substr(0, 4);
-    setPost({ ...post, date: { day: day, month: month, year: year } });
+    setPost({ ...post, date_day: day, date_month: month, date_year: year });
   };
   const submitModal = e => {
     e.preventDefault();
-    // dispatch(createTransaction(data));
+    addArticle(post);
+    console.log('post');
     console.log(post);
     setModal(!modal);
+    // getArticles();
+    // setData({ ...data, post });
+    setData([
+      ...data,
+      {
+        _id: post._id,
+        title: post.title,
+        date_day: post.date_day,
+        date_month: post.date_month,
+        date_year: post.date_year,
+        photo_position: post.photo_position,
+        photo: post.photo,
+        text1: post.text1,
+        text2: post.text2,
+        text3: post.text3,
+        favorite: post.favorite,
+      },
+    ]);
+    console.log('data');
+    console.log(data);
   };
+
   return (
     <>
       <div className={styles.newsAdminPanel}>
@@ -206,59 +225,61 @@ export const News = () => {
           <h1 className={styles.newsTitle}>Aktualności</h1>
         </div>
 
-        {data.map(
-          ({
-            id,
-            title,
-            date_day,
-            date_month,
-            date_year,
-            photo_position,
-            photo,
-            text1,
-            text2,
-            text3,
-            favorite,
-          }) => {
-            return (
-              <div
-                className={styles.newsElement}
-                key={nanoid()}
-                id={id ?? nanoid()}
-              >
-                <p className={styles.newsSubTitle}>{title}</p>
-                <p className={styles.newsDate}>
-                  {date_day}.{date_month}.{date_year}
-                </p>
-                <div className={styles.newsContainer}>
-                  {photo_position === 'left' ? (
-                    <>
-                      <div className={styles.newsImg}>
-                        <img src={require(`../images/${photo}`)} alt="bike" />
-                      </div>
-                      <div className={styles.newsText}>
-                        <p>{text1}</p>
-                        <p>{text2}</p>
-                        <p>{text3}</p>
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <div className={styles.newsText}>
-                        <p>{text1}</p>
-                        <p>{text2}</p>
-                        <p>{text3}</p>
-                      </div>
-                      <div className={styles.newsImg}>
-                        <img src={require(`../images/${photo}`)} alt="bike" />
-                      </div>
-                    </>
-                  )}
+        {data
+          .toReversed()
+          .map(
+            ({
+              id,
+              title,
+              date_day,
+              date_month,
+              date_year,
+              photo_position,
+              photo,
+              text1,
+              text2,
+              text3,
+              favorite,
+            }) => {
+              return (
+                <div
+                  className={styles.newsElement}
+                  key={nanoid()}
+                  id={id ?? nanoid()}
+                >
+                  <p className={styles.newsSubTitle}>{title}</p>
+                  <p className={styles.newsDate}>
+                    {date_day}.{date_month}.{date_year}
+                  </p>
+                  <div className={styles.newsContainer}>
+                    {photo_position === 'left' ? (
+                      <>
+                        <div className={styles.newsImg}>
+                          <img src={require(`../images/${photo}`)} alt="bike" />
+                        </div>
+                        <div className={styles.newsText}>
+                          <p>{text1}</p>
+                          <p>{text2}</p>
+                          <p>{text3}</p>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className={styles.newsText}>
+                          <p>{text1}</p>
+                          <p>{text2}</p>
+                          <p>{text3}</p>
+                        </div>
+                        <div className={styles.newsImg}>
+                          <img src={require(`../images/${photo}`)} alt="bike" />
+                        </div>
+                      </>
+                    )}
+                  </div>
                 </div>
-              </div>
-            );
-          }
-        )}
+              );
+            }
+          )}
       </div>
     </>
   );

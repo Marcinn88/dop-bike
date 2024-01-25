@@ -17,16 +17,19 @@
     height: 50px;
     border-radius: 50%;
     border: 1px solid rgba(255, 255, 255, 0.13);
+    background-color: rgba(0, 0, 0, 0.411);
     font-family: 'Oswald';
     font-size: 35px;
     color: #fff;
     padding: 0;
     margin: 0;
-    background-color: rgba(0, 0, 0, 0.411);
     z-index: 5;
     cursor: pointer;
     top: 50px;
     left:50px;
+}
+.addNewsBtn:hover{
+  background-color: rgba(110, 110, 110, 0.411);
 }
 .shadowBox{
     background-color: rgba(0, 0, 0, 0.767);
@@ -53,6 +56,7 @@ z-index: 5;
 left:20%;
 top:50px;
 }
+
 .addNewsModalTitle{
     font-family: 'Oswald', sans-serif;
     color:#000000b4
@@ -152,6 +156,23 @@ top:50px;
 }
 .newsElement{
     padding: 20px;
+}
+.newsTtleContainer{
+  display: flex;
+  gap: 25px;
+}
+.newsBtn{
+  border-radius: 50px;
+  width: 60px;
+  cursor: pointer;
+  color:white;
+  font-size: 12px;
+  font-family: 'Montserrat', sans-serif;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  background-color: rgba(0, 0, 0, 0.411);
+}
+.newsBtn:hover{
+  background-color: rgba(110, 110, 110, 0.411);
 }
 .newsSubTitle{
     color:white;

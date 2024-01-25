@@ -19,13 +19,31 @@ export const Header = () => {
           </ul>
           <ul className={styles.socialNav}>
             <li className={styles.socialNavEl}>
-              <i className={styles.demoIconYt}>&#xf16a;</i>
+              <a
+                href="https://www.youtube.com/@maciejdop7079"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <i className={styles.demoIconYt}>&#xf16a;</i>
+              </a>
             </li>
             <li className={styles.socialNavEl}>
-              <i className={styles.demoIconInsta}>&#xf16d;</i>
+              <a
+                href="https://www.instagram.com/maciejdop/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <i className={styles.demoIconInsta}>&#xf16d;</i>
+              </a>
             </li>
             <li className={styles.socialNavEl}>
-              <i className={styles.demoIconFb}>&#xf308;</i>
+              <a
+                href="https://www.facebook.com/profile.php?id=100004323405905"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <i className={styles.demoIconFb}>&#xf308;</i>
+              </a>
             </li>
           </ul>
         </div>

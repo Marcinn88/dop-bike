@@ -88,11 +88,13 @@
     padding-right: 10px;
 }
 /* Element nawigacji - social media */
-.socialNavEl{
+.socialNavEl,
+.socialNavEl a{
     color:white;
     font-family: 'Oswald', sans-serif;
     font-size: 30px;
     font-weight: 600;
+    text-decoration: none;
 }
 .demoIconYt:hover{
     cursor: pointer;

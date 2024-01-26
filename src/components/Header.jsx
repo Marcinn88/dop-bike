@@ -1,6 +1,7 @@
 import styles from './Header.module.css';
 import { nanoid } from 'nanoid';
 import { useState } from 'react';
+import newsLetterImg from '../images/news.jpg';
 
 export const Header = () => {
   const [modal, setModal] = useState(false);
@@ -15,14 +16,41 @@ export const Header = () => {
         <>
           <div onClick={openModal} className={styles.shadowBox}></div>
           <div className={styles.newsLetterModal}>
-            <p>Zapisz się do Newslettera!</p>
-            <p>Zapisz się do Newslettera!</p>
+            <h1 className={styles.newsModalTitle}>
+              Zapisz się do Newslettera!
+            </h1>
+            <p className={styles.newsModalSubtitle}>
+              Chcesz otrzymywać powiadomienia o najnowszych wydarzeniach?
+            </p>
+            <p className={styles.newsModalSubtitle}>
+              Jeżeli tak, to koniecznie zapisz się do{' '}
+              <strong>NewsLettera!</strong>
+            </p>
+            <img
+              className={styles.newsLetterImg}
+              src={newsLetterImg}
+              alt="człowiek na motorze pośród emaili"
+            ></img>
             <form className={styles.newsLetterForm}>
-              <input className={styles.newsLetterFormEl} type="text"></input>
-              <input className={styles.newsLetterFormEl} type="text"></input>
+              <div className={styles.newsLetterInputContainer}>
+                <input
+                  className={styles.newsLetterFormEl}
+                  type="text"
+                  placeholder="imię"
+                ></input>
+                <input
+                  className={styles.newsLetterFormEl}
+                  type="email"
+                  placeholder="email"
+                ></input>
+              </div>
               <div className={styles.newsLetterBtnContainer}>
-                <button type="submit">Zapisz się</button>
-                <button onClick={openModal}>Zamknij</button>
+                <button className={styles.modalNewsBtn} type="submit">
+                  Zapisz się
+                </button>
+                <button className={styles.modalNewsBtn} onClick={openModal}>
+                  Zamknij
+                </button>
               </div>
             </form>
           </div>

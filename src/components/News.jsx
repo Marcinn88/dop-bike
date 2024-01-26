@@ -59,19 +59,16 @@ export const News = () => {
   const handleSlider = e => setCount(!count);
 
   const setUploadFile = e => {
-    console.log('uploaded');
     setPost({ ...post, photo: e.target.value });
   };
 
   const sliderTypeLeft = () => {
     setPost({ ...post, photo_position: 'left' });
     setEditedData({ ...post, photo_position: 'left' });
-    console.log('left');
   };
   const sliderTypeRight = () => {
     setPost({ ...post, photo_position: 'right' });
     setEditedData({ ...post, photo_position: 'right' });
-    console.log('right');
   };
   const dateTrim = e => {
     const selectedData = e.target.value.toString();
@@ -89,8 +86,6 @@ export const News = () => {
   const submitModal = e => {
     e.preventDefault();
     addArticle(post);
-    console.log('post');
-    console.log(post);
     setModal(!modal);
     setData([
       ...data,
@@ -108,8 +103,6 @@ export const News = () => {
         favorite: post.favorite,
       },
     ]);
-    console.log('data');
-    console.log(data);
   };
 
   const articleDelete = index => {
@@ -119,7 +112,6 @@ export const News = () => {
   };
 
   const articleEdit = index => {
-    console.log(index);
     setEditedId(index);
     const newData = data.filter(e => e.id === index);
     setPost({
@@ -136,23 +128,17 @@ export const News = () => {
       text3: newData[0].text3,
       favorite: newData[0].favorite,
     });
-    console.log(post);
     setModal(true);
     setEditModal(true);
   };
 
   const submitEditedModal = e => {
     e.preventDefault();
-    console.log(editedId);
-    console.log('post');
-    console.log(post);
     setModal(!modal);
     setEditedData(post);
-    console.log('editedData');
     console.log(editedData);
-    console.log('editedId');
-    console.log(editedId);
     editArticle(editedData, editedId);
+    console.log(data);
   };
 
   return (

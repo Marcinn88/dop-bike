@@ -1,3 +1,4 @@
+/* @media screen and (min-width: 768px) {	} */
 .main{
     background-color: black;
     width: 90%;
@@ -129,7 +130,8 @@
 .mainButton:hover{box-shadow: 8px 8px 24px 0px rgba(0, 0, 0, 0.4);
 }
 
-.newsLetterModal{
+.newsLetterModal,
+.newsLetterSmallModal{
     position: absolute;
     width: 70%;
     height: 90vh;
@@ -143,7 +145,15 @@
     align-items: center;
     padding: 0;
 }
-.shadowBox{
+.newsLetterSmallModal{
+    width: 50%;
+    left:25%;
+    height: 20vh;
+    top:40vh;
+    justify-content: center;
+}
+.shadowBox,
+.smallShadowBox{
     background-color: rgba(0, 0, 0, 0.767);
     backdrop-filter: blur(5px);
     position: fixed;
@@ -200,6 +210,9 @@
     margin: 0;
     background-color: rgb(255, 255, 255);
     cursor: pointer;
+}
+.modalNewsBtn:hover{
+    background-color: rgb(245, 245, 245);
 }
 .newsModalSubtitle{
     padding: 0;

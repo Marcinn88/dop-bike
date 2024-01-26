@@ -162,7 +162,6 @@ export const News = () => {
               onSubmit={!editModal ? submitModal : submitEditedModal}
               className={styles.modalFormWrapper}
             >
-              {/* <form onSubmit={submitModal} className={styles.modalFormWrapper}> */}
               {!editModal ? (
                 <input
                   className={styles.modalTitle}

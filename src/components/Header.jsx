@@ -1,9 +1,34 @@
 import styles from './Header.module.css';
 import { nanoid } from 'nanoid';
+import { useState } from 'react';
 
 export const Header = () => {
+  const [modal, setModal] = useState(false);
+
+  const openModal = () => {
+    setModal(!modal);
+  };
+
   return (
     <>
+      {modal && (
+        <>
+          <div onClick={openModal} className={styles.shadowBox}></div>
+          <div className={styles.newsLetterModal}>
+            <p>Zapisz się do Newslettera!</p>
+            <p>Zapisz się do Newslettera!</p>
+            <form className={styles.newsLetterForm}>
+              <input className={styles.newsLetterFormEl} type="text"></input>
+              <input className={styles.newsLetterFormEl} type="text"></input>
+              <div className={styles.newsLetterBtnContainer}>
+                <button type="submit">Zapisz się</button>
+                <button onClick={openModal}>Zamknij</button>
+              </div>
+            </form>
+          </div>
+        </>
+      )}
+
       <div className={styles.main} id={nanoid()}>
         <div className={styles.mainNav}>
           <ul className={styles.mainNavList}>
@@ -51,7 +76,9 @@ export const Header = () => {
         <div className={styles.mainTitle}>DOP</div>
         <div className={styles.subTitle}>Maciej Bielicki</div>
 
-        <button className={styles.mainButton}>Newsletter</button>
+        <button onClick={openModal} className={styles.mainButton}>
+          Newsletter
+        </button>
       </div>
     </>
   );

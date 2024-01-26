@@ -5,11 +5,7 @@ import { nanoid } from 'nanoid';
 import leftImage from '../images/left-img.jpg';
 import rightImage from '../images/right-img.jpg';
 import { getDay, getMonth, getDefYear } from '../services/DateFunctions';
-import {
-  addArticle,
-  deleteArticle,
-  // editArticle
-} from '../services/operations';
+import { addArticle, deleteArticle, editArticle } from '../services/operations';
 
 axios.defaults.baseURL = 'https://65b15d5ed16d31d11bdec7f4.mockapi.io';
 
@@ -19,6 +15,8 @@ export const News = () => {
   const [post, setPost] = useState({});
   const [count, setCount] = useState(true);
   const [data, setData] = useState([]);
+  const [editedData, setEditedData] = useState([]);
+  const [editedId, setEditedId] = useState('');
 
   const getArticles = async () => {
     try {
@@ -67,10 +65,12 @@ export const News = () => {
 
   const sliderTypeLeft = () => {
     setPost({ ...post, photo_position: 'left' });
+    setEditedData({ ...post, photo_position: 'left' });
     console.log('left');
   };
   const sliderTypeRight = () => {
     setPost({ ...post, photo_position: 'right' });
+    setEditedData({ ...post, photo_position: 'right' });
     console.log('right');
   };
   const dateTrim = e => {
@@ -79,6 +79,12 @@ export const News = () => {
     const month = selectedData.substr(5, 2);
     const year = selectedData.substr(0, 4);
     setPost({ ...post, date_day: day, date_month: month, date_year: year });
+    setEditedData({
+      ...post,
+      date_day: day,
+      date_month: month,
+      date_year: year,
+    });
   };
   const submitModal = e => {
     e.preventDefault();
@@ -86,8 +92,6 @@ export const News = () => {
     console.log('post');
     console.log(post);
     setModal(!modal);
-    // getArticles();
-    // setData({ ...data, post });
     setData([
       ...data,
       {
@@ -115,6 +119,8 @@ export const News = () => {
   };
 
   const articleEdit = index => {
+    console.log(index);
+    setEditedId(index);
     const newData = data.filter(e => e.id === index);
     setPost({
       ...post,
@@ -130,8 +136,23 @@ export const News = () => {
       text3: newData[0].text3,
       favorite: newData[0].favorite,
     });
+    console.log(post);
     setModal(true);
     setEditModal(true);
+  };
+
+  const submitEditedModal = e => {
+    e.preventDefault();
+    console.log(editedId);
+    console.log('post');
+    console.log(post);
+    setModal(!modal);
+    setEditedData(post);
+    console.log('editedData');
+    console.log(editedData);
+    console.log('editedId');
+    console.log(editedId);
+    editArticle(editedData, editedId);
   };
 
   return (
@@ -151,7 +172,11 @@ export const News = () => {
               <h1 className={styles.addNewsModalTitle}>Edytuj wpis!</h1>
             )}
 
-            <form onSubmit={submitModal} className={styles.modalFormWrapper}>
+            <form
+              onSubmit={!editModal ? submitModal : submitEditedModal}
+              className={styles.modalFormWrapper}
+            >
+              {/* <form onSubmit={submitModal} className={styles.modalFormWrapper}> */}
               {!editModal ? (
                 <input
                   className={styles.modalTitle}
@@ -159,7 +184,10 @@ export const News = () => {
                   name="title"
                   maxLength="50"
                   placeholder="Wpisz tytuł"
-                  onChange={e => setPost({ ...post, title: e.target.value })}
+                  onChange={e => {
+                    setPost({ ...post, title: e.target.value });
+                    setEditedData({ ...post, title: e.target.value });
+                  }}
                   required
                 ></input>
               ) : (
@@ -170,7 +198,10 @@ export const News = () => {
                   maxLength="50"
                   value={post.title}
                   placeholder="Wpisz tytuł"
-                  onChange={e => setPost({ ...post, title: e.target.value })}
+                  onChange={e => {
+                    setPost({ ...post, title: e.target.value });
+                    setEditedData({ ...post, title: e.target.value });
+                  }}
                   required
                 ></input>
               )}
@@ -236,7 +267,10 @@ export const News = () => {
                   maxLength="500"
                   name="paragraf"
                   placeholder="Wpisz zawartość pierwszego Paragrafu"
-                  onChange={e => setPost({ ...post, text1: e.target.value })}
+                  onChange={e => {
+                    setPost({ ...post, text1: e.target.value });
+                    setEditedData({ ...post, text1: e.target.value });
+                  }}
                   className={styles.modalParagraf}
                   required
                 ></textarea>
@@ -247,7 +281,10 @@ export const News = () => {
                   name="paragraf"
                   value={post.text1}
                   placeholder="Wpisz zawartość pierwszego Paragrafu"
-                  onChange={e => setPost({ ...post, text1: e.target.value })}
+                  onChange={e => {
+                    setPost({ ...post, text1: e.target.value });
+                    setEditedData({ ...post, text1: e.target.value });
+                  }}
                   className={styles.modalParagraf}
                   required
                 ></textarea>
@@ -258,7 +295,10 @@ export const News = () => {
                   maxLength="500"
                   name="paragraf"
                   placeholder="Wpisz zawartość drugiego Paragrafu (opcjonalnie)"
-                  onChange={e => setPost({ ...post, text2: e.target.value })}
+                  onChange={e => {
+                    setPost({ ...post, text2: e.target.value });
+                    setEditedData({ ...post, text2: e.target.value });
+                  }}
                   className={styles.modalParagraf}
                 ></textarea>
               ) : (
@@ -268,7 +308,10 @@ export const News = () => {
                   name="paragraf"
                   value={post.text2}
                   placeholder="Wpisz zawartość drugiego Paragrafu (opcjonalnie)"
-                  onChange={e => setPost({ ...post, text2: e.target.value })}
+                  onChange={e => {
+                    setPost({ ...post, text2: e.target.value });
+                    setEditedData({ ...post, text2: e.target.value });
+                  }}
                   className={styles.modalParagraf}
                 ></textarea>
               )}
@@ -278,7 +321,10 @@ export const News = () => {
                   maxLength="500"
                   name="paragraf"
                   placeholder="Wpisz zawartość trzeciego Paragrafu (opcjonalnie)"
-                  onChange={e => setPost({ ...post, text3: e.target.value })}
+                  onChange={e => {
+                    setPost({ ...post, text3: e.target.value });
+                    setEditedData({ ...post, text3: e.target.value });
+                  }}
                   className={styles.modalParagraf}
                 ></textarea>
               ) : (
@@ -288,13 +334,20 @@ export const News = () => {
                   name="paragraf"
                   value={post.text3}
                   placeholder="Wpisz zawartość trzeciego Paragrafu (opcjonalnie)"
-                  onChange={e => setPost({ ...post, text3: e.target.value })}
+                  onChange={e => {
+                    setPost({ ...post, text3: e.target.value });
+                    setEditedData({ ...post, text3: e.target.value });
+                  }}
                   className={styles.modalParagraf}
                 ></textarea>
               )}
 
               <div className={styles.addNewsModalBtns}>
-                <button className={styles.modalNewsBtn}>Dodaj</button>
+                {!editModal ? (
+                  <button className={styles.modalNewsBtn}>Dodaj</button>
+                ) : (
+                  <button className={styles.modalNewsBtn}>Zapisz</button>
+                )}
                 <button className={styles.modalNewsBtn} onClick={closeModal}>
                   Zamknij
                 </button>

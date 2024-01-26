@@ -31,9 +31,9 @@ export const deleteArticle = async articleId => {
   }
 };
 
-export const editArticle = async data => {
+export const editArticle = async (data, id) => {
   try {
-    const response = await axios.patch(`/articles/${data.id}`, {
+    const response = await axios.put(`/articles/${id}`, {
       title: data.title,
       date: data.date,
       photo_position: data.photo_position,

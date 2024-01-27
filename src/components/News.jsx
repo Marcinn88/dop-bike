@@ -87,6 +87,10 @@ export const News = () => {
     e.preventDefault();
     addArticle(post);
     setModal(!modal);
+    // const form = e.currentTarget;
+    // console.log(form);
+    // console.log(new FormData(form));
+    // fetch('../images', { method: 'POST', body: new FormData(form) });
     setData([
       ...data,
       {
@@ -235,6 +239,7 @@ export const News = () => {
                     className={styles.modalInputFile}
                     type="file"
                     id="upload-file"
+                    accept=".jpg, .jpeg, .png"
                     onChange={setUploadFile}
                   ></input>
                   <em>Załącz zdjęcie</em>

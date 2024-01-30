@@ -21,9 +21,8 @@ export const News = () => {
   const [editedData, setEditedData] = useState([]);
   const [editedId, setEditedId] = useState('');
   const [uploadModal, setUploadModal] = useState(false);
-  const [forData, setForData] = useState({ files: null });
+  const [formData, setFormData] = useState({ files: null });
   const [urls, seUrls] = useState([]);
-  const [apiFiles, setApiFiles] = useState({});
 
   const getArticles = async () => {
     try {
@@ -154,32 +153,30 @@ export const News = () => {
   };
 
   useEffect(() => {
-    if (forData?.files?.length > 0) {
-      seUrls(forData.files.map(f => URL.createObjectURL(f)));
+    if (formData?.files?.length > 0) {
+      seUrls(formData.files.map(f => URL.createObjectURL(f)));
     }
-  }, [forData.files]);
+  }, [formData.files]);
 
   const onSubmit = async () => {
     setUploadModal(!uploadModal);
-    console.log(forData.files[0]);
+    fetch('../images', { method: 'POST', body: formData.files[0] });
+    console.log(formData);
+    console.log(formData.files[0]);
+    console.log(formData.files[0].name);
     console.log(urls);
-
-    console.log('apiFiles', apiFiles);
-
+    let dataApi = new dataApi();
+    dataApi.append('file', formData.files[0]);
+    dataApi.append('api_key', '236848125572374');
     const results = await fetch(
-      'https://api.cloudinary.com/v1_1/djwth1q7u/image/upload/',
+      'https://api.cloudinary.com/v1_1/djwth1q7u/image/upload',
       {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'form/data',
-        },
-        body: apiFiles,
-      }
+        method: 'post',
+        body: dataApi,
+      }.then(r => r.json())
     );
-    const data = await results.json();
     console.log('results', results);
-    console.log('data', data);
-    // axios.post('/images', forData);
+    // axios.post('/images', formData);
   };
   return (
     <>
@@ -192,7 +189,7 @@ export const News = () => {
           <div className={styles.uploadModal}>
             <FilePond
               className={styles.uploadFilePond}
-              files={forData.files}
+              files={formData.files}
               allowMultiple={false}
               required
               maxFiles={1}
@@ -204,14 +201,9 @@ export const News = () => {
                 const files = fileItems.map(fileItem => {
                   return fileItem.file;
                 });
-                setForData({
-                  ...forData,
+                setFormData({
+                  ...formData,
                   files,
-                });
-                setApiFiles({
-                  file: forData.files[0],
-                  api_key: '236848125572374',
-                  upload_preset: 'dop-bike',
                 });
               }}
             />
@@ -319,12 +311,12 @@ export const News = () => {
                   ></input>
                   <em>Załącz zdjęcie</em>
                 </label> */}
-                {forData?.files?.length > 0 ? (
+                {formData?.files?.length > 0 ? (
                   <button
                     className={styles.modalFile}
                     onClick={toogleUploadModal}
                   >
-                    {forData.files[0].name}
+                    {formData.files[0].name}
                   </button>
                 ) : (
                   <button

@@ -10,7 +10,7 @@ import { FilePond } from 'react-filepond';
 import 'filepond/dist/filepond.min.css';
 
 const mockApi = 'https://65b15d5ed16d31d11bdec7f4.mockapi.io';
-axios.defaults.baseURL = '';
+// axios.defaults.baseURL = '';
 
 export const News = () => {
   const [modal, setModal] = useState(false);

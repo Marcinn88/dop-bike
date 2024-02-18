@@ -1,4 +1,5 @@
 import styles from './Footer.module.css';
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
 export const Footer = ({ token }) => {
@@ -71,15 +72,24 @@ export const Footer = ({ token }) => {
       <div className={styles.footer}>
         <div className={styles.footer_lists}>
           <div className={styles.footer_list_container}>
-            <p>Links</p>
+            <p>Nawigacja:</p>
             <ul className={styles.footer_list}>
-              <li className={styles.footer_list_element}>O mnie</li>
-              <li className={styles.footer_list_element}>Galeria</li>
-              <li className={styles.footer_list_element}>Kontakt</li>
+              <li className={styles.footer_list_element}>
+                <Link to="/dop-bike/">Newsy</Link>
+              </li>
+              <li className={styles.footer_list_element}>
+                <Link to="/dop-bike/about">O mnie</Link>
+              </li>
+              <li className={styles.footer_list_element}>
+                <Link to="/dop-bike/gallery">Galeria</Link>
+              </li>
+              <li className={styles.footer_list_element}>
+                <Link to="/dop-bike/contact">Kontakt</Link>
+              </li>
             </ul>
           </div>
           <div className={styles.footer_list_container}>
-            <p>Moje Social Media</p>
+            <p>Moje Social Media:</p>
             <ul className={styles.footer_list}>
               <li className={styles.footer_list_element}>YouTube</li>
               <li className={styles.footer_list_element}>Instagram</li>

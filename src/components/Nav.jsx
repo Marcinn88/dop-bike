@@ -35,8 +35,8 @@ export const Nav = ({ selected, token }) => {
             </Link>
           </li>
           <li className={styles.mainNavEl}>
-            <Link to="/dop-bike/">
-              {selected === 'galery' ? (
+            <Link to="/dop-bike/gallery">
+              {selected === 'gallery' ? (
                 <p className={styles.mainNavElTextSelected}>Galeria</p>
               ) : (
                 <p className={styles.mainNavElText}>Galeria</p>
@@ -44,7 +44,7 @@ export const Nav = ({ selected, token }) => {
             </Link>
           </li>
           <li className={styles.mainNavEl}>
-            <Link to="/dop-bike/">
+            <Link to="/dop-bike/contact">
               {selected === 'contact' ? (
                 <p className={styles.mainNavElTextSelected}>Kontakt</p>
               ) : (

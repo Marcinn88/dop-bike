@@ -160,7 +160,12 @@ top:50px;
     margin: 0;
     background-color: rgb(255, 255, 255);
     cursor: pointer;
+    
 }
+/* input[type="file"] {
+  display: none;
+} */
+
 .newsTitleBox{
     background-color: rgba(114, 114, 114, 0.493);
     box-sizing: border-box;

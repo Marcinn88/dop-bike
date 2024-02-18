@@ -1,6 +1,7 @@
-import { Header } from './Header';
-import { News } from './News';
-import { Footer } from './Footer';
+import { Main } from './Main';
+import { Routes, Route } from 'react-router-dom';
+import { Layout } from 'layouts/layout';
+import { About } from './About';
 
 export const App = () => {
   const tokenChecker = () => {
@@ -17,10 +18,12 @@ export const App = () => {
   };
 
   return (
-    <>
-      <Header />
-      <News token={tokenChecker()} />
-      <Footer />
-    </>
+    <Routes>
+      <Route path="/" element={<Layout token={tokenChecker()} />}>
+        <Route path="/" element={<Main token={tokenChecker()} />} />
+        <Route path="/about" element={<About token={tokenChecker()} />} />
+        {/* <Route path="*" element={<NoMatch />} /> */}
+      </Route>
+    </Routes>
   );
 };

@@ -1,7 +1,7 @@
 import styles from './Footer.module.css';
 import { useState } from 'react';
 
-export const Footer = () => {
+export const Footer = ({ token }) => {
   const [loginModal, setloginModal] = useState(false);
   const [loginData, setLoginData] = useState({});
   const ref = () => {
@@ -29,6 +29,9 @@ export const Footer = () => {
     } else {
       alert('Zle haslo');
     }
+  };
+  const errorMsg = () => {
+    alert('Jesteś zalogowany');
   };
 
   return (
@@ -85,7 +88,10 @@ export const Footer = () => {
           </div>
           <div className={styles.footer_list_container}>
             <p className={styles.footer_link_admin}>Admin Tools</p>
-            <i onClick={openLoginModal} className={styles.demoIconDesktop}>
+            <i
+              onClick={token === '' ? openLoginModal : errorMsg}
+              className={styles.demoIconDesktop}
+            >
               &#xf108;
             </i>
           </div>

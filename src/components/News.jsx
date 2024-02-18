@@ -183,6 +183,7 @@ export const News = ({ token }) => {
           <div className={styles.uploadModal}>
             <input
               type="file"
+              accept="image/*;capture=camera"
               onChange={e => {
                 setApiFiles(e.target.files[0]);
                 console.log('apifiles:', apiFiles);

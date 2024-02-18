@@ -17,7 +17,7 @@ export const Nav = ({ selected, token }) => {
 
         <ul className={styles.mainNavList}>
           <li className={styles.mainNavEl}>
-            <Link to="/">
+            <Link to="/dop-bike/">
               {selected === 'news' ? (
                 <p className={styles.mainNavElTextSelected}>News</p>
               ) : (
@@ -26,7 +26,7 @@ export const Nav = ({ selected, token }) => {
             </Link>
           </li>
           <li className={styles.mainNavEl}>
-            <Link to="/about">
+            <Link to="/dop-bike/about">
               {selected === 'about' ? (
                 <p className={styles.mainNavElTextSelected}>O mnie</p>
               ) : (
@@ -35,7 +35,7 @@ export const Nav = ({ selected, token }) => {
             </Link>
           </li>
           <li className={styles.mainNavEl}>
-            <Link to="/">
+            <Link to="/dop-bike/">
               {selected === 'galery' ? (
                 <p className={styles.mainNavElTextSelected}>Galeria</p>
               ) : (
@@ -44,7 +44,7 @@ export const Nav = ({ selected, token }) => {
             </Link>
           </li>
           <li className={styles.mainNavEl}>
-            <Link to="/">
+            <Link to="/dop-bike/">
               {selected === 'contact' ? (
                 <p className={styles.mainNavElTextSelected}>Kontakt</p>
               ) : (

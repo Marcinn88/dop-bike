@@ -19,9 +19,12 @@ export const App = () => {
 
   return (
     <Routes>
-      <Route path="/" element={<Layout token={tokenChecker()} />}>
-        <Route path="/" element={<Main token={tokenChecker()} />} />
-        <Route path="/about" element={<About token={tokenChecker()} />} />
+      <Route path="/dop-bike/" element={<Layout token={tokenChecker()} />}>
+        <Route path="/dop-bike/" element={<Main token={tokenChecker()} />} />
+        <Route
+          path="/dop-bike/about"
+          element={<About token={tokenChecker()} />}
+        />
         {/* <Route path="*" element={<NoMatch />} /> */}
       </Route>
     </Routes>

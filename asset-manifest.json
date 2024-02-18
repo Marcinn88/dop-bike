@@ -1,30 +1,21 @@
 {
   "files": {
-    "main.css": "/dop-bike/static/css/main.8f967765.css",
-    "main.js": "/dop-bike/static/js/main.e7ac0782.js",
-    "static/media/maciek3.jpg": "/dop-bike/static/media/maciek3.4718815ba0777053809c.jpg",
-    "static/media/maciek2.jpg": "/dop-bike/static/media/maciek2.e2062ae08f5bd63df114.jpg",
+    "main.css": "/dop-bike/static/css/main.6d80b540.css",
+    "main.js": "/dop-bike/static/js/main.39c80c9e.js",
     "static/media/news.jpg": "/dop-bike/static/media/news.16d7fef3b01349e05df5.jpg",
-    "static/media/maciek4.jpg": "/dop-bike/static/media/maciek4.fb508a7a3e060366a133.jpg",
-    "static/media/maciek.jpg": "/dop-bike/static/media/maciek.25a9fd5266a78300cb7b.jpg",
-    "static/media/ai-bike.jpg": "/dop-bike/static/media/ai-bike.e71c95e43f21312f8776.jpg",
-    "static/media/default.png": "/dop-bike/static/media/default.2b30347874635a5b048f.png",
-    "static/media/ai-bike2.jpg": "/dop-bike/static/media/ai-bike2.433c8eebcf5b299cf45b.jpg",
     "static/media/motor.jpg": "/dop-bike/static/media/motor.0d8159557704f007564c.jpg",
-    "static/media/default.jpg": "/dop-bike/static/media/default.0720169c8162641f3358.jpg",
     "static/media/right-img.jpg": "/dop-bike/static/media/right-img.4b057200d339d29a6901.jpg",
     "static/media/left-img.jpg": "/dop-bike/static/media/left-img.a4b3f880a839237c7c49.jpg",
-    "static/media/defaultImg.jpg": "/dop-bike/static/media/defaultImg.69c94cf0a5e3fb144695.jpg",
     "static/media/fontello.eot?86056": "/dop-bike/static/media/fontello.6237c9ac804b596577b2.eot",
     "static/media/fontello.ttf?86056": "/dop-bike/static/media/fontello.f32007632d4922699b2f.ttf",
     "static/media/fontello.woff?86056": "/dop-bike/static/media/fontello.ce25bbdefaacfc232d9e.woff",
     "static/media/fontello.svg?86056": "/dop-bike/static/media/fontello.c5fdf3c39b8625f57845.svg",
     "index.html": "/dop-bike/index.html",
-    "main.8f967765.css.map": "/dop-bike/static/css/main.8f967765.css.map",
-    "main.e7ac0782.js.map": "/dop-bike/static/js/main.e7ac0782.js.map"
+    "main.6d80b540.css.map": "/dop-bike/static/css/main.6d80b540.css.map",
+    "main.39c80c9e.js.map": "/dop-bike/static/js/main.39c80c9e.js.map"
   },
   "entrypoints": [
-    "static/css/main.8f967765.css",
-    "static/js/main.e7ac0782.js"
+    "static/css/main.6d80b540.css",
+    "static/js/main.39c80c9e.js"
   ]
 }

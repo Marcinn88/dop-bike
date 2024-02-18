@@ -9,6 +9,7 @@ import { addArticle, deleteArticle, editArticle } from '../services/operations';
 
 const mockApi = 'https://65b15d5ed16d31d11bdec7f4.mockapi.io';
 
+// zmiana
 export const News = () => {
   const [modal, setModal] = useState(false);
   const [editModal, setEditModal] = useState(false);

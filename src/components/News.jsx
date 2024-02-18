@@ -1,16 +1,13 @@
 import { useState, useEffect } from 'react';
-import axios, { Axios } from 'axios';
+import axios from 'axios';
 import styles from './News.module.css';
 import { nanoid } from 'nanoid';
 import leftImage from '../images/left-img.jpg';
 import rightImage from '../images/right-img.jpg';
 import { getDay, getMonth, getDefYear } from '../services/DateFunctions';
 import { addArticle, deleteArticle, editArticle } from '../services/operations';
-import { FilePond } from 'react-filepond';
-import 'filepond/dist/filepond.min.css';
 
 const mockApi = 'https://65b15d5ed16d31d11bdec7f4.mockapi.io';
-// axios.defaults.baseURL = '';
 
 export const News = () => {
   const [modal, setModal] = useState(false);
@@ -21,8 +18,6 @@ export const News = () => {
   const [editedData, setEditedData] = useState([]);
   const [editedId, setEditedId] = useState('');
   const [uploadModal, setUploadModal] = useState(false);
-  const [forData, setForData] = useState({ files: null });
-  const [urls, seUrls] = useState([]);
   const [apiFiles, setApiFiles] = useState({});
 
   const getArticles = async () => {
@@ -164,34 +159,6 @@ export const News = () => {
     console.log(data);
   };
 
-  useEffect(() => {
-    if (forData?.files?.length > 0) {
-      seUrls(forData.files.map(f => URL.createObjectURL(f)));
-    }
-  }, [forData.files]);
-
-  const onSubmit = async () => {
-    setUploadModal(!uploadModal);
-    console.log(forData.files[0]);
-    console.log(urls);
-
-    console.log('apiFiles', apiFiles);
-
-    const results = await fetch(
-      'https://api.cloudinary.com/v1_1/djwth1q7u/image/upload/',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'form/data',
-        },
-        body: apiFiles,
-      }
-    );
-    const data = await results.json();
-    console.log('results', results);
-    console.log('data', data);
-    // axios.post('/images', forData);
-  };
   return (
     <>
       {uploadModal && (

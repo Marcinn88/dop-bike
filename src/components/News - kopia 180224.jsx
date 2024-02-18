@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios, { Axios } from 'axios';
 import styles from './News.module.css';
 import { nanoid } from 'nanoid';
 import leftImage from '../images/left-img.jpg';
@@ -36,6 +36,21 @@ export const News = () => {
     }
   };
 
+  const uploadPhoto = () => {
+    const formData = new FormData();
+    formData.append('file', apiFiles);
+    formData.append('upload_preset', 'dop-bike');
+    console.log('formData', formData);
+    axios
+      .post('https://api.cloudinary.com/v1_1/djwth1q7u/image/upload', formData)
+      .then(response => {
+        console.log(response);
+        console.log(response.data.secure_url);
+        setPost({ ...post, photo: response.data.secure_url });
+      });
+    setUploadModal(!uploadModal);
+  };
+
   useEffect(() => {
     getArticles();
   }, []);
@@ -69,10 +84,6 @@ export const News = () => {
   };
 
   const handleSlider = e => setCount(!count);
-
-  // const setUploadFile = e => {
-  //   setPost({ ...post, photo: e.target.value });
-  // };
 
   const sliderTypeLeft = () => {
     setPost({ ...post, photo_position: 'left' });
@@ -190,32 +201,18 @@ export const News = () => {
             className={styles.uploadShadowBox}
           ></div>
           <div className={styles.uploadModal}>
-            <FilePond
-              className={styles.uploadFilePond}
-              files={forData.files}
-              allowMultiple={false}
-              required
-              maxFiles={1}
-              server="/images"
-              labelIdle={
-                'Upuść plik tutaj lub <span class="filepond--label-action">kliknij</span> aby wczytać '
-              }
-              onupdatefiles={fileItems => {
-                const files = fileItems.map(fileItem => {
-                  return fileItem.file;
-                });
-                setForData({
-                  ...forData,
-                  files,
-                });
-                setApiFiles({
-                  file: forData.files[0],
-                  api_key: '236848125572374',
-                  upload_preset: 'dop-bike',
-                });
+            <input
+              type="file"
+              onChange={e => {
+                setApiFiles(e.target.files[0]);
+                console.log('apifiles:', apiFiles);
               }}
             />
-            <button className={styles.modalNewsBtn} onClick={() => onSubmit()}>
+
+            <button
+              className={styles.modalNewsBtn}
+              onClick={() => uploadPhoto()}
+            >
               Zapisz plik
             </button>
           </div>
@@ -308,32 +305,12 @@ export const News = () => {
               </div>
 
               <div className={styles.modalSmallWrapper}>
-                {/* <label className={styles.modalFile} id="upload-label">
-                  <input
-                    className={styles.modalInputFile}
-                    type="file"
-                    id="upload-file"
-                    accept=".jpg, .jpeg, .png"
-
-                    onChange={setUploadFile}
-                  ></input>
-                  <em>Załącz zdjęcie</em>
-                </label> */}
-                {forData?.files?.length > 0 ? (
-                  <button
-                    className={styles.modalFile}
-                    onClick={toogleUploadModal}
-                  >
-                    {forData.files[0].name}
-                  </button>
-                ) : (
-                  <button
-                    className={styles.modalFile}
-                    onClick={toogleUploadModal}
-                  >
-                    Załącz zdjęcie
-                  </button>
-                )}
+                <button
+                  className={styles.modalFile}
+                  onClick={toogleUploadModal}
+                >
+                  Załącz zdjęcie
+                </button>
 
                 <input
                   className={styles.modalData}
@@ -490,7 +467,8 @@ export const News = () => {
                     {photo_position === 'left' ? (
                       <>
                         <div className={styles.newsImg}>
-                          <img src={require(`../images/${photo}`)} alt="bike" />
+                          <img src={photo} alt="bike" />
+                          {/* <img src={require(`../images/${photo}`)} alt="bike" /> */}
                         </div>
                         <div className={styles.newsText}>
                           <p>{text1}</p>
@@ -506,7 +484,9 @@ export const News = () => {
                           <p>{text3}</p>
                         </div>
                         <div className={styles.newsImg}>
-                          <img src={require(`../images/${photo}`)} alt="bike" />
+                          <img src={photo} alt="bike" />
+
+                          {/* <img src={require(`../images/${photo}`)} alt="bike" /> */}
                         </div>
                       </>
                     )}

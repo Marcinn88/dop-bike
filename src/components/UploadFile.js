@@ -3,7 +3,7 @@ import { FilePond } from "react-filepond";
 import "filepond/dist/filepond.min.css";
 
 
-export const FileUpload = () => {
+ export const FileUpload = () => {
   const [formData, setFormData] = useState({
     files: null
   });

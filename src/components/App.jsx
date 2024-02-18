@@ -8,8 +8,8 @@ export const App = () => {
   return (
     <>
       <Header />
-      {/* <News /> */}
-      <Footer />
+      <News />
+      {/* <Footer /> */}
     </>
   );
 };

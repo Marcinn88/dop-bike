@@ -10,7 +10,7 @@ import { addArticle, deleteArticle, editArticle } from '../services/operations';
 const mockApi = 'https://65b15d5ed16d31d11bdec7f4.mockapi.io';
 
 // zmiana
-export const News = () => {
+export const News = ({ token }) => {
   const [modal, setModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
   const [post, setPost] = useState({});
@@ -20,6 +20,11 @@ export const News = () => {
   const [editedId, setEditedId] = useState('');
   const [uploadModal, setUploadModal] = useState(false);
   const [apiFiles, setApiFiles] = useState({});
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  const ref = () => {
+    window.location.reload(false);
+  };
 
   const getArticles = async () => {
     try {
@@ -161,6 +166,9 @@ export const News = () => {
   };
 
   const logOut = () => {
+    localStorage.setItem('token', JSON.stringify({ token: '' }));
+    setLoggedIn(!loggedIn);
+    ref();
     console.log('Wylogowano');
   };
 
@@ -190,15 +198,20 @@ export const News = () => {
           </div>
         </>
       )}
-      <div className={styles.newsAdminPanel}>
-        <button onClick={openModal} className={styles.addNewsBtn}>
-          +
-        </button>
 
-        <button onClick={logOut} className={styles.loBtn}>
-          Logout
-        </button>
-      </div>
+      {token === 'admin' ? (
+        <div className={styles.newsAdminPanel}>
+          <button onClick={openModal} className={styles.addNewsBtn}>
+            +
+          </button>
+
+          <button onClick={logOut} className={styles.loBtn}>
+            Logout
+          </button>
+        </div>
+      ) : (
+        <></>
+      )}
 
       {modal && (
         <>
@@ -422,20 +435,28 @@ export const News = () => {
                 >
                   <div className={styles.newsTtleContainer}>
                     <p className={styles.newsSubTitle}>{title}</p>
-                    <button
-                      className={styles.newsBtn}
-                      id={id}
-                      onClick={() => articleDelete(id)}
-                    >
-                      Usuń
-                    </button>
-                    <button
-                      className={styles.newsBtn}
-                      id={id}
-                      onClick={() => articleEdit(id)}
-                    >
-                      Edytuj
-                    </button>
+                    {token === 'admin' ? (
+                      <button
+                        className={styles.newsBtn}
+                        id={id}
+                        onClick={() => articleDelete(id)}
+                      >
+                        Usuń
+                      </button>
+                    ) : (
+                      <></>
+                    )}
+                    {token === 'admin' ? (
+                      <button
+                        className={styles.newsBtn}
+                        id={id}
+                        onClick={() => articleEdit(id)}
+                      >
+                        Edytuj
+                      </button>
+                    ) : (
+                      <></>
+                    )}
                   </div>
                   <p className={styles.newsDate}>
                     {date_day}.{date_month}.{date_year}

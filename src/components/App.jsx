@@ -3,12 +3,14 @@ import { News } from './News';
 import { Footer } from './Footer';
 
 export const App = () => {
-  // function here
+  const token = localStorage.getItem('token');
+  const parsedToken = JSON.parse(token).token;
+  // console.log(parsedToken.token);
 
   return (
     <>
       <Header />
-      <News />
+      <News token={parsedToken} />
       <Footer />
     </>
   );

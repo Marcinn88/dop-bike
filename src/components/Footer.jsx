@@ -4,7 +4,9 @@ import { useState } from 'react';
 export const Footer = () => {
   const [loginModal, setloginModal] = useState(false);
   const [loginData, setLoginData] = useState({});
-
+  const ref = () => {
+    window.location.reload(false);
+  };
   const openLoginModal = () => {
     setloginModal(true);
     setLoginData({
@@ -19,9 +21,14 @@ export const Footer = () => {
   };
 
   const adminLogin = () => {
-    console.log('loginData', loginData);
-    setloginModal(false);
-    localStorage.setItem('token', JSON.stringify({ token: '12345678' }));
+    if (loginData.login === 'admin' && loginData.password === '123') {
+      console.log('loginData', loginData);
+      setloginModal(false);
+      localStorage.setItem('token', JSON.stringify({ token: 'admin' }));
+      ref();
+    } else {
+      alert('Zle haslo');
+    }
   };
 
   return (
@@ -78,7 +85,7 @@ export const Footer = () => {
           </div>
           <div className={styles.footer_list_container}>
             <p className={styles.footer_link_admin}>Admin Tools</p>
-            <i onClick={openLoginModal} class={styles.demoIconDesktop}>
+            <i onClick={openLoginModal} className={styles.demoIconDesktop}>
               &#xf108;
             </i>
           </div>

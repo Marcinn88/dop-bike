@@ -1,5 +1,9 @@
 import styles from './Footer.module.css';
 
 export const Footer = () => {
-  return <></>;
+  return (
+    <>
+      <div className={styles.footer}></div>
+    </>
+  );
 };

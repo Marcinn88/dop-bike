@@ -1,6 +1,6 @@
 import { Header } from './Header';
 import { News } from './News';
-// import { Footer } from './Footer';
+import { Footer } from './Footer';
 
 export const App = () => {
   // function here
@@ -9,7 +9,7 @@ export const App = () => {
     <>
       <Header />
       <News />
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 };

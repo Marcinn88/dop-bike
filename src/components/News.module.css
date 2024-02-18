@@ -1,14 +1,15 @@
 .news{
     background-color: black;
     width: 90%;
-    height: 100vh;
+    /* height: 100vh; */
     margin-left: auto;
     margin-right: auto;
     display: flex;
     flex-direction: column;
     position: relative;
 }
-.addNewsBtn{
+.addNewsBtn,
+.loBtn{
     position: fixed;
     display: flex;
     justify-content: center;
@@ -28,7 +29,12 @@
     top: 50px;
     left:50px;
 }
-.addNewsBtn:hover{
+.loBtn{
+top:120px;
+font-size: 15px;
+}
+.addNewsBtn:hover,
+.loBtn:hover{
   background-color: rgba(110, 110, 110, 0.411);
 }
 .shadowBox{

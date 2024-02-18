@@ -160,6 +160,10 @@ export const News = () => {
     console.log(data);
   };
 
+  const logOut = () => {
+    console.log('Wylogowano');
+  };
+
   return (
     <>
       {uploadModal && (
@@ -190,7 +194,12 @@ export const News = () => {
         <button onClick={openModal} className={styles.addNewsBtn}>
           +
         </button>
+
+        <button onClick={logOut} className={styles.loBtn}>
+          Logout
+        </button>
       </div>
+
       {modal && (
         <>
           <div onClick={closeModal} className={styles.shadowBox}></div>

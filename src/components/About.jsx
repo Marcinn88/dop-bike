@@ -12,7 +12,7 @@ export const About = ({ token }) => {
         <p className={styles.aboutText}>
           Na tej stronie pojawią się informacje o Mnie
         </p>
-        <Review />
+        <Review token={token} />
       </div>
     </>
   );

@@ -1,8 +1,19 @@
 import styles from './Review.module.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { getDay, getMonth, getDefYear } from 'services/DateFunctions';
+import {
+  sendComment,
+  deleteComment,
+  showComment,
+  hideComment,
+} from 'services/operations';
+import axios from 'axios';
+import { nanoid } from 'nanoid';
 
-export const Review = () => {
+const API = 'https://65d39f84522627d501094a90.mockapi.io/';
+
+export const Review = ({ token }) => {
+  const [data, setData] = useState([]);
   const [comment, setComment] = useState({
     name: '',
     text: '',
@@ -10,7 +21,11 @@ export const Review = () => {
     date: '',
   });
 
-  const setData = () => {
+  const ref = () => {
+    window.location.reload(false);
+  };
+
+  const setDate = () => {
     const date = Date.now();
     const day = getDay(date);
     const month = getMonth(date);
@@ -18,57 +33,136 @@ export const Review = () => {
     setComment({ ...comment, date: `${day}.${month}.${year}` });
   };
 
-  const addComment = e => {
-    e.preventDefault();
-    setData();
-    console.log('komentarz: ', comment);
+  const getReviews = async () => {
+    try {
+      const response = await axios.get(`${API}/comments/`);
+      setData(response.data);
+      console.log('lodaing comments....');
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      return console.error(error.message);
+    }
   };
+
+  useEffect(() => {
+    getReviews();
+    setDate();
+  }, []);
+
+  const submitComment = e => {
+    e.preventDefault();
+    sendComment(comment);
+    alert(
+      'Dziękujemy za opinię! Twój komentarz już niedługo pojawi się na stronie głównej! Jeżeli przejdzie pozytywnie weryfikację naszej administracji.'
+    );
+    ref();
+  };
+
+  const commentDelete = async index => {
+    await deleteComment(index);
+    console.log('usunieto wpis o ID', index);
+    ref();
+  };
+
+  const commentShow = async index => {
+    await showComment(index);
+    console.log('pokazano wpis o ID', index);
+    ref();
+  };
+
+  const commentHide = async index => {
+    await hideComment(index);
+    console.log('pokazano wpis o ID', index);
+    ref();
+  };
+
   return (
     <>
       <div className={styles.reviewWrapper}>
         <div className={styles.reviewMain}>
           <ul className={styles.reviewList}>
-            <li className={styles.reviewListEl}>
-              <p className={styles.reviewDate}>19.02.2024</p>
-              <p>
-                Super występ. Jak będę duży też kiedyś będę chciał jeździć na
-                motorze. Kiedy pokazy w Małej Wsi?
-              </p>
-              <div className={styles.reviewSign}>
-                <p className={styles.reviewSignName}>Krzysiek12PL</p>
-              </div>
-            </li>
-            <li className={styles.reviewListEl}>
-              <p className={styles.reviewDate}>19.02.2024</p>
-              <p>
-                Super występ. Jak będę duży też kiedyś będę chciał jeździć na
-                motorze. Kiedy pokazy w Małej Wsi?
-              </p>
-              <div className={styles.reviewSign}>
-                <p className={styles.reviewSignName}>Krzysiek12PL</p>
-              </div>
-            </li>
+            {data.toReversed().map(({ id, name, text, verify, date }) => {
+              return (
+                <>
+                  {(token === 'admin' || verify === true) && (
+                    <li
+                      className={
+                        verify ? styles.reviewListEl : styles.reviewListHiddenEl
+                      }
+                      key={nanoid()}
+                      id={id ?? nanoid()}
+                    >
+                      <div className={styles.reviewBtnBar}>
+                        <p className={styles.reviewDate}>{date}</p>
+                        {token === 'admin' && (
+                          <>
+                            {verify === true ? (
+                              <button
+                                className={styles.reviewBtn}
+                                id={id}
+                                onClick={() => commentHide(id)}
+                              >
+                                Ukryj
+                              </button>
+                            ) : (
+                              <>
+                                <p className={styles.reviewHiddenText}>
+                                  Post Ukryty
+                                </p>
+                                <button
+                                  className={styles.reviewBtn}
+                                  id={id}
+                                  onClick={() => commentShow(id)}
+                                >
+                                  Pokaż
+                                </button>
+                              </>
+                            )}
+
+                            <button
+                              className={styles.reviewBtn}
+                              id={id}
+                              onClick={() => commentDelete(id)}
+                            >
+                              Usuń
+                            </button>
+                          </>
+                        )}
+                      </div>
+                      <p>{text}</p>
+                      <div className={styles.reviewSign}>
+                        <p className={styles.reviewSignName}>{name}</p>
+                      </div>
+                    </li>
+                  )}
+                </>
+              );
+            })}
           </ul>
         </div>
         <div className={styles.reviewComment}>
-          <form className={styles.reviewCommentForm} onSubmit={addComment}>
+          <form className={styles.reviewCommentForm} onSubmit={submitComment}>
             <input
+              className={styles.reviewCommentFormElname}
               type="text"
               name="name"
               placeholder="imię"
+              maxLength="40"
               required
               onChange={e => {
                 setComment({ ...comment, name: e.target.value });
-                setData();
               }}
             />
-            <input
-              type="textarea"
+            <textarea
+              className={styles.reviewCommentFormEltext}
+              placeholder="Wpisz swój komentarz."
+              maxLength="500"
               onChange={e => {
                 setComment({ ...comment, text: e.target.value });
               }}
             />
-            <input type="submit" />
+            <input className={styles.reviewCommentFormElButton} type="submit" />
           </form>
         </div>
       </div>

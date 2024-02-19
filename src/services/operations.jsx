@@ -58,3 +58,53 @@ export const editArticle = async (data, id) => {
     return console.error(error.message);
   }
 };
+
+export const sendComment = async comment => {
+  try {
+    const response = await axios.post(
+      'https://65d39f84522627d501094a90.mockapi.io/comments',
+      comment
+    );
+    return response.data;
+  } catch (error) {
+    return console.error(error.message);
+  }
+};
+
+export const deleteComment = async commentId => {
+  try {
+    const response = await axios.delete(
+      `https://65d39f84522627d501094a90.mockapi.io/comments/${commentId}`
+    );
+    return response.data;
+  } catch (error) {
+    return console.error(error.message);
+  }
+};
+
+export const showComment = async id => {
+  try {
+    const response = await axios.put(
+      `https://65d39f84522627d501094a90.mockapi.io/comments/${id}`,
+      {
+        verify: true,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    return console.error(error.message);
+  }
+};
+export const hideComment = async id => {
+  try {
+    const response = await axios.put(
+      `https://65d39f84522627d501094a90.mockapi.io/comments/${id}`,
+      {
+        verify: false,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    return console.error(error.message);
+  }
+};

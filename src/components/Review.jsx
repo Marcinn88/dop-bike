@@ -13,6 +13,14 @@ import { nanoid } from 'nanoid';
 const API = 'https://65d39f84522627d501094a90.mockapi.io/';
 
 export const Review = ({ token }) => {
+  const setDate = () => {
+    const date = Date.now();
+    const day = getDay(date);
+    const month = getMonth(date);
+    const year = getDefYear(date);
+    setComment({ ...comment, date: `${day}.${month}.${year}` });
+  };
+
   const [data, setData] = useState([]);
   const [comment, setComment] = useState({
     name: '',
@@ -23,14 +31,6 @@ export const Review = ({ token }) => {
 
   const ref = () => {
     window.location.reload(false);
-  };
-
-  const setDate = () => {
-    const date = Date.now();
-    const day = getDay(date);
-    const month = getMonth(date);
-    const year = getDefYear(date);
-    setComment({ ...comment, date: `${day}.${month}.${year}` });
   };
 
   const getReviews = async () => {
@@ -47,7 +47,6 @@ export const Review = ({ token }) => {
 
   useEffect(() => {
     getReviews();
-    setDate();
   }, []);
 
   const submitComment = e => {
@@ -57,6 +56,7 @@ export const Review = ({ token }) => {
       'Dziękujemy za opinię! Twój komentarz już niedługo pojawi się na stronie głównej! Jeżeli przejdzie pozytywnie weryfikację naszej administracji.'
     );
     ref();
+    console.log(comment);
   };
 
   const commentDelete = async index => {
@@ -150,6 +150,9 @@ export const Review = ({ token }) => {
               placeholder="imię"
               maxLength="40"
               required
+              onClick={() => {
+                setDate();
+              }}
               onChange={e => {
                 setComment({ ...comment, name: e.target.value });
               }}

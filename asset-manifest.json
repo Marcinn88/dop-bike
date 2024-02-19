@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/dop-bike/static/css/main.181a3fc6.css",
-    "main.js": "/dop-bike/static/js/main.80e294c3.js",
+    "main.css": "/dop-bike/static/css/main.3d633043.css",
+    "main.js": "/dop-bike/static/js/main.cccc228d.js",
     "static/media/news.jpg": "/dop-bike/static/media/news.16d7fef3b01349e05df5.jpg",
     "static/media/motor.jpg": "/dop-bike/static/media/motor.0d8159557704f007564c.jpg",
     "static/media/right-img.jpg": "/dop-bike/static/media/right-img.4b057200d339d29a6901.jpg",
@@ -11,11 +11,11 @@
     "static/media/fontello.woff?86056": "/dop-bike/static/media/fontello.d7fa9f771898a89dddff.woff",
     "static/media/fontello.svg?86056": "/dop-bike/static/media/fontello.7a107c24c57015b22494.svg",
     "index.html": "/dop-bike/index.html",
-    "main.181a3fc6.css.map": "/dop-bike/static/css/main.181a3fc6.css.map",
-    "main.80e294c3.js.map": "/dop-bike/static/js/main.80e294c3.js.map"
+    "main.3d633043.css.map": "/dop-bike/static/css/main.3d633043.css.map",
+    "main.cccc228d.js.map": "/dop-bike/static/js/main.cccc228d.js.map"
   },
   "entrypoints": [
-    "static/css/main.181a3fc6.css",
-    "static/js/main.80e294c3.js"
+    "static/css/main.3d633043.css",
+    "static/js/main.cccc228d.js"
   ]
 }

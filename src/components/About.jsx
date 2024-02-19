@@ -1,5 +1,6 @@
 import styles from './About.module.css';
 import { Nav } from './Nav';
+import { Review } from './Review';
 
 export const About = ({ token }) => {
   return (
@@ -11,6 +12,7 @@ export const About = ({ token }) => {
         <p className={styles.aboutText}>
           Na tej stronie pojawią się informacje o Mnie
         </p>
+        <Review />
       </div>
     </>
   );

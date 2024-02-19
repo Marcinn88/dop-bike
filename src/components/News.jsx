@@ -64,7 +64,8 @@ export const News = ({ token }) => {
       date_month: getMonth(),
       date_year: getDefYear(),
       photo_position: 'right',
-      photo: 'default.jpg',
+      photo:
+        'https://res.cloudinary.com/djwth1q7u/image/upload/v1708351807/default.jpg',
       text1: '',
       text2: '',
       text3: '',

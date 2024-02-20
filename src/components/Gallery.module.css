@@ -13,7 +13,26 @@
     background-size: cover;
     min-height: 100vh;
     flex-direction: column;
-
+}
+.galleryShadowBox{
+    background-color: rgba(0, 0, 0, 0.767);
+    backdrop-filter: blur(8px);
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+.galleryMainModal{
+    position: fixed;
+    background-color: rgba(22, 22, 22, 0.8);
+    border-radius: 5px;
+    top:5%;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+    z-index: 2;
 
 }
 .galleryTitle{
@@ -60,10 +79,12 @@ transition: all 0.5s;
 align-items: center;
 width: 250px;
 height: 380px;
+color:rgb(94, 94, 94);
 }
 .galleryElement:hover{
 background: linear-gradient(180deg, rgb(20, 20, 20) 0%, rgb(31, 30, 30) 53%, rgb(36, 35, 35) 100%);
 border: 1px solid rgb(68, 68, 68);
+color:rgb(172, 172, 172);
 
 }
 .galleryElement img{
@@ -71,7 +92,6 @@ border: 1px solid rgb(68, 68, 68);
     height: 240px;
     object-fit: fill;
     border-radius: 3px;
-    background-color: red;
 }
 .galleryBtn{
     border-radius: 3px;
@@ -93,10 +113,10 @@ border: 1px solid rgb(68, 68, 68);
 .gallerySubTitle{
     font-size: 20px;
     margin: 0;
+    color:white;
 }
 
 .gallerySubText{
-    color:rgb(94, 94, 94);
     margin: 0;
     font-size: 15px;
     text-align: center;

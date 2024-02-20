@@ -21,7 +21,6 @@
     left:50px;
     bottom: 150px;
     cursor: default;
-    /* background-color: red; */
 }
 /* Podtytuł */
 .subTitle{
@@ -32,7 +31,6 @@
     left:60px;
     bottom: 80px;
     cursor: default;
-    /* background-color: aqua; */
 }
 /* Nawigacja */
 .mainNav{
@@ -98,9 +96,9 @@
     font-size: 45px;
     color: #fff;
     cursor: pointer;
+    transition: all 0.5s;
 }
 .mainButton:hover{box-shadow: 8px 8px 24px 0px rgba(0, 0, 0, 0.4);
-    transition: all 0.5s;
 }
 
 .newsLetterModal,
@@ -183,10 +181,10 @@
     margin: 0;
     background-color: rgb(255, 255, 255);
     cursor: pointer;
+    transition: all 0.5s;
 }
 .modalNewsBtn:hover{
     background-color: rgb(245, 245, 245);
-    transition: all 0.5s;
 }
 .newsModalSubtitle{
     padding: 0;

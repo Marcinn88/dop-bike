@@ -1,7 +1,6 @@
 .news{
     background-color: black;
     width: 90%;
-    /* height: 100vh; */
     margin-left: auto;
     margin-right: auto;
     display: flex;
@@ -28,6 +27,7 @@
     cursor: pointer;
     top: 50px;
     left:50px;
+    transition: all 0.5s;
 }
 .loBtn{
 top:120px;
@@ -217,6 +217,7 @@ top:50px;
   font-family: 'Montserrat', sans-serif;
   border: 1px solid rgba(255, 255, 255, 0.13);
   background-color: rgba(0, 0, 0, 0.411);
+  transition: all 0.5s;
 }
 .newsBtn:hover{
   background-color: rgba(110, 110, 110, 0.411);

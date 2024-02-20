@@ -7,7 +7,7 @@
 
 .reviewMain{
     min-height: 200px;
-    background-color: rgb(56, 56, 56);
+    background-color: rgba(97, 97, 97, 0.2);
     border-radius: 10px;
     padding: 10px;
 }

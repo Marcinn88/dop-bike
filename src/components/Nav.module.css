@@ -44,6 +44,7 @@
 .mainNavElTextSelected:hover{
     cursor: pointer;
     color: lightblue;
+    transition: all 0.5s;
 }
 
 @font-face {

@@ -28,11 +28,12 @@
     display: flex;
     margin-left: auto;
     margin-right: auto;
-    background-color: rgb(179, 179, 179);
+    background-color: rgba(255, 255, 255, 0.05);
     border-radius: 15px;
     width: 80%;
     justify-content: center;
     align-items: center;
+    padding: 20px 0;
 }
 .galleryList{
     display: flex;
@@ -41,20 +42,30 @@
     list-style: none;
     padding: 0;
     justify-content: center;
+
 }
 .galleryElement{
-background-color: rgb(114, 114, 114);
+background-color: rgb(56, 56, 56);
 display: flex;
 flex-direction: column;
 gap:10px;
+border: 1px solid rgb(49, 49, 49);
 border-radius: 15px;
 padding: 0 10px 10px 10px;
+box-shadow: 8px 8px 24px 0px rgb(32, 32, 32);
+cursor: pointer;
+transition: all 0.5s;
+}
+.galleryElement:hover{
+background-color: rgb(75, 74, 74);
+border: 1px solid rgb(68, 68, 68);
+box-shadow: 8px 8px 24px 0px rgb(32, 32, 32);
 }
 .galleryElement img{
-    width: 350px;
-    object-fit:contain;
+    width: 320px;
+    object-fit: fill;
     height: 350px;
-    border-radius: 15px;
+    border-radius: 5px;
     background-color: rgb(85, 85, 85);
 }
 .galleryBtn{
@@ -71,4 +82,5 @@ padding: 0 10px 10px 10px;
 }
 .galleryBtn:hover{
 background-color: rgba(110, 110, 110, 0.411);
+transition: all 0.5s;
 }

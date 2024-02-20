@@ -42,29 +42,34 @@
     list-style: none;
     padding: 0;
     justify-content: center;
-
+    max-width: 866px;
+    /* background-color: red; */
 }
 .galleryElement{
-background-color: rgb(56, 56, 56);
+/* background-color: rgb(56, 56, 56); */
+background: linear-gradient(180deg, rgb(14, 14, 14) 0%, rgb(24, 24, 24) 53%, rgba(31,31,31,1) 100%);
 display: flex;
 flex-direction: column;
 gap:10px;
-border: 1px solid rgb(49, 49, 49);
-border-radius: 15px;
-padding: 0 10px 10px 10px;
-box-shadow: 8px 8px 24px 0px rgb(32, 32, 32);
+border: 1px solid rgb(27, 27, 27);
+border-radius: 3px;
+padding: 10px;
+box-shadow: 3px 3px 8px 0px rgb(17, 17, 17);
 cursor: pointer;
 transition: all 0.5s;
+align-items: center;
+width: 250px;
+height: 380px;
 }
 .galleryElement:hover{
-background-color: rgb(75, 74, 74);
+background: linear-gradient(180deg, rgb(20, 20, 20) 0%, rgb(31, 30, 30) 53%, rgb(36, 35, 35) 100%);
 border: 1px solid rgb(68, 68, 68);
-box-shadow: 8px 8px 24px 0px rgb(32, 32, 32);
+
 }
 .galleryElement img{
-    width: 320px;
+    width: 250px;
     object-fit: fill;
-    height: 350px;
+    height: 250px;
     border-radius: 5px;
     background-color: rgb(85, 85, 85);
 }
@@ -78,9 +83,21 @@ box-shadow: 8px 8px 24px 0px rgb(32, 32, 32);
     font-family: 'Montserrat', sans-serif;
     border: 1px solid rgba(255, 255, 255, 0.13);
     background-color: rgba(0, 0, 0, 0.411);
+    transition: all 0.5s;
 
 }
 .galleryBtn:hover{
-background-color: rgba(110, 110, 110, 0.411);
-transition: all 0.5s;
+    background-color: rgba(110, 110, 110, 0.411);
+}
+
+.gallerySubTitle{
+    font-size: 20px;
+    margin: 0;
+}
+
+.gallerySubText{
+    color:rgb(94, 94, 94);
+    margin: 0;
+    font-size: 15px;
+    text-align: center;
 }

@@ -33,12 +33,22 @@ export const Gallery = ({ token }) => {
             ></div>
             <div className={styles.galleryMainModal}>
               <button
+                className={styles.galleryCloseBtn}
                 onClick={() => {
                   closeGallery();
                 }}
               >
-                Zamknij
+                +
               </button>
+              <div className={styles.modalTextBox}>
+                <p className={styles.modalTitle}>Tytuł Galerii</p>
+                <p className={styles.modalSubTitle}>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Doloribus qui corrupti vel quibusdam sit explicabo hic
+                  delectus.
+                </p>
+              </div>
+              <div className={styles.galleryWindow}></div>
             </div>
           </>
         )}

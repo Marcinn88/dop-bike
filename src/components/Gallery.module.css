@@ -67,15 +67,15 @@ border: 1px solid rgb(68, 68, 68);
 
 }
 .galleryElement img{
-    width: 250px;
+    width: 100%;
+    height: 240px;
     object-fit: fill;
-    height: 250px;
-    border-radius: 5px;
-    background-color: rgb(85, 85, 85);
+    border-radius: 3px;
+    background-color: red;
 }
 .galleryBtn{
-    border-radius: 50px;
-    height: 25px;
+    border-radius: 3px;
+    height: 30px;
     padding: 2px 10px;
     cursor: pointer;
     color:white;
@@ -100,4 +100,5 @@ border: 1px solid rgb(68, 68, 68);
     margin: 0;
     font-size: 15px;
     text-align: center;
+    min-height: 55px;
 }

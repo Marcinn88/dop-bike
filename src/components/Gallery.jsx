@@ -30,31 +30,40 @@ export const Gallery = ({ token }) => {
             <li className={styles.galleryElement}>
               <img className={styles.gallerySubTitle} src={image2} alt="bike" />
               <p className={styles.gallerySubTitle}>Ciachcin - 2024</p>
-              <p className={styles.gallerySubText}>Ciachcin - 2024</p>
+              <p className={styles.gallerySubText}>
+                Działo się!! Ciachcin to obowiązkowy punkt wizyty w trójmieście!
+              </p>
               <button className={styles.galleryBtn}>Otwórz</button>
             </li>
             <li className={styles.galleryElement}>
               <img className={styles.gallerySubTitle} src={image3} alt="bike" />
               <p className={styles.gallerySubTitle}>Sosnowiec - 2024</p>
-              <p className={styles.gallerySubText}>Sosnowiec - 2024</p>
+              <p className={styles.gallerySubText}>
+                Złomiarze go nienawidzą... Odkrył prosty sekret jak zarobić
+                milion złotych w 5 minut. Klinkij i przekonaj się sam.
+              </p>
               <button className={styles.galleryBtn}>Otwórz</button>
             </li>
             <li className={styles.galleryElement}>
               <img className={styles.gallerySubTitle} src={image4} alt="bike" />
               <p className={styles.gallerySubTitle}>Koszelówka - 2024</p>
-              <p className={styles.gallerySubText}>Koszelówka - 2024</p>
+              <p className={styles.gallerySubText}>
+                Podobno jgdzieś jest tu jezioro. Ale czy na pewno?
+              </p>
               <button className={styles.galleryBtn}>Otwórz</button>
             </li>
             <li className={styles.galleryElement}>
               <img className={styles.gallerySubTitle} src={image5} alt="bike" />
               <p className={styles.gallerySubTitle}>Parking</p>
-              <p className={styles.gallerySubText}>Parking</p>
+              <p className={styles.gallerySubText}>
+                Foty z parkingu. Takie ooo
+              </p>
               <button className={styles.galleryBtn}>Otwórz</button>
             </li>
             <li className={styles.galleryElement}>
               <img className={styles.gallerySubTitle} src={image6} alt="bike" />
               <p className={styles.gallerySubTitle}>Tajne zdjęcia</p>
-              <p className={styles.gallerySubText}>Tajne zdjęcia</p>
+              <p className={styles.gallerySubText}>Ściśle tajne i poufne.</p>
               <button className={styles.galleryBtn}>Otwórz</button>
             </li>
           </ul>

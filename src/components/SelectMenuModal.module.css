@@ -39,7 +39,7 @@
 
 .optionsContainer {
 	background-color: rgba(255, 255, 255, 0.486);
-	opacity: 80%;
+	opacity: 90%;
 	border-radius: 3px;
 	width: 300px;
 	display: flex;
@@ -70,7 +70,6 @@
 }
 
 .option:hover {
-	/* color: #4a5db3; */
     font-family: 'Montserrat', sans-serif;
 	font-weight: 800;
 	background-color: #fff;

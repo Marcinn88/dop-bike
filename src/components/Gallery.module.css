@@ -265,3 +265,30 @@ color:rgb(172, 172, 172);
     left:20%;
     top:50px;
 }
+.addGalleryModalAlbumList{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.addGalleryModalAlbumListBtn{
+	display: flex;
+    font-family: 'Montserrat', sans-serif;
+	background-color: rgb(180, 180, 180);
+	box-sizing: border-box;
+	padding: 10px;
+	height: 30px;
+	width: 300px;
+	justify-content: center;
+	align-items: center;
+	color: black;
+	font-size: 16px;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	border-radius: 3px;
+	cursor: pointer;
+	z-index: 56;
+	transition: all 0.5s;
+}
+
+.addGalleryModalAlbumListBtn:hover{
+	background-color: rgb(219, 219, 219);
+}

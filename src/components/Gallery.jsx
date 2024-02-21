@@ -54,8 +54,12 @@ export const Gallery = ({ token }) => {
             ></div>
             <div className={styles.addGalleryModal}>
               <p>Wybierz album z listy lub dodaj nowy.</p>
-              <div className={styles.addGalleryModalAlbumList}></div>
-              <SelectMenuModal placeholder={'Wybierz album z listy.'} />
+              <div className={styles.addGalleryModalAlbumList}>
+                <button className={styles.addGalleryModalAlbumListBtn}>
+                  Nowy Album
+                </button>
+                <SelectMenuModal placeholder={'Wybierz album z listy.'} />
+              </div>
             </div>
           </>
         )}

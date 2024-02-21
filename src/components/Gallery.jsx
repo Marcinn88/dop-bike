@@ -48,7 +48,19 @@ export const Gallery = ({ token }) => {
                   delectus.
                 </p>
               </div>
-              <div className={styles.galleryWindow}></div>
+              <div className={styles.galleryWindowWrapper}>
+                <button className={styles.galleryWindowBtn}>Poprzedni</button>
+                <div className={styles.galleryWindow}></div>
+                <button className={styles.galleryWindowBtn}>Następny</button>
+              </div>
+              <div className={styles.gallerySmallWindowWrapper}>
+                <div className={styles.gallerySmallWindow}></div>
+                <div className={styles.gallerySmallWindow}></div>
+                <div className={styles.gallerySmallWindow}></div>
+                <div className={styles.gallerySmallWindow}></div>
+                <div className={styles.gallerySmallWindow}></div>
+                <div className={styles.gallerySmallWindow}></div>
+              </div>
             </div>
           </>
         )}

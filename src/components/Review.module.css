@@ -22,24 +22,24 @@
 }
 .reviewListEl{
     list-style: none;
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 15px;
-    border: solid 1px rgb(51, 51, 51);
+    background-color: rgba(0, 0, 0, 0.116);
+    border: 1px solid rgba(82, 82, 82, 0.2);
+    border-radius: 3px;
     width: 90%;
     max-width: 900px;
     padding: 10px 20px;
-    box-shadow: 8px 8px 24px 0px rgb(32, 32, 32);
+    box-shadow: 3px 3px 8px 0px rgba(32, 32, 32, 0.3);
 }
 .reviewListHiddenEl{
     list-style: none;
-    background-color: rgba(167, 167, 167, 0.116);
-    border-radius: 15px;
-    border: solid 1px rgb(51, 51, 51);
+    background-color: rgba(51, 51, 51, 0.116);
+    border: solid 1px rgb(92, 34, 34);
+    border-radius: 3px;
     width: 90%;
     max-width: 900px;
     padding: 10px 20px;
-    box-shadow: 8px 8px 24px 0px rgb(32, 32, 32);
-    color: rgb(134, 134, 134);
+    box-shadow: 3px 3px 8px 0px rgb(32, 32, 32, 0.3);
+    color: rgba(134, 134, 134, 0.582);
 }
 .reviewDate{
     color:rgb(177, 177, 177)
@@ -65,21 +65,21 @@
 .reviewCommentForm{
     display: flex;
     flex-direction: column;
-    background-color: rgba(255, 255, 255, 0.226);
+    background-color: rgba(70, 70, 70, 0.226);
+    border: 1px solid rgba(64, 64, 64, 0.226);
     padding: 15px;
-    border-radius: 15px;
+    border-radius: 3px;
     gap: 25px;
     width: 90%;
     max-width: 600px;
-    box-shadow: 8px 8px 24px 0px rgb(32, 32, 32);
 }
 .reviewCommentFormElname{
     font-size: 14px;
     font-weight: 600;
     padding: 10px;
-    border-radius: 10px;
-    border: 1px solid grey;
-    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 3px;
+    background-color: rgba(255, 255, 255, 0.5); 
+    border: 1px solid rgba(64, 64, 64, 0.226);
     color: black;
 }
 
@@ -88,17 +88,23 @@
     font-weight: 600;
     padding: 10px;
     height: 200px;
-    border-radius: 10px;
-    border: 1px solid grey;
-    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 3px;
+    background-color: rgba(255, 255, 255, 0.5); 
+    border: 1px solid rgba(64, 64, 64, 0.226);
 }
 .reviewCommentFormElButton{
-    font-size: 14px;
+    font-size: 16px;
     padding: 10px;
     height: 50px;
-    border-radius: 10px;
-    border: 1px solid grey;
-    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 3px;
+    background-color: rgba(150, 150, 150, 0.452); 
+    border: 1px solid rgba(64, 64, 64, 0.226);
+    transition: all .5s;
+}
+.reviewCommentFormElButton:hover{
+    background-color: rgba(184, 184, 184, 0.671); 
+    border: 1px solid rgba(64, 64, 64, 0.8);
+    cursor: pointer;
 }
 .reviewBtnBar{
     display: flex;
@@ -109,15 +115,16 @@
     color:rgb(219, 105, 124)
 }
 .reviewBtn{
-        border-radius: 50px;
-        height: 25px;
-        padding: 2px 10px;
-        cursor: pointer;
-        color:white;
-        font-size: 12px;
-        font-family: 'Montserrat', sans-serif;
-        border: 1px solid rgba(255, 255, 255, 0.13);
-        background-color: rgba(0, 0, 0, 0.411);
+    border-radius: 50px;
+    height: 25px;
+    padding: 2px 10px;
+    cursor: pointer;
+    color:white;
+    font-size: 12px;
+    font-family: 'Montserrat', sans-serif;
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    background-color: rgba(0, 0, 0, 0.411);
+    transition: all .5s;
 }
 .reviewBtn:hover{
     background-color: rgba(110, 110, 110, 0.411);

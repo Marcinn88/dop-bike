@@ -263,6 +263,7 @@ color:rgb(172, 172, 172);
     left:20%;
     top:50px;
 }
+
 .addGalleryModalAlbumList{
     display: flex;
     flex-direction: column;
@@ -289,21 +290,31 @@ color:rgb(172, 172, 172);
 .addGalleryModalAlbumListBtn:hover{
 	background-color: rgb(219, 219, 219);
 }
-
+.addGalleryModalFileUpladList{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+}
+.addGalleryModalFileUpladContainer{
+    display: flex;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 5px;
+}
 .addGalleryModalFileUplad{
     display: flex;
     margin-top: 20px;
     /* background-color: red; */
-    padding: 5px;
-	border: 1px solid rgba(255, 255, 255, 0.1);
 	border-radius: 3px;
     max-width: 500px;
-    width: 50%;
+    width: 60%;
     min-width: 250px;
     position: relative;
 }
 
-.addGalleryModalFileUpladInput{
+.addGalleryModalFileUpladInput,.addGalleryModalFileUpladInputDisabled{
 	display: flex;
     font-family: 'Montserrat', sans-serif;
 	box-sizing: border-box;
@@ -316,20 +327,12 @@ color:rgb(172, 172, 172);
 	border-radius: 3px;
 	transition: all 0.5s;
 }
-.addGalleryModalFileUpladInput::after{
-    content: url(../images/verified.png);
-    pointer-events: none;
-    position: absolute;
-    right:-60px;
-    bottom:-10px;
-    width: 40px;
-    height: 40px;
-    /* background-color: rgb(0, 105, 23); */
-    border-radius: 50%;
-    z-index: 4;
+.addGalleryModalFileUpladInputDisabled{
+    color:rgb(92, 92, 92);
 }
 
-.addGalleryModalFileUpladInputBtn{
+
+.addGalleryModalFileUpladInputBtn,.addGalleryModalFileUpladInputBtnDisabled{
     display: flex;
     font-family: 'Montserrat', sans-serif;
 	background-color: rgb(180, 180, 180);
@@ -344,4 +347,19 @@ color:rgb(172, 172, 172);
 	border-radius: 3px;
 	cursor: pointer;
 	transition: all 0.5s;
+}
+.addGalleryModalFileUpladInputBtnDisabled{
+    background-color: rgb(63, 63, 63);
+}
+.addGalleryModalFileUpladInputDisabled::after{
+    content: url(../images/verified.png);
+    pointer-events: none;
+    position: absolute;
+    right:-60px;
+    bottom:-10px;
+    width: 40px;
+    height: 40px;
+    /* background-color: rgb(0, 105, 23); */
+    border-radius: 50%;
+    z-index: 4;
 }

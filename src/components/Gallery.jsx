@@ -14,6 +14,11 @@ export const Gallery = ({ token }) => {
   const [gallery, setGallery] = useState(false);
   const [addGalleryModal, setAddGalleryModal] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [uploadedOne, setUploadedOne] = useState(false);
+  const [uploadedTwo, setUploadedTwo] = useState(false);
+  const [uploadedThree, setUploadedThree] = useState(false);
+  const [uploadedFour, setUploadedFour] = useState(false);
+  const [uploadedFive, setUploadedFive] = useState(false);
 
   const ref = () => {
     window.location.reload(false);
@@ -28,6 +33,11 @@ export const Gallery = ({ token }) => {
 
   const openAddGallery = () => {
     setAddGalleryModal(true);
+    setUploadedOne(false);
+    setUploadedTwo(false);
+    setUploadedThree(false);
+    setUploadedFour(false);
+    setUploadedFive(false);
   };
 
   const closeAddGallery = () => {
@@ -39,6 +49,22 @@ export const Gallery = ({ token }) => {
     setLoggedIn(!loggedIn);
     ref();
     console.log('Wylogowano');
+  };
+
+  const toogleUploadOne = () => {
+    setUploadedOne(!uploadedOne);
+  };
+  const toogleUploadTwo = () => {
+    setUploadedTwo(!uploadedTwo);
+  };
+  const toogleUploadThree = () => {
+    setUploadedThree(!uploadedThree);
+  };
+  const toogleUploadFour = () => {
+    setUploadedFour(!uploadedFour);
+  };
+  const toogleUploadFive = () => {
+    setUploadedFive(!uploadedFive);
   };
 
   return (
@@ -53,6 +79,14 @@ export const Gallery = ({ token }) => {
               }}
             ></div>
             <div className={styles.addGalleryModal}>
+              <button
+                className={styles.galleryCloseBtn}
+                onClick={() => {
+                  closeAddGallery();
+                }}
+              >
+                +
+              </button>
               <p>Wybierz album z listy lub dodaj nowy.</p>
               <div className={styles.addGalleryModalAlbumList}>
                 <button className={styles.addGalleryModalAlbumListBtn}>
@@ -61,14 +95,183 @@ export const Gallery = ({ token }) => {
                 <SelectMenuModal placeholder={'Wybierz album z listy.'} />
               </div>
               <div className={styles.addGalleryModalFileUplad}>
-                <input
-                  type="file"
-                  // disabled
-                  className={styles.addGalleryModalFileUpladInput}
-                />
-                <button className={styles.addGalleryModalFileUpladInputBtn}>
-                  Upload
-                </button>
+                <ul className={styles.addGalleryModalFileUpladList}>
+                  <li className={styles.addGalleryModalFileUpladContainer}>
+                    {!uploadedOne ? (
+                      <>
+                        <input
+                          type="file"
+                          className={styles.addGalleryModalFileUpladInput}
+                        />
+                        <button
+                          className={styles.addGalleryModalFileUpladInputBtn}
+                          onClick={() => {
+                            toogleUploadOne();
+                          }}
+                        >
+                          Upload
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <input
+                          disabled
+                          type="file"
+                          className={
+                            styles.addGalleryModalFileUpladInputDisabled
+                          }
+                        />{' '}
+                        <button
+                          className={
+                            styles.addGalleryModalFileUpladInputBtnDisabled
+                          }
+                        >
+                          Zapisano
+                        </button>
+                      </>
+                    )}
+                  </li>
+                  <li className={styles.addGalleryModalFileUpladContainer}>
+                    {!uploadedTwo ? (
+                      <>
+                        <input
+                          type="file"
+                          className={styles.addGalleryModalFileUpladInput}
+                        />{' '}
+                        <button
+                          className={styles.addGalleryModalFileUpladInputBtn}
+                          onClick={() => {
+                            toogleUploadTwo();
+                          }}
+                        >
+                          Upload
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <input
+                          disabled
+                          type="file"
+                          className={
+                            styles.addGalleryModalFileUpladInputDisabled
+                          }
+                        />{' '}
+                        <button
+                          className={
+                            styles.addGalleryModalFileUpladInputBtnDisabled
+                          }
+                        >
+                          Zapisano
+                        </button>
+                      </>
+                    )}
+                  </li>
+                  <li className={styles.addGalleryModalFileUpladContainer}>
+                    {!uploadedThree ? (
+                      <>
+                        <input
+                          type="file"
+                          className={styles.addGalleryModalFileUpladInput}
+                        />{' '}
+                        <button
+                          className={styles.addGalleryModalFileUpladInputBtn}
+                          onClick={() => {
+                            toogleUploadThree();
+                          }}
+                        >
+                          Upload
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <input
+                          disabled
+                          type="file"
+                          className={
+                            styles.addGalleryModalFileUpladInputDisabled
+                          }
+                        />{' '}
+                        <button
+                          className={
+                            styles.addGalleryModalFileUpladInputBtnDisabled
+                          }
+                        >
+                          Zapisano
+                        </button>
+                      </>
+                    )}
+                  </li>
+                  <li className={styles.addGalleryModalFileUpladContainer}>
+                    {!uploadedFour ? (
+                      <>
+                        <input
+                          type="file"
+                          className={styles.addGalleryModalFileUpladInput}
+                        />{' '}
+                        <button
+                          className={styles.addGalleryModalFileUpladInputBtn}
+                          onClick={() => {
+                            toogleUploadFour();
+                          }}
+                        >
+                          Upload
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <input
+                          disabled
+                          type="file"
+                          className={
+                            styles.addGalleryModalFileUpladInputDisabled
+                          }
+                        />{' '}
+                        <button
+                          className={
+                            styles.addGalleryModalFileUpladInputBtnDisabled
+                          }
+                        >
+                          Zapisano
+                        </button>
+                      </>
+                    )}
+                  </li>
+                  <li className={styles.addGalleryModalFileUpladContainer}>
+                    {!uploadedFive ? (
+                      <>
+                        <input
+                          type="file"
+                          className={styles.addGalleryModalFileUpladInput}
+                        />{' '}
+                        <button
+                          className={styles.addGalleryModalFileUpladInputBtn}
+                          onClick={() => {
+                            toogleUploadFive();
+                          }}
+                        >
+                          Upload
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <input
+                          disabled
+                          type="file"
+                          className={
+                            styles.addGalleryModalFileUpladInputDisabled
+                          }
+                        />{' '}
+                        <button
+                          className={
+                            styles.addGalleryModalFileUpladInputBtnDisabled
+                          }
+                        >
+                          Zapisano
+                        </button>
+                      </>
+                    )}
+                  </li>
+                </ul>
               </div>
             </div>
           </>

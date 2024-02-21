@@ -8,10 +8,16 @@ import image3 from '../images/maciek3.jpg';
 import image4 from '../images/maciek4.jpg';
 import image5 from '../images/motor.jpg';
 import image6 from '../images/ai-bike2.jpg';
+import { SelectMenuModal } from './SelectMenuModal';
 
 export const Gallery = ({ token }) => {
   const [gallery, setGallery] = useState(false);
+  const [addGalleryModal, setAddGalleryModal] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
 
+  const ref = () => {
+    window.location.reload(false);
+  };
   const openGallery = () => {
     setGallery(true);
   };
@@ -20,9 +26,40 @@ export const Gallery = ({ token }) => {
     setGallery(false);
   };
 
+  const openAddGallery = () => {
+    setAddGalleryModal(true);
+  };
+
+  const closeAddGallery = () => {
+    setAddGalleryModal(false);
+  };
+
+  const logOut = () => {
+    localStorage.setItem('token', JSON.stringify({ token: '' }));
+    setLoggedIn(!loggedIn);
+    ref();
+    console.log('Wylogowano');
+  };
+
   return (
     <>
       <div className={styles.galleryWrapper}>
+        {addGalleryModal && (
+          <>
+            <div
+              className={styles.galleryShadowBox}
+              onClick={() => {
+                closeAddGallery();
+              }}
+            ></div>
+            <div className={styles.addGalleryModal}>
+              <p>Wybierz album z listy lub dodaj nowy.</p>
+              <div className={styles.addGalleryModalAlbumList}></div>
+              <SelectMenuModal placeholder={'Wybierz album z listy.'} />
+            </div>
+          </>
+        )}
+
         {gallery && (
           <>
             <div
@@ -64,7 +101,20 @@ export const Gallery = ({ token }) => {
             </div>
           </>
         )}
+        <div className={styles.galleryAdminPanel}>
+          <button
+            className={styles.addGalleryBtn}
+            onClick={() => {
+              openAddGallery();
+            }}
+          >
+            +
+          </button>
 
+          <button className={styles.loBtn} onClick={logOut}>
+            Logout
+          </button>
+        </div>
         <Nav selected={'gallery'} token={token} />
         <p className={styles.galleryTitle}>Galeria!</p>
         <p className={styles.galleryText}>

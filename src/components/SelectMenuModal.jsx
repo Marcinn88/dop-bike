@@ -57,11 +57,7 @@ export const SelectMenuModal = ({ placeholder }) => {
           </div>
         )}
       </div>
-      {modal && (
-        <div className={styles.backdrop} onClick={toogleModal}>
-          a
-        </div>
-      )}
+      {modal && <div className={styles.backdrop} onClick={toogleModal}></div>}
     </>
   );
 };

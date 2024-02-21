@@ -60,6 +60,16 @@ export const Gallery = ({ token }) => {
                 </button>
                 <SelectMenuModal placeholder={'Wybierz album z listy.'} />
               </div>
+              <div className={styles.addGalleryModalFileUplad}>
+                <input
+                  type="file"
+                  // disabled
+                  className={styles.addGalleryModalFileUpladInput}
+                />
+                <button className={styles.addGalleryModalFileUpladInputBtn}>
+                  Upload
+                </button>
+              </div>
             </div>
           </>
         )}

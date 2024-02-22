@@ -82,6 +82,7 @@ export const Gallery = ({ token }) => {
   const [uploadedOne, setUploadedOne] = useState(false);
   const [postPhoto, setPostPhoto] = useState({});
   const [newAlbumModal, setNewAlbumModal] = useState(false);
+  const [album, setAlbum] = useState({});
 
   const ref = () => {
     window.location.reload(false);
@@ -114,6 +115,13 @@ export const Gallery = ({ token }) => {
       hidden: false,
       photo: '',
     });
+    setAlbum({
+      album: '',
+      description: '',
+      main_id: '1',
+      hidden: false,
+      photo: [],
+    });
   };
 
   const closeAddGallery = () => {
@@ -143,6 +151,11 @@ export const Gallery = ({ token }) => {
     console.log('postPhoto', postPhoto);
   };
 
+  const onAddNewAlbum = () => {
+    console.log(album);
+    closeNewAlbumModal();
+  };
+
   return (
     <>
       <div className={styles.galleryWrapper}>
@@ -165,10 +178,54 @@ export const Gallery = ({ token }) => {
               </button>
               <div className={styles.modalTextBox}>
                 <p className={styles.modalNewAlbumTitle}>Stwórz nowy album</p>
-                <p className={styles.modalNewAlbumSubTitle}>Nazwa:</p>
-                <input type="text" />
-                <p className={styles.modalNewAlbumSubTitle}>Opis:</p>
-                <input type="text" />
+                <div className={styles.modalNewAlbumContainer}>
+                  <div className={styles.modalAddNewAlbumLeft}>
+                    <p className={styles.modalNewAlbumSubTitle}>Nazwa:</p>
+                    <input
+                      type="text"
+                      className={styles.modalNewAlbumTextInput}
+                      onChange={e => {
+                        setAlbum({ ...album, album: e.target.value });
+                      }}
+                    />
+                    <p className={styles.modalNewAlbumSubTitle}>Opis:</p>
+                    <textarea
+                      type="textarea"
+                      maxLength="100"
+                      name="album"
+                      className={styles.modalNewAlbumTextAreaInput}
+                      onChange={e => {
+                        setAlbum({ ...album, description: e.target.value });
+                      }}
+                    />
+                  </div>
+                  <div className={styles.modalAddNewAlbumRight}>
+                    <div className={styles.galleryElement}>
+                      <img
+                        className={styles.gallerySubTitle}
+                        src={image4}
+                        alt="bike"
+                      />
+                      <p className={styles.gallerySubTitle}>
+                        {album.album === '' ? 'Przykładowy Tytuł' : album.album}
+                      </p>
+                      <p className={styles.gallerySubText}>
+                        {album.description === ''
+                          ? 'Pzykładowy opis Albumu'
+                          : album.description}
+                      </p>
+                      <button className={styles.galleryBtn}>Otwórz</button>
+                    </div>
+                  </div>
+                </div>
+                <button
+                  onClick={() => {
+                    onAddNewAlbum();
+                  }}
+                  className={styles.addGalleryModalAlbumListBtn}
+                >
+                  Dodaj
+                </button>
               </div>
             </div>
           </>

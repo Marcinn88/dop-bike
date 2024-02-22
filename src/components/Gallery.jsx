@@ -1,6 +1,7 @@
 import styles from './Gallery.module.css';
 import { Nav } from './Nav';
 import { useState } from 'react';
+import { SelectMenuModal } from './SelectMenuModal';
 
 import image1 from '../images/maciek.jpg';
 import image2 from '../images/maciek2.jpg';
@@ -8,17 +9,79 @@ import image3 from '../images/maciek3.jpg';
 import image4 from '../images/maciek4.jpg';
 import image5 from '../images/motor.jpg';
 import image6 from '../images/ai-bike2.jpg';
-import { SelectMenuModal } from './SelectMenuModal';
 
 export const Gallery = ({ token }) => {
+  // const galleryApi = 'https://65d784e727d9a3bc1d7b3c59.mockapi.io/';
+
+  const TestGallery = [
+    {
+      album: 'Parking',
+      name: 'Zdjęcie główne',
+      main: true,
+      hidden: false,
+      photo:
+        'https://res.cloudinary.com/djwth1q7u/image/upload/v1708351807/default.jpg',
+    },
+    {
+      album: 'Parking',
+      name: 'Zdjecie dwa',
+      main: false,
+      hidden: false,
+      photo:
+        'https://res.cloudinary.com/djwth1q7u/image/upload/v1708351807/default.jpg',
+    },
+    {
+      album: 'Parking',
+      name: 'Zdjecie trzy',
+      main: false,
+      hidden: false,
+      photo:
+        'https://res.cloudinary.com/djwth1q7u/image/upload/v1708351807/default.jpg',
+    },
+    {
+      album: 'Parking',
+      name: 'Zdjecie cztery',
+      main: false,
+      hidden: true,
+      photo:
+        'https://res.cloudinary.com/djwth1q7u/image/upload/v1708351807/default.jpg',
+    },
+    {
+      album: 'Tajne',
+      name: 'Zdjecie piec',
+      main: false,
+      hidden: false,
+      photo:
+        'https://res.cloudinary.com/djwth1q7u/image/upload/v1708351807/default.jpg',
+    },
+    {
+      album: 'Tajne',
+      name: 'Zdjecie szesc',
+      main: true,
+      hidden: false,
+      photo:
+        'https://res.cloudinary.com/djwth1q7u/image/upload/v1708351807/default.jpg',
+    },
+  ];
+
+  const TestAlbum = {
+    album: 'Parking',
+    description: 'Zdjęcia z parkingu. Takie, że oooo.',
+    main_id: '1',
+    hidden: false,
+    photo: [
+      'https://res.cloudinary.com/djwth1q7u/image/upload/v1708351807/default.jpg',
+      'https://res.cloudinary.com/djwth1q7u/image/upload/v1708351807/default.jpg',
+      'https://res.cloudinary.com/djwth1q7u/image/upload/v1708351807/default.jpg',
+    ],
+  };
+
   const [gallery, setGallery] = useState(false);
   const [addGalleryModal, setAddGalleryModal] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [uploadedOne, setUploadedOne] = useState(false);
-  const [uploadedTwo, setUploadedTwo] = useState(false);
-  const [uploadedThree, setUploadedThree] = useState(false);
-  const [uploadedFour, setUploadedFour] = useState(false);
-  const [uploadedFive, setUploadedFive] = useState(false);
+  const [postPhoto, setPostPhoto] = useState({});
+  const [newAlbumModal, setNewAlbumModal] = useState(false);
 
   const ref = () => {
     window.location.reload(false);
@@ -34,10 +97,23 @@ export const Gallery = ({ token }) => {
   const openAddGallery = () => {
     setAddGalleryModal(true);
     setUploadedOne(false);
-    setUploadedTwo(false);
-    setUploadedThree(false);
-    setUploadedFour(false);
-    setUploadedFive(false);
+    console.log(TestAlbum);
+    console.log(TestGallery);
+    const TestResults = TestGallery.filter(el => el.album === 'Tajne');
+    const TestMainResult = TestResults.filter(el => el.main === true);
+    const TestMainTester = data => {
+      return data.length > 0 ? true : false;
+    };
+    console.log(TestResults);
+    console.log(TestMainResult);
+    console.log(TestMainTester(TestMainResult));
+    setPostPhoto({
+      album: '',
+      name: '',
+      main: false,
+      hidden: false,
+      photo: '',
+    });
   };
 
   const closeAddGallery = () => {
@@ -54,22 +130,49 @@ export const Gallery = ({ token }) => {
   const toogleUploadOne = () => {
     setUploadedOne(!uploadedOne);
   };
-  const toogleUploadTwo = () => {
-    setUploadedTwo(!uploadedTwo);
+
+  const openNewAlbumModal = () => {
+    setNewAlbumModal(true);
   };
-  const toogleUploadThree = () => {
-    setUploadedThree(!uploadedThree);
+  const closeNewAlbumModal = () => {
+    setNewAlbumModal(false);
   };
-  const toogleUploadFour = () => {
-    setUploadedFour(!uploadedFour);
-  };
-  const toogleUploadFive = () => {
-    setUploadedFive(!uploadedFive);
+
+  const onSubmit = () => {
+    console.log('Submit wciśnięty.');
+    console.log('postPhoto', postPhoto);
   };
 
   return (
     <>
       <div className={styles.galleryWrapper}>
+        {newAlbumModal && (
+          <>
+            <div
+              className={styles.galleryNewAlbumShadowBox}
+              onClick={() => {
+                closeNewAlbumModal();
+              }}
+            ></div>
+            <div className={styles.galleryAddAlbumModal}>
+              <button
+                className={styles.galleryCloseBtn}
+                onClick={() => {
+                  closeNewAlbumModal();
+                }}
+              >
+                +
+              </button>
+              <div className={styles.modalTextBox}>
+                <p className={styles.modalNewAlbumTitle}>Stwórz nowy album</p>
+                <p className={styles.modalNewAlbumSubTitle}>Nazwa:</p>
+                <input type="text" />
+                <p className={styles.modalNewAlbumSubTitle}>Opis:</p>
+                <input type="text" />
+              </div>
+            </div>
+          </>
+        )}
         {addGalleryModal && (
           <>
             <div
@@ -89,10 +192,20 @@ export const Gallery = ({ token }) => {
               </button>
               <p>Wybierz album z listy lub dodaj nowy.</p>
               <div className={styles.addGalleryModalAlbumList}>
-                <button className={styles.addGalleryModalAlbumListBtn}>
+                <button
+                  className={styles.addGalleryModalAlbumListBtn}
+                  onClick={() => {
+                    openNewAlbumModal();
+                  }}
+                >
                   Nowy Album
                 </button>
-                <SelectMenuModal placeholder={'Wybierz album z listy.'} />
+                <SelectMenuModal
+                  placeholder={'Wybierz album z listy.'}
+                  onClick={e => {
+                    setPostPhoto({ ...postPhoto, album: e });
+                  }}
+                />
               </div>
               <div className={styles.addGalleryModalFileUplad}>
                 <ul className={styles.addGalleryModalFileUpladList}>
@@ -120,147 +233,7 @@ export const Gallery = ({ token }) => {
                           className={
                             styles.addGalleryModalFileUpladInputDisabled
                           }
-                        />{' '}
-                        <button
-                          className={
-                            styles.addGalleryModalFileUpladInputBtnDisabled
-                          }
-                        >
-                          Zapisano
-                        </button>
-                      </>
-                    )}
-                  </li>
-                  <li className={styles.addGalleryModalFileUpladContainer}>
-                    {!uploadedTwo ? (
-                      <>
-                        <input
-                          type="file"
-                          className={styles.addGalleryModalFileUpladInput}
-                        />{' '}
-                        <button
-                          className={styles.addGalleryModalFileUpladInputBtn}
-                          onClick={() => {
-                            toogleUploadTwo();
-                          }}
-                        >
-                          Upload
-                        </button>
-                      </>
-                    ) : (
-                      <>
-                        <input
-                          disabled
-                          type="file"
-                          className={
-                            styles.addGalleryModalFileUpladInputDisabled
-                          }
-                        />{' '}
-                        <button
-                          className={
-                            styles.addGalleryModalFileUpladInputBtnDisabled
-                          }
-                        >
-                          Zapisano
-                        </button>
-                      </>
-                    )}
-                  </li>
-                  <li className={styles.addGalleryModalFileUpladContainer}>
-                    {!uploadedThree ? (
-                      <>
-                        <input
-                          type="file"
-                          className={styles.addGalleryModalFileUpladInput}
-                        />{' '}
-                        <button
-                          className={styles.addGalleryModalFileUpladInputBtn}
-                          onClick={() => {
-                            toogleUploadThree();
-                          }}
-                        >
-                          Upload
-                        </button>
-                      </>
-                    ) : (
-                      <>
-                        <input
-                          disabled
-                          type="file"
-                          className={
-                            styles.addGalleryModalFileUpladInputDisabled
-                          }
-                        />{' '}
-                        <button
-                          className={
-                            styles.addGalleryModalFileUpladInputBtnDisabled
-                          }
-                        >
-                          Zapisano
-                        </button>
-                      </>
-                    )}
-                  </li>
-                  <li className={styles.addGalleryModalFileUpladContainer}>
-                    {!uploadedFour ? (
-                      <>
-                        <input
-                          type="file"
-                          className={styles.addGalleryModalFileUpladInput}
-                        />{' '}
-                        <button
-                          className={styles.addGalleryModalFileUpladInputBtn}
-                          onClick={() => {
-                            toogleUploadFour();
-                          }}
-                        >
-                          Upload
-                        </button>
-                      </>
-                    ) : (
-                      <>
-                        <input
-                          disabled
-                          type="file"
-                          className={
-                            styles.addGalleryModalFileUpladInputDisabled
-                          }
-                        />{' '}
-                        <button
-                          className={
-                            styles.addGalleryModalFileUpladInputBtnDisabled
-                          }
-                        >
-                          Zapisano
-                        </button>
-                      </>
-                    )}
-                  </li>
-                  <li className={styles.addGalleryModalFileUpladContainer}>
-                    {!uploadedFive ? (
-                      <>
-                        <input
-                          type="file"
-                          className={styles.addGalleryModalFileUpladInput}
-                        />{' '}
-                        <button
-                          className={styles.addGalleryModalFileUpladInputBtn}
-                          onClick={() => {
-                            toogleUploadFive();
-                          }}
-                        >
-                          Upload
-                        </button>
-                      </>
-                    ) : (
-                      <>
-                        <input
-                          disabled
-                          type="file"
-                          className={
-                            styles.addGalleryModalFileUpladInputDisabled
-                          }
-                        />{' '}
+                        />
                         <button
                           className={
                             styles.addGalleryModalFileUpladInputBtnDisabled
@@ -273,6 +246,14 @@ export const Gallery = ({ token }) => {
                   </li>
                 </ul>
               </div>
+              <button
+                className={styles.addGalleryModalAlbumListBtn}
+                onClick={() => {
+                  onSubmit();
+                }}
+              >
+                Dodaj do Galerii
+              </button>
             </div>
           </>
         )}

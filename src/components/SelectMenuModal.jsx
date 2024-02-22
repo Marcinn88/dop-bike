@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from './SelectMenuModal.module.css';
 import { nanoid } from 'nanoid';
 
-export const SelectMenuModal = ({ placeholder }) => {
+export const SelectMenuModal = ({ placeholder, onClick }) => {
   const categories = [
     { category: 'Wadowice - 2024' },
     { category: 'Ciachcin - 2024' },
@@ -46,7 +46,10 @@ export const SelectMenuModal = ({ placeholder }) => {
                 return (
                   <li
                     key={nanoid()}
-                    onClick={e => changeName(e.target)}
+                    onClick={e => {
+                      changeName(e.target);
+                      onClick(e.target.innerText);
+                    }}
                     className={styles.option}
                   >
                     <span>{category}</span>

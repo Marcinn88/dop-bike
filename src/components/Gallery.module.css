@@ -95,7 +95,8 @@
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
-.addGalleryImagesPreviewEl{
+.addGalleryImagesPreviewEl,
+.addGalleryImagesPreviewElHidden{
     width: 100px;
     height: 100px;
     border: solid 1px rgba(63, 63, 63, 0.349);
@@ -103,8 +104,19 @@
     position: relative;
     transition: all .5s;
 }
+.addGalleryImagesPreviewElHidden{
+    border: solid 1px rgba(218, 0, 0, 0.349);
+}
+.addGalleryImagesPreviewElHiddenIco{
+    position: absolute;
+    left: 8px;
+    top: 8px;
+}
 .addGalleryImagesPreviewEl:hover{
     border: solid 1px rgba(133, 133, 133, 0.349);
+}
+.addGalleryImagesPreviewElHidden:hover{
+    border: solid 1px rgba(218, 0, 0, 0.61);
 }
 .addGalleryImagesPreviewElIco{
     position: absolute;
@@ -117,9 +129,24 @@
     transition: all .5s;
     cursor: pointer;
 }
+.addGalleryImagesPreviewEl:focus .addGalleryImagesPreviewElIco,
 .addGalleryImagesPreviewEl:hover .addGalleryImagesPreviewElIco,
-.addGalleryImagesPreviewEl:focus .addGalleryImagesPreviewElIco{
+.addGalleryImagesPreviewElHidden:focus .addGalleryImagesPreviewElIco,
+.addGalleryImagesPreviewElHidden:hover .addGalleryImagesPreviewElIco{
     opacity: 90%;
+}
+.addGalleryImagesPreviewElImg{
+    width: 100%;
+    height: 100px;
+    object-fit:contain;
+}
+.addGalleryHiddenOverlay{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top:0;
+    left:0;
+    background-color: rgba(54, 27, 27, 0.726);
 }
 .dropDownList{
     position: absolute;

@@ -6,6 +6,9 @@ import ico from '../images/more.png';
 import ico_star from '../images/star.png';
 import ico_del from '../images/delete.png';
 import ico_hidden from '../images/hidden.png';
+import ico_unhidden from '../images/unhidden.png';
+
+import { nanoid } from 'nanoid';
 
 import image1 from '../images/maciek.jpg';
 import image2 from '../images/maciek2.jpg';
@@ -124,7 +127,28 @@ export const Gallery = ({ token }) => {
       description: '',
       main_id: '1',
       hidden: false,
-      photo: [],
+      photos: [
+        {
+          hidden: false,
+          photo:
+            'https://res.cloudinary.com/djwth1q7u/image/upload/v1708276435/images/rwpcnltckm2slhkxeuv0.jpg',
+        },
+        {
+          hidden: false,
+          photo:
+            'https://res.cloudinary.com/djwth1q7u/image/upload/v1708351807/default.jpg',
+        },
+        {
+          hidden: true,
+          photo:
+            'https://res.cloudinary.com/djwth1q7u/image/upload/v1708287555/images/osu9iovysnygf2xubjxw.jpg',
+        },
+        {
+          hidden: false,
+          photo:
+            'https://res.cloudinary.com/djwth1q7u/image/upload/v1708324726/images/jpnpeac2dn19zxvctfca.jpg',
+        },
+      ],
     });
   };
 
@@ -319,234 +343,69 @@ export const Gallery = ({ token }) => {
                 </div>
                 <div className={styles.addGalleryImagesPreviewWrapper}>
                   <ul className={styles.addGalleryImagesPreviewList}>
-                    <li className={styles.addGalleryImagesPreviewEl}>
-                      <div className={styles.addGalleryImagesPreviewElIco}>
-                        <img src={ico} alt="3 kropki" />
-                        <ul className={styles.dropDownList}>
-                          <li className={styles.dropDownEl}>
-                            <img src={ico_star} alt="gwiazdka" />
-                            <p>Główne</p>
-                          </li>
-                          <li className={styles.dropDownEl}>
-                            <img src={ico_hidden} alt="przekreślone oko" />
-                            <p>Ukryj</p>
-                          </li>
-                          <li className={styles.dropDownEl}>
-                            <img src={ico_del} alt="kosz na śmieci" />
-                            <p>Usuń</p>
-                          </li>
-                        </ul>
-                      </div>
-                    </li>
-                    <li className={styles.addGalleryImagesPreviewEl}>
-                      <div className={styles.addGalleryImagesPreviewElIco}>
-                        <img src={ico} alt="3 kropki" />
-                        <ul className={styles.dropDownList}>
-                          <li className={styles.dropDownEl}>
-                            <img src={ico_star} alt="gwiazdka" />
-                            <p>Główne</p>
-                          </li>
-                          <li className={styles.dropDownEl}>
-                            <img src={ico_hidden} alt="przekreślone oko" />
-                            <p>Ukryj</p>
-                          </li>
-                          <li className={styles.dropDownEl}>
-                            <img src={ico_del} alt="kosz na śmieci" />
-                            <p>Usuń</p>
-                          </li>
-                        </ul>
-                      </div>
-                    </li>
-                    <li className={styles.addGalleryImagesPreviewEl}>
-                      <div className={styles.addGalleryImagesPreviewElIco}>
-                        <img src={ico} alt="3 kropki" />
-                        <ul className={styles.dropDownList}>
-                          <li className={styles.dropDownEl}>
-                            <img src={ico_star} alt="gwiazdka" />
-                            <p>Główne</p>
-                          </li>
-                          <li className={styles.dropDownEl}>
-                            <img src={ico_hidden} alt="przekreślone oko" />
-                            <p>Ukryj</p>
-                          </li>
-                          <li className={styles.dropDownEl}>
-                            <img src={ico_del} alt="kosz na śmieci" />
-                            <p>Usuń</p>
-                          </li>
-                        </ul>
-                      </div>
-                    </li>
-                    <li className={styles.addGalleryImagesPreviewEl}>
-                      <div className={styles.addGalleryImagesPreviewElIco}>
-                        <img src={ico} alt="3 kropki" />
-                        <ul className={styles.dropDownList}>
-                          <li className={styles.dropDownEl}>
-                            <img src={ico_star} alt="gwiazdka" />
-                            <p>Główne</p>
-                          </li>
-                          <li className={styles.dropDownEl}>
-                            <img src={ico_hidden} alt="przekreślone oko" />
-                            <p>Ukryj</p>
-                          </li>
-                          <li className={styles.dropDownEl}>
-                            <img src={ico_del} alt="kosz na śmieci" />
-                            <p>Usuń</p>
-                          </li>
-                        </ul>
-                      </div>
-                    </li>
-                    <li className={styles.addGalleryImagesPreviewEl}>
-                      <div className={styles.addGalleryImagesPreviewElIco}>
-                        <img src={ico} alt="3 kropki" />
-                        <ul className={styles.dropDownList}>
-                          <li className={styles.dropDownEl}>
-                            <img src={ico_star} alt="gwiazdka" />
-                            <p>Główne</p>
-                          </li>
-                          <li className={styles.dropDownEl}>
-                            <img src={ico_hidden} alt="przekreślone oko" />
-                            <p>Ukryj</p>
-                          </li>
-                          <li className={styles.dropDownEl}>
-                            <img src={ico_del} alt="kosz na śmieci" />
-                            <p>Usuń</p>
-                          </li>
-                        </ul>
-                      </div>
-                    </li>
-                    <li className={styles.addGalleryImagesPreviewEl}>
-                      <div className={styles.addGalleryImagesPreviewElIco}>
-                        <img src={ico} alt="3 kropki" />
-                        <ul className={styles.dropDownList}>
-                          <li className={styles.dropDownEl}>
-                            <img src={ico_star} alt="gwiazdka" />
-                            <p>Główne</p>
-                          </li>
-                          <li className={styles.dropDownEl}>
-                            <img src={ico_hidden} alt="przekreślone oko" />
-                            <p>Ukryj</p>
-                          </li>
-                          <li className={styles.dropDownEl}>
-                            <img src={ico_del} alt="kosz na śmieci" />
-                            <p>Usuń</p>
-                          </li>
-                        </ul>
-                      </div>
-                    </li>
-                    <li className={styles.addGalleryImagesPreviewEl}>
-                      <div className={styles.addGalleryImagesPreviewElIco}>
-                        <img src={ico} alt="3 kropki" />
-                        <ul className={styles.dropDownList}>
-                          <li className={styles.dropDownEl}>
-                            <img src={ico_star} alt="gwiazdka" />
-                            <p>Główne</p>
-                          </li>
-                          <li className={styles.dropDownEl}>
-                            <img src={ico_hidden} alt="przekreślone oko" />
-                            <p>Ukryj</p>
-                          </li>
-                          <li className={styles.dropDownEl}>
-                            <img src={ico_del} alt="kosz na śmieci" />
-                            <p>Usuń</p>
-                          </li>
-                        </ul>
-                      </div>
-                    </li>
-                    <li className={styles.addGalleryImagesPreviewEl}>
-                      <div className={styles.addGalleryImagesPreviewElIco}>
-                        <img src={ico} alt="3 kropki" />
-                        <ul className={styles.dropDownList}>
-                          <li className={styles.dropDownEl}>
-                            <img src={ico_star} alt="gwiazdka" />
-                            <p>Główne</p>
-                          </li>
-                          <li className={styles.dropDownEl}>
-                            <img src={ico_hidden} alt="przekreślone oko" />
-                            <p>Ukryj</p>
-                          </li>
-                          <li className={styles.dropDownEl}>
-                            <img src={ico_del} alt="kosz na śmieci" />
-                            <p>Usuń</p>
-                          </li>
-                        </ul>
-                      </div>
-                    </li>
-                    <li className={styles.addGalleryImagesPreviewEl}>
-                      <div className={styles.addGalleryImagesPreviewElIco}>
-                        <img src={ico} alt="3 kropki" />
-                        <ul className={styles.dropDownList}>
-                          <li className={styles.dropDownEl}>
-                            <img src={ico_star} alt="gwiazdka" />
-                            <p>Główne</p>
-                          </li>
-                          <li className={styles.dropDownEl}>
-                            <img src={ico_hidden} alt="przekreślone oko" />
-                            <p>Ukryj</p>
-                          </li>
-                          <li className={styles.dropDownEl}>
-                            <img src={ico_del} alt="kosz na śmieci" />
-                            <p>Usuń</p>
-                          </li>
-                        </ul>
-                      </div>
-                    </li>
-                    <li className={styles.addGalleryImagesPreviewEl}>
-                      <div className={styles.addGalleryImagesPreviewElIco}>
-                        <img src={ico} alt="3 kropki" />
-                        <ul className={styles.dropDownList}>
-                          <li className={styles.dropDownEl}>
-                            <img src={ico_star} alt="gwiazdka" />
-                            <p>Główne</p>
-                          </li>
-                          <li className={styles.dropDownEl}>
-                            <img src={ico_hidden} alt="przekreślone oko" />
-                            <p>Ukryj</p>
-                          </li>
-                          <li className={styles.dropDownEl}>
-                            <img src={ico_del} alt="kosz na śmieci" />
-                            <p>Usuń</p>
-                          </li>
-                        </ul>
-                      </div>
-                    </li>
-                    <li className={styles.addGalleryImagesPreviewEl}>
-                      <div className={styles.addGalleryImagesPreviewElIco}>
-                        <img src={ico} alt="3 kropki" />
-                        <ul className={styles.dropDownList}>
-                          <li className={styles.dropDownEl}>
-                            <img src={ico_star} alt="gwiazdka" />
-                            <p>Główne</p>
-                          </li>
-                          <li className={styles.dropDownEl}>
-                            <img src={ico_hidden} alt="przekreślone oko" />
-                            <p>Ukryj</p>
-                          </li>
-                          <li className={styles.dropDownEl}>
-                            <img src={ico_del} alt="kosz na śmieci" />
-                            <p>Usuń</p>
-                          </li>
-                        </ul>
-                      </div>
-                    </li>
-                    <li className={styles.addGalleryImagesPreviewEl}>
-                      <div className={styles.addGalleryImagesPreviewElIco}>
-                        <img src={ico} alt="3 kropki" />
-                        <ul className={styles.dropDownList}>
-                          <li className={styles.dropDownEl}>
-                            <img src={ico_star} alt="gwiazdka" />
-                            <p>Główne</p>
-                          </li>
-                          <li className={styles.dropDownEl}>
-                            <img src={ico_hidden} alt="przekreślone oko" />
-                            <p>Ukryj</p>
-                          </li>
-                          <li className={styles.dropDownEl}>
-                            <img src={ico_del} alt="kosz na śmieci" />
-                            <p>Usuń</p>
-                          </li>
-                        </ul>
-                      </div>
-                    </li>
+                    {album.photos.map(({ hidden, photo }) => {
+                      return (
+                        <li
+                          className={
+                            hidden
+                              ? styles.addGalleryImagesPreviewElHidden
+                              : styles.addGalleryImagesPreviewEl
+                          }
+                          key={nanoid()}
+                          id={nanoid()}
+                        >
+                          {hidden && (
+                            <img
+                              src={ico_hidden}
+                              alt=""
+                              className={
+                                styles.addGalleryImagesPreviewElHiddenIco
+                              }
+                            />
+                          )}
+                          {hidden && (
+                            <div
+                              className={styles.addGalleryHiddenOverlay}
+                            ></div>
+                          )}
+                          <div className={styles.addGalleryImagesPreviewElIco}>
+                            <img src={ico} alt="3 kropki" />
+                            <ul className={styles.dropDownList}>
+                              <li className={styles.dropDownEl}>
+                                <img src={ico_star} alt="gwiazdka" />
+                                <p>Główne</p>
+                              </li>
+                              {hidden ? (
+                                <li className={styles.dropDownEl}>
+                                  <img
+                                    src={ico_unhidden}
+                                    alt="przekreślone oko"
+                                  />
+                                  <p>Odkryj</p>
+                                </li>
+                              ) : (
+                                <li className={styles.dropDownEl}>
+                                  <img
+                                    src={ico_hidden}
+                                    alt="przekreślone oko"
+                                  />
+                                  <p>Ukryj</p>
+                                </li>
+                              )}
+                              <li className={styles.dropDownEl}>
+                                <img src={ico_del} alt="kosz na śmieci" />
+                                <p>Usuń</p>
+                              </li>
+                            </ul>
+                          </div>
+                          <img
+                            src={photo}
+                            alt="motor"
+                            className={styles.addGalleryImagesPreviewElImg}
+                          />
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
               </div>

@@ -74,7 +74,7 @@ export const Gallery = ({ token }) => {
   const TestAlbum = {
     album: 'Parking',
     description: 'Zdjęcia z parkingu. Takie, że oooo.',
-    main_id: '1',
+    main_id: '0',
     hidden: false,
     photo: [
       'https://res.cloudinary.com/djwth1q7u/image/upload/v1708351807/default.jpg',
@@ -125,7 +125,7 @@ export const Gallery = ({ token }) => {
     setAlbum({
       album: '',
       description: '',
-      main_id: '1',
+      main_id: '0',
       hidden: false,
       photos: [
         {
@@ -176,12 +176,25 @@ export const Gallery = ({ token }) => {
 
   const onSubmit = () => {
     console.log('Submit wciśnięty.');
-    console.log('postPhoto', postPhoto);
+    console.log('Gotowy do wyslania album', album);
   };
 
   const onAddNewAlbum = () => {
     console.log(album);
     closeNewAlbumModal();
+  };
+
+  const hideImage = (index, photo) => {
+    let albumArray = album.photos;
+    let newAlbumRaw = { hidden: true, photo: photo };
+    albumArray[index] = newAlbumRaw;
+    setAlbum({ ...album, photos: albumArray });
+  };
+  const unhideImage = (index, photo) => {
+    let albumArray = album.photos;
+    let newAlbumRaw = { hidden: false, photo: photo };
+    albumArray[index] = newAlbumRaw;
+    setAlbum({ ...album, photos: albumArray });
   };
 
   return (
@@ -343,18 +356,21 @@ export const Gallery = ({ token }) => {
                 </div>
                 <div className={styles.addGalleryImagesPreviewWrapper}>
                   <ul className={styles.addGalleryImagesPreviewList}>
-                    {album.photos.map(({ hidden, photo }) => {
+                    {album.photos.map(({ hidden, photo }, index) => {
+                      const mainIndex = album.main_id;
                       return (
                         <li
                           className={
                             hidden
                               ? styles.addGalleryImagesPreviewElHidden
+                              : mainIndex === index.toString()
+                              ? styles.addGalleryImagesPreviewElMain
                               : styles.addGalleryImagesPreviewEl
                           }
                           key={nanoid()}
-                          id={nanoid()}
+                          id={index}
                         >
-                          {hidden && (
+                          {hidden ? (
                             <img
                               src={ico_hidden}
                               alt=""
@@ -362,6 +378,16 @@ export const Gallery = ({ token }) => {
                                 styles.addGalleryImagesPreviewElHiddenIco
                               }
                             />
+                          ) : mainIndex === index.toString() ? (
+                            <img
+                              src={ico_star}
+                              alt=""
+                              className={
+                                styles.addGalleryImagesPreviewElHiddenIco
+                              }
+                            />
+                          ) : (
+                            <></>
                           )}
                           {hidden && (
                             <div
@@ -371,12 +397,37 @@ export const Gallery = ({ token }) => {
                           <div className={styles.addGalleryImagesPreviewElIco}>
                             <img src={ico} alt="3 kropki" />
                             <ul className={styles.dropDownList}>
-                              <li className={styles.dropDownEl}>
-                                <img src={ico_star} alt="gwiazdka" />
-                                <p>Główne</p>
-                              </li>
                               {hidden ? (
-                                <li className={styles.dropDownEl}>
+                                <></>
+                              ) : mainIndex === index.toString() ? (
+                                <></>
+                              ) : (
+                                <li
+                                  className={styles.dropDownEl}
+                                  onClick={() => {
+                                    setAlbum({
+                                      ...album,
+                                      main_id: index.toString(),
+                                    });
+                                  }}
+                                >
+                                  <img src={ico_star} alt="gwiazdka" />
+                                  <p>Główne</p>
+                                </li>
+                              )}
+
+                              {mainIndex === index.toString() ? (
+                                <></>
+                              ) : hidden ? (
+                                <li
+                                  className={styles.dropDownEl}
+                                  onClick={() => {
+                                    unhideImage(
+                                      index,
+                                      album.photos[index].photo
+                                    );
+                                  }}
+                                >
                                   <img
                                     src={ico_unhidden}
                                     alt="przekreślone oko"
@@ -384,7 +435,12 @@ export const Gallery = ({ token }) => {
                                   <p>Odkryj</p>
                                 </li>
                               ) : (
-                                <li className={styles.dropDownEl}>
+                                <li
+                                  className={styles.dropDownEl}
+                                  onClick={() => {
+                                    hideImage(index, album.photos[index].photo);
+                                  }}
+                                >
                                   <img
                                     src={ico_hidden}
                                     alt="przekreślone oko"

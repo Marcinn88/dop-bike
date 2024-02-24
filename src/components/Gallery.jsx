@@ -347,122 +347,135 @@ export const Gallery = ({ token }) => {
 
               <div className={styles.addGalleryPreviewWrapper}>
                 <div className={styles.addGalleryPreviewTitleWrapper}>
-                  <p className={styles.addGalleryPreviewTitle}>
-                    Wybrany Album:
-                  </p>
+                  {album.album.length > 0 && (
+                    <p className={styles.addGalleryPreviewTitle}>
+                      Wybrany Album:
+                    </p>
+                  )}
                   <span className={styles.addGalleryPreviewTitleAlbum}>
                     {album.album}
                   </span>
                 </div>
                 <div className={styles.addGalleryImagesPreviewWrapper}>
-                  <ul className={styles.addGalleryImagesPreviewList}>
-                    {album.photos.map(({ hidden, photo }, index) => {
-                      const mainIndex = album.main_id;
-                      return (
-                        <li
-                          className={
-                            hidden
-                              ? styles.addGalleryImagesPreviewElHidden
-                              : mainIndex === index.toString()
-                              ? styles.addGalleryImagesPreviewElMain
-                              : styles.addGalleryImagesPreviewEl
-                          }
-                          key={nanoid()}
-                          id={index}
-                        >
-                          {hidden ? (
-                            <img
-                              src={ico_hidden}
-                              alt=""
-                              className={
-                                styles.addGalleryImagesPreviewElHiddenIco
-                              }
-                            />
-                          ) : mainIndex === index.toString() ? (
-                            <img
-                              src={ico_star}
-                              alt=""
-                              className={
-                                styles.addGalleryImagesPreviewElHiddenIco
-                              }
-                            />
-                          ) : (
-                            <></>
-                          )}
-                          {hidden && (
+                  {album.album.length === 0 ? (
+                    <p className={styles.addGalleryPreviewTitle}>
+                      Wybierz Album aby zobaczyć podgląd zawartości
+                    </p>
+                  ) : (
+                    <ul className={styles.addGalleryImagesPreviewList}>
+                      {album.photos.map(({ hidden, photo }, index) => {
+                        const mainIndex = album.main_id;
+                        return (
+                          <li
+                            className={
+                              hidden
+                                ? styles.addGalleryImagesPreviewElHidden
+                                : mainIndex === index.toString()
+                                ? styles.addGalleryImagesPreviewElMain
+                                : styles.addGalleryImagesPreviewEl
+                            }
+                            key={nanoid()}
+                            id={index}
+                          >
+                            {hidden ? (
+                              <img
+                                src={ico_hidden}
+                                alt=""
+                                className={
+                                  styles.addGalleryImagesPreviewElHiddenIco
+                                }
+                              />
+                            ) : mainIndex === index.toString() ? (
+                              <img
+                                src={ico_star}
+                                alt=""
+                                className={
+                                  styles.addGalleryImagesPreviewElHiddenIco
+                                }
+                              />
+                            ) : (
+                              <></>
+                            )}
+                            {hidden && (
+                              <div
+                                className={styles.addGalleryHiddenOverlay}
+                              ></div>
+                            )}
                             <div
-                              className={styles.addGalleryHiddenOverlay}
-                            ></div>
-                          )}
-                          <div className={styles.addGalleryImagesPreviewElIco}>
-                            <img src={ico} alt="3 kropki" />
-                            <ul className={styles.dropDownList}>
-                              {hidden ? (
-                                <></>
-                              ) : mainIndex === index.toString() ? (
-                                <></>
-                              ) : (
-                                <li
-                                  className={styles.dropDownEl}
-                                  onClick={() => {
-                                    setAlbum({
-                                      ...album,
-                                      main_id: index.toString(),
-                                    });
-                                  }}
-                                >
-                                  <img src={ico_star} alt="gwiazdka" />
-                                  <p>Główne</p>
-                                </li>
-                              )}
+                              className={styles.addGalleryImagesPreviewElIco}
+                            >
+                              <img src={ico} alt="3 kropki" />
+                              <ul className={styles.dropDownList}>
+                                {hidden ? (
+                                  <></>
+                                ) : mainIndex === index.toString() ? (
+                                  <></>
+                                ) : (
+                                  <li
+                                    className={styles.dropDownEl}
+                                    onClick={() => {
+                                      setAlbum({
+                                        ...album,
+                                        main_id: index.toString(),
+                                      });
+                                    }}
+                                  >
+                                    <img src={ico_star} alt="gwiazdka" />
+                                    <p>Główne</p>
+                                  </li>
+                                )}
 
-                              {mainIndex === index.toString() ? (
-                                <></>
-                              ) : hidden ? (
-                                <li
-                                  className={styles.dropDownEl}
-                                  onClick={() => {
-                                    unhideImage(
-                                      index,
-                                      album.photos[index].photo
-                                    );
-                                  }}
-                                >
-                                  <img
-                                    src={ico_unhidden}
-                                    alt="przekreślone oko"
-                                  />
-                                  <p>Odkryj</p>
+                                {mainIndex === index.toString() ? (
+                                  <></>
+                                ) : hidden ? (
+                                  <li
+                                    className={styles.dropDownEl}
+                                    onClick={() => {
+                                      unhideImage(
+                                        index,
+                                        album.photos[index].photo
+                                      );
+                                    }}
+                                  >
+                                    <img
+                                      src={ico_unhidden}
+                                      alt="przekreślone oko"
+                                    />
+                                    <p>Odkryj</p>
+                                  </li>
+                                ) : (
+                                  <li
+                                    className={styles.dropDownEl}
+                                    onClick={() => {
+                                      hideImage(
+                                        index,
+                                        album.photos[index].photo
+                                      );
+                                    }}
+                                  >
+                                    <img
+                                      src={ico_hidden}
+                                      alt="przekreślone oko"
+                                    />
+                                    <p>Ukryj</p>
+                                  </li>
+                                )}
+                                <li className={styles.dropDownEl}>
+                                  <img src={ico_del} alt="kosz na śmieci" />
+                                  <p>Usuń</p>
                                 </li>
-                              ) : (
-                                <li
-                                  className={styles.dropDownEl}
-                                  onClick={() => {
-                                    hideImage(index, album.photos[index].photo);
-                                  }}
-                                >
-                                  <img
-                                    src={ico_hidden}
-                                    alt="przekreślone oko"
-                                  />
-                                  <p>Ukryj</p>
-                                </li>
-                              )}
-                              <li className={styles.dropDownEl}>
-                                <img src={ico_del} alt="kosz na śmieci" />
-                                <p>Usuń</p>
-                              </li>
-                            </ul>
-                          </div>
-                          <img
-                            src={photo}
-                            alt="motor"
-                            className={styles.addGalleryImagesPreviewElImg}
-                          />
-                        </li>
-                      );
-                    })}
-                  </ul>
+                              </ul>
+                            </div>
+                            <img
+                              src={photo}
+                              alt="motor"
+                              className={styles.addGalleryImagesPreviewElImg}
+                            />
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  )}
                 </div>
               </div>
               <button

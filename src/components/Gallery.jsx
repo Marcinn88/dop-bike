@@ -87,7 +87,6 @@ export const Gallery = ({ token }) => {
   const [addGalleryModal, setAddGalleryModal] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [uploadedOne, setUploadedOne] = useState(false);
-  const [postPhoto, setPostPhoto] = useState({});
   const [newAlbumModal, setNewAlbumModal] = useState(false);
   const [album, setAlbum] = useState({});
 
@@ -115,15 +114,10 @@ export const Gallery = ({ token }) => {
     console.log(TestResults);
     console.log(TestMainResult);
     console.log(TestMainTester(TestMainResult));
-    setPostPhoto({
-      album: '',
-      name: '',
-      main: false,
-      hidden: false,
-      photo: '',
-    });
+
     setAlbum({
       album: '',
+      id: '1',
       description: '',
       main_id: '0',
       hidden: false,
@@ -139,7 +133,7 @@ export const Gallery = ({ token }) => {
             'https://res.cloudinary.com/djwth1q7u/image/upload/v1708351807/default.jpg',
         },
         {
-          hidden: true,
+          hidden: false,
           photo:
             'https://res.cloudinary.com/djwth1q7u/image/upload/v1708287555/images/osu9iovysnygf2xubjxw.jpg',
         },
@@ -195,6 +189,16 @@ export const Gallery = ({ token }) => {
     let newAlbumRaw = { hidden: false, photo: photo };
     albumArray[index] = newAlbumRaw;
     setAlbum({ ...album, photos: albumArray });
+  };
+
+  const deletePhoto = index => {
+    let albumArray = album.photos;
+    albumArray.splice(index, 1);
+    setAlbum({ ...album, photos: albumArray });
+    if (index < album.main_id) {
+      setAlbum({ ...album, main_id: (album.main_id - 1).toString() });
+      console.log(`Wartości index ${index} oraz main_id ${album.main_id}`);
+    }
   };
 
   return (
@@ -301,47 +305,49 @@ export const Gallery = ({ token }) => {
                 <SelectMenuModal
                   placeholder={'Wybierz album z listy.'}
                   onClick={e => {
-                    setPostPhoto({ ...postPhoto, album: e });
+                    setAlbum({ ...album, album: e });
                   }}
                 />
               </div>
               <div className={styles.addGalleryModalFileUplad}>
                 <ul className={styles.addGalleryModalFileUpladList}>
-                  <li className={styles.addGalleryModalFileUpladContainer}>
-                    {!uploadedOne ? (
-                      <>
-                        <input
-                          type="file"
-                          className={styles.addGalleryModalFileUpladInput}
-                        />
-                        <button
-                          className={styles.addGalleryModalFileUpladInputBtn}
-                          onClick={() => {
-                            toogleUploadOne();
-                          }}
-                        >
-                          Upload
-                        </button>
-                      </>
-                    ) : (
-                      <>
-                        <input
-                          disabled
-                          type="file"
-                          className={
-                            styles.addGalleryModalFileUpladInputDisabled
-                          }
-                        />
-                        <button
-                          className={
-                            styles.addGalleryModalFileUpladInputBtnDisabled
-                          }
-                        >
-                          Zapisano
-                        </button>
-                      </>
-                    )}
-                  </li>
+                  {album.album.length > 0 && (
+                    <li className={styles.addGalleryModalFileUpladContainer}>
+                      {!uploadedOne ? (
+                        <>
+                          <input
+                            type="file"
+                            className={styles.addGalleryModalFileUpladInput}
+                          />
+                          <button
+                            className={styles.addGalleryModalFileUpladInputBtn}
+                            onClick={() => {
+                              toogleUploadOne();
+                            }}
+                          >
+                            Upload
+                          </button>
+                        </>
+                      ) : (
+                        <>
+                          <input
+                            disabled
+                            type="file"
+                            className={
+                              styles.addGalleryModalFileUpladInputDisabled
+                            }
+                          />
+                          <button
+                            className={
+                              styles.addGalleryModalFileUpladInputBtnDisabled
+                            }
+                          >
+                            Zapisano
+                          </button>
+                        </>
+                      )}
+                    </li>
+                  )}
                 </ul>
               </div>
 
@@ -460,7 +466,16 @@ export const Gallery = ({ token }) => {
                                     <p>Ukryj</p>
                                   </li>
                                 )}
-                                <li className={styles.dropDownEl}>
+                                <li
+                                  className={styles.dropDownEl}
+                                  onClick={() => {
+                                    mainIndex === index.toString()
+                                      ? alert(
+                                          'Nie możesz skasować zdjęcia głównego.'
+                                        )
+                                      : deletePhoto(index);
+                                  }}
+                                >
                                   <img src={ico_del} alt="kosz na śmieci" />
                                   <p>Usuń</p>
                                 </li>
@@ -478,10 +493,11 @@ export const Gallery = ({ token }) => {
                   )}
                 </div>
               </div>
+
               <button
                 className={styles.addGalleryModalAlbumListBtn}
                 onClick={() => {
-                  onSubmit();
+                  album.album.length > 0 ? onSubmit() : alert('Brak zmian');
                 }}
               >
                 Zapisz w Galerii

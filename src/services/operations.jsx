@@ -108,3 +108,15 @@ export const hideComment = async id => {
     return console.error(error.message);
   }
 };
+
+export const addAlbum = async album => {
+  try {
+    const response = await axios.post(
+      'https://65d784e727d9a3bc1d7b3c59.mockapi.io/gallery',
+      album
+    );
+    return response.data;
+  } catch (error) {
+    return console.error(error.message);
+  }
+};

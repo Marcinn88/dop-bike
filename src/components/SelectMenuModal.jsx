@@ -1,48 +1,41 @@
 import React, { useState } from 'react';
-import styles from './SelectMenuModal.module.css';
+import selectStyles from './SelectMenuModal.module.css';
 import { nanoid } from 'nanoid';
 
-export const SelectMenuModal = ({ placeholder, onClick }) => {
-  const categories = [
-    { category: 'Wadowice - 2024' },
-    { category: 'Ciachcin - 2024' },
-    { category: 'Sosnowiec - 2024' },
-    { category: 'Koszelówka - 2024' },
-    { category: 'Parking' },
-    { category: 'Tajne zdjęcia' },
-  ];
+export const SelectMenuModal = ({ placeholder, onClick, data }) => {
+  const [selectModal, setSelectModal] = useState(false);
+  const [selectName, setSelectName] = useState(`${placeholder}`);
 
-  const data = categories;
-
-  const [modal, setModal] = useState(false);
-  const [name, setName] = useState(`${placeholder}`);
-
-  const toogleModal = () => {
-    setModal(!modal);
+  const toogleSelectModal = () => {
+    setSelectModal(!selectModal);
+    console.log('data', data);
   };
   const changeName = e => {
     const newName = e.innerText;
-    setName(newName);
-    setModal(!modal);
+    setSelectName(newName);
+    setSelectModal(!selectModal);
     return newName;
   };
 
   return (
     <>
-      <div className={styles.wrapper}>
-        {name === placeholder ? (
-          <div onClick={toogleModal} className={styles.selectBtnGrey}>
-            <span>{name}</span>
+      <div className={selectStyles.wrapper}>
+        {selectName === placeholder ? (
+          <div
+            onClick={toogleSelectModal}
+            className={selectStyles.selectBtnGrey}
+          >
+            <span>{selectName}</span>
           </div>
         ) : (
-          <div onClick={toogleModal} className={styles.selectBtn}>
-            <span>{name}</span>
+          <div onClick={toogleSelectModal} className={selectStyles.selectBtn}>
+            <span>{selectName}</span>
           </div>
         )}
-        {modal && (
-          <div className={styles.optionsContainer}>
-            <ul className={styles.options}>
-              {data.map(({ category }) => {
+        {selectModal && (
+          <div className={selectStyles.optionsContainer}>
+            <ul className={selectStyles.options}>
+              {data.map(({ album }) => {
                 return (
                   <li
                     key={nanoid()}
@@ -50,9 +43,9 @@ export const SelectMenuModal = ({ placeholder, onClick }) => {
                       changeName(e.target);
                       onClick(e.target.innerText);
                     }}
-                    className={styles.option}
+                    className={selectStyles.option}
                   >
-                    <span>{category}</span>
+                    <span>{album}</span>
                   </li>
                 );
               })}
@@ -60,7 +53,12 @@ export const SelectMenuModal = ({ placeholder, onClick }) => {
           </div>
         )}
       </div>
-      {modal && <div className={styles.backdrop} onClick={toogleModal}></div>}
+      {selectModal && (
+        <div
+          className={selectStyles.backdrop}
+          onClick={toogleSelectModal}
+        ></div>
+      )}
     </>
   );
 };

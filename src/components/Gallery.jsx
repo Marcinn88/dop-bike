@@ -1,7 +1,10 @@
 import styles from './Gallery.module.css';
+import selectStyles from './SelectMenuModal.module.css';
 import { Nav } from './Nav';
-import { useState } from 'react';
-import { SelectMenuModal } from './SelectMenuModal';
+import { useState, useEffect } from 'react';
+// import { SelectMenuModal } from './SelectMenuModal';
+import { addAlbum } from '../services/operations';
+import axios from 'axios';
 import ico from '../images/more.png';
 import ico_star from '../images/star.png';
 import ico_del from '../images/delete.png';
@@ -89,10 +92,32 @@ export const Gallery = ({ token }) => {
   const [uploadedOne, setUploadedOne] = useState(false);
   const [newAlbumModal, setNewAlbumModal] = useState(false);
   const [album, setAlbum] = useState({});
+  const [newAlbum, setNewAlbum] = useState({});
+  const [data, setData] = useState([]);
+  const [selectModal, setSelectModal] = useState(false);
+  const [selectName, setSelectName] = useState(`Wybierz`);
 
   const ref = () => {
     window.location.reload(false);
   };
+  const getAlbums = async () => {
+    try {
+      const response = await axios.get(
+        `https://65d784e727d9a3bc1d7b3c59.mockapi.io/gallery/`
+      );
+      setData(response.data);
+      console.log('lodaing Albums....');
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      return console.error(error.message);
+    }
+  };
+
+  useEffect(() => {
+    getAlbums();
+  }, []);
+
   const openGallery = () => {
     setGallery(true);
   };
@@ -118,9 +143,9 @@ export const Gallery = ({ token }) => {
     setAlbum({
       album: '',
       id: '1',
-      description: '',
       main_id: '0',
       hidden: false,
+      description: '',
       photos: [
         {
           hidden: false,
@@ -163,6 +188,13 @@ export const Gallery = ({ token }) => {
 
   const openNewAlbumModal = () => {
     setNewAlbumModal(true);
+    setNewAlbum({
+      album: '',
+      main_id: '0',
+      hidden: false,
+      description: '',
+      photos: [],
+    });
   };
   const closeNewAlbumModal = () => {
     setNewAlbumModal(false);
@@ -174,8 +206,28 @@ export const Gallery = ({ token }) => {
   };
 
   const onAddNewAlbum = () => {
-    console.log(album);
+    setAlbum({
+      ...album,
+      album: newAlbum.album,
+      description: newAlbum.description,
+    });
     closeNewAlbumModal();
+    console.log(newAlbum);
+    addAlbum(newAlbum);
+
+    let dataArray = {
+      album: newAlbum.album,
+      description: newAlbum.description,
+      hidden: false,
+      id: 'new',
+      main_id: '0',
+      photos: [],
+    };
+
+    let newArray = data.push(dataArray);
+    console.log(newArray);
+    // setData(newArray);
+    console.log('Nowa data', data);
   };
 
   const hideImage = (index, photo) => {
@@ -201,8 +253,27 @@ export const Gallery = ({ token }) => {
     }
   };
 
+  const toogleSelectModal = () => {
+    setSelectModal(!selectModal);
+    console.log('data', data);
+  };
+  const changeName = e => {
+    const newName = e;
+    setSelectName(newName);
+    setSelectModal(!selectModal);
+    return newName;
+  };
+
+  const selectAlbumHandler = e => {
+    setAlbum({
+      ...album,
+      album: e,
+    });
+  };
+
   return (
     <>
+      {data && <></>}
       <div className={styles.galleryWrapper}>
         {newAlbumModal && (
           <>
@@ -230,7 +301,7 @@ export const Gallery = ({ token }) => {
                       type="text"
                       className={styles.modalNewAlbumTextInput}
                       onChange={e => {
-                        setAlbum({ ...album, album: e.target.value });
+                        setNewAlbum({ ...newAlbum, album: e.target.value });
                       }}
                     />
                     <p className={styles.modalNewAlbumSubTitle}>Opis:</p>
@@ -240,7 +311,10 @@ export const Gallery = ({ token }) => {
                       name="album"
                       className={styles.modalNewAlbumTextAreaInput}
                       onChange={e => {
-                        setAlbum({ ...album, description: e.target.value });
+                        setNewAlbum({
+                          ...newAlbum,
+                          description: e.target.value,
+                        });
                       }}
                     />
                   </div>
@@ -252,12 +326,14 @@ export const Gallery = ({ token }) => {
                         alt="bike"
                       />
                       <p className={styles.gallerySubTitle}>
-                        {album.album === '' ? 'Przykładowy Tytuł' : album.album}
+                        {newAlbum.album === ''
+                          ? 'Przykładowy Tytuł'
+                          : newAlbum.album}
                       </p>
                       <p className={styles.gallerySubText}>
-                        {album.description === ''
+                        {newAlbum.description === ''
                           ? 'Pzykładowy opis Albumu'
-                          : album.description}
+                          : newAlbum.description}
                       </p>
                       <button className={styles.galleryBtn}>Otwórz</button>
                     </div>
@@ -302,12 +378,69 @@ export const Gallery = ({ token }) => {
                 >
                   Nowy Album
                 </button>
-                <SelectMenuModal
-                  placeholder={'Wybierz album z listy.'}
-                  onClick={e => {
-                    setAlbum({ ...album, album: e });
-                  }}
-                />
+                {/* {album.album === '' ? (
+                  <SelectMenuModal
+                    data={data}
+                    placeholder={'Wybierz album z listy.'}
+                    onClick={e => {
+                      setAlbum({ ...album, album: e });
+                    }}
+                  />
+                ) : (
+                  <SelectMenuModal
+                    data={data}
+                    placeholder={album.album}
+                    onClick={e => {
+                      setAlbum({ ...album, album: e });
+                    }}
+                  />
+                )} */}
+                <>
+                  <div className={selectStyles.wrapper}>
+                    {selectName === 'Wybierz album z listy.' ? (
+                      <div
+                        onClick={toogleSelectModal}
+                        className={selectStyles.selectBtnGrey}
+                      >
+                        <span>{selectName}</span>
+                      </div>
+                    ) : (
+                      <div
+                        onClick={toogleSelectModal}
+                        className={selectStyles.selectBtn}
+                      >
+                        <span>{selectName}</span>
+                      </div>
+                    )}
+                    {selectModal && (
+                      <div className={selectStyles.optionsContainer}>
+                        <ul className={selectStyles.options}>
+                          {data.map(({ album }) => {
+                            return (
+                              <li
+                                key={nanoid()}
+                                onClick={e => {
+                                  console.log(e.target.innerText);
+                                  changeName(e.target.innerText);
+                                  selectAlbumHandler(e.target.innerText);
+                                }}
+                                className={selectStyles.option}
+                              >
+                                <span>{album}</span>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                  {selectModal && (
+                    <div
+                      className={selectStyles.backdrop}
+                      onClick={toogleSelectModal}
+                    ></div>
+                  )}
+                </>
               </div>
               <div className={styles.addGalleryModalFileUplad}>
                 <ul className={styles.addGalleryModalFileUpladList}>

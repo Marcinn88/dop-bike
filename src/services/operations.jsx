@@ -120,3 +120,21 @@ export const addAlbum = async album => {
     return console.error(error.message);
   }
 };
+
+export const saveAlbum = async (data, id) => {
+  try {
+    const response = await axios.put(
+      `https://65d784e727d9a3bc1d7b3c59.mockapi.io/gallery/${id}`,
+      {
+        album: data.album,
+        main_id: data.main_id,
+        hidden: data.hidden,
+        description: data.description,
+        photos: data.photos,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    return console.error(error.message);
+  }
+};

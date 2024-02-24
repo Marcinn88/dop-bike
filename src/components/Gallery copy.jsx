@@ -2,7 +2,7 @@ import styles from './Gallery.module.css';
 import selectStyles from './SelectMenuModal.module.css';
 import { Nav } from './Nav';
 import { useState, useEffect } from 'react';
-import { addAlbum, saveAlbum } from '../services/operations';
+import { addAlbum } from '../services/operations';
 import { nanoid } from 'nanoid';
 import axios from 'axios';
 
@@ -28,7 +28,6 @@ export const Gallery = ({ token }) => {
   const [album, setAlbum] = useState({});
   const [newAlbum, setNewAlbum] = useState({});
   const [data, setData] = useState([]);
-  const [apiFiles, setApiFiles] = useState({});
   const [selectModal, setSelectModal] = useState(false);
   const [selectName, setSelectName] = useState(`Wybierz album z listy`);
   const [placeholder, setPlaceholder] = useState('Wybierz album z listy');
@@ -126,12 +125,9 @@ export const Gallery = ({ token }) => {
     setNewAlbumModal(false);
   };
 
-  const onSubmit = async () => {
+  const onSubmit = () => {
     console.log('Submit wciśnięty.');
     console.log('Gotowy do wyslania album', album);
-    await saveAlbum(album, album.id);
-    closeAddGallery();
-    ref();
   };
 
   const onAddNewAlbum = () => {
@@ -186,45 +182,19 @@ export const Gallery = ({ token }) => {
     return newName;
   };
 
-  const selectAlbumHandler = async e => {
+  const selectAlbumHandler = e => {
     const results = data.filter(el => el.album === e);
     console.log('results filtered', results);
     console.log('results photos', results[0].photos);
     setAlbum({
       ...album,
       album: e,
-      description: results[0].description,
-      hidden: results[0].hidden,
-      id: results[0].id,
-      main_id: results[0].main_id,
+      description: results.description,
+      hidden: results.hidden,
+      id: results.id,
+      main_id: results.main_id,
       photos: results[0].photos,
     });
-    console.log(album);
-  };
-
-  const uploadPhoto = async () => {
-    let newArray = album.photos;
-    const formData = new FormData();
-    formData.append('file', apiFiles);
-    formData.append('upload_preset', 'dop-bike');
-    console.log('formData', formData);
-    try {
-      await axios
-        .post(
-          'https://api.cloudinary.com/v1_1/djwth1q7u/image/upload',
-          formData
-        )
-        .then(response => {
-          console.log(response);
-          console.log(response.data.secure_url);
-          // newArray.push(response.data.secure_url);
-          newArray.push({ hidden: false, photo: response.data.secure_url });
-          setAlbum({ ...album, photos: newArray });
-          console.log('album mam nadzieje po zmianach', album);
-        });
-    } catch (error) {
-      console.error(error.message);
-    }
   };
 
   return (
@@ -379,24 +349,39 @@ export const Gallery = ({ token }) => {
                 <ul className={styles.addGalleryModalFileUpladList}>
                   {album.album.length > 0 && (
                     <li className={styles.addGalleryModalFileUpladContainer}>
-                      <input
-                        type="file"
-                        accept="image/*;capture=camera"
-                        className={styles.addGalleryModalFileUpladInput}
-                        onChange={e => {
-                          setApiFiles(e.target.files[0]);
-                          console.log(apiFiles);
-                        }}
-                      />
-                      <button
-                        className={styles.addGalleryModalFileUpladInputBtn}
-                        onClick={() => {
-                          toogleUploadOne();
-                          uploadPhoto();
-                        }}
-                      >
-                        Upload
-                      </button>
+                      {!uploadedOne ? (
+                        <>
+                          <input
+                            type="file"
+                            className={styles.addGalleryModalFileUpladInput}
+                          />
+                          <button
+                            className={styles.addGalleryModalFileUpladInputBtn}
+                            onClick={() => {
+                              toogleUploadOne();
+                            }}
+                          >
+                            Upload
+                          </button>
+                        </>
+                      ) : (
+                        <>
+                          <input
+                            disabled
+                            type="file"
+                            className={
+                              styles.addGalleryModalFileUpladInputDisabled
+                            }
+                          />
+                          <button
+                            className={
+                              styles.addGalleryModalFileUpladInputBtnDisabled
+                            }
+                          >
+                            Zapisano
+                          </button>
+                        </>
+                      )}
                     </li>
                   )}
                 </ul>

@@ -187,7 +187,7 @@ export const News = ({ token }) => {
               accept="image/*;capture=camera"
               onChange={e => {
                 setApiFiles(e.target.files[0]);
-                console.log('apifiles:', apiFiles);
+                console.log(apiFiles);
               }}
             />
 

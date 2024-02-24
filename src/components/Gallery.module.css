@@ -558,3 +558,11 @@ color:rgb(172, 172, 172);
     border-radius: 50%;
     z-index: 4;
 }
+.addGalleryModalDeleteInboxContainer{
+    display: flex;
+    gap:10px;
+    width: 300px;
+}
+.addGalleryModalDeleteInboxContainer input{
+    accent-color: rgb(90, 90, 90);
+}

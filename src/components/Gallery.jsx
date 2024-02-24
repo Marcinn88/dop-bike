@@ -2,7 +2,7 @@ import styles from './Gallery.module.css';
 import selectStyles from './SelectMenuModal.module.css';
 import { Nav } from './Nav';
 import { useState, useEffect } from 'react';
-import { addAlbum, saveAlbum } from '../services/operations';
+import { addAlbum, saveAlbum, deleteAlbum } from '../services/operations';
 import { nanoid } from 'nanoid';
 import axios from 'axios';
 
@@ -32,6 +32,7 @@ export const Gallery = ({ token }) => {
   const [selectModal, setSelectModal] = useState(false);
   const [selectName, setSelectName] = useState(`Wybierz album z listy`);
   const [placeholder, setPlaceholder] = useState('Wybierz album z listy');
+  const [delFactor, setDelFactor] = useState(false);
 
   const ref = () => {
     window.location.reload(false);
@@ -73,28 +74,7 @@ export const Gallery = ({ token }) => {
       main_id: '0',
       hidden: false,
       description: '',
-      photos: [
-        {
-          hidden: false,
-          photo:
-            'https://res.cloudinary.com/djwth1q7u/image/upload/v1708276435/images/rwpcnltckm2slhkxeuv0.jpg',
-        },
-        {
-          hidden: false,
-          photo:
-            'https://res.cloudinary.com/djwth1q7u/image/upload/v1708351807/default.jpg',
-        },
-        {
-          hidden: false,
-          photo:
-            'https://res.cloudinary.com/djwth1q7u/image/upload/v1708287555/images/osu9iovysnygf2xubjxw.jpg',
-        },
-        {
-          hidden: false,
-          photo:
-            'https://res.cloudinary.com/djwth1q7u/image/upload/v1708324726/images/jpnpeac2dn19zxvctfca.jpg',
-        },
-      ],
+      photos: [],
     });
   };
 
@@ -217,7 +197,6 @@ export const Gallery = ({ token }) => {
         .then(response => {
           console.log(response);
           console.log(response.data.secure_url);
-          // newArray.push(response.data.secure_url);
           newArray.push({ hidden: false, photo: response.data.secure_url });
           setAlbum({ ...album, photos: newArray });
           console.log('album mam nadzieje po zmianach', album);
@@ -225,6 +204,17 @@ export const Gallery = ({ token }) => {
     } catch (error) {
       console.error(error.message);
     }
+  };
+
+  const onDelete = async () => {
+    console.log(album.id);
+    await deleteAlbum(album.id);
+    closeAddGallery();
+    ref();
+  };
+
+  const toogleDelFactor = () => {
+    setDelFactor(!delFactor);
   };
 
   return (
@@ -550,11 +540,38 @@ export const Gallery = ({ token }) => {
               <button
                 className={styles.addGalleryModalAlbumListBtn}
                 onClick={() => {
-                  album.album.length > 0 ? onSubmit() : alert('Brak zmian');
+                  album.album.length > 0
+                    ? onSubmit()
+                    : alert('Brak wybranego albumu');
                 }}
               >
                 Zapisz w Galerii
               </button>
+              <div>
+                <label className={styles.addGalleryModalDeleteInboxContainer}>
+                  <input
+                    type="checkbox"
+                    onClick={() => {
+                      toogleDelFactor();
+                    }}
+                  />
+                  <p>Usuń album.</p>
+                </label>
+                {delFactor && (
+                  <button
+                    className={styles.addGalleryModalAlbumListBtn}
+                    onClick={() => {
+                      album.album === ''
+                        ? alert('Brak wybranego albumu.')
+                        : album.id === 'new'
+                        ? alert('Nie możesz skasować niezapisanego albumu.')
+                        : onDelete();
+                    }}
+                  >
+                    Usuń Album{album.id}
+                  </button>
+                )}
+              </div>
             </div>
           </>
         )}
@@ -600,20 +617,24 @@ export const Gallery = ({ token }) => {
             </div>
           </>
         )}
-        <div className={styles.galleryAdminPanel}>
-          <button
-            className={styles.addGalleryBtn}
-            onClick={() => {
-              openAddGallery();
-            }}
-          >
-            +
-          </button>
+        {token === 'admin' ? (
+          <div className={styles.galleryAdminPanel}>
+            <button
+              className={styles.addGalleryBtn}
+              onClick={() => {
+                openAddGallery();
+              }}
+            >
+              +
+            </button>
 
-          <button className={styles.loBtn} onClick={logOut}>
-            Logout
-          </button>
-        </div>
+            <button className={styles.loBtn} onClick={logOut}>
+              Logout
+            </button>
+          </div>
+        ) : (
+          <></>
+        )}
         <Nav selected={'gallery'} token={token} />
         <p className={styles.galleryTitle}>Galeria!</p>
         <p className={styles.galleryText}>

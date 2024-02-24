@@ -138,3 +138,14 @@ export const saveAlbum = async (data, id) => {
     return console.error(error.message);
   }
 };
+
+export const deleteAlbum = async albumId => {
+  try {
+    const response = await axios.delete(
+      `https://65d784e727d9a3bc1d7b3c59.mockapi.io/gallery/${albumId}`
+    );
+    return response.data;
+  } catch (error) {
+    return console.error(error.message);
+  }
+};

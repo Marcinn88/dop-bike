@@ -16,7 +16,6 @@ export const News = ({ token }) => {
   const [post, setPost] = useState({});
   const [count, setCount] = useState(true);
   const [data, setData] = useState([]);
-  const [editedData, setEditedData] = useState([]);
   const [editedId, setEditedId] = useState('');
   const [uploadModal, setUploadModal] = useState(false);
   const [apiFiles, setApiFiles] = useState({});
@@ -89,11 +88,9 @@ export const News = ({ token }) => {
 
   const sliderTypeLeft = () => {
     setPost({ ...post, photo_position: 'left' });
-    setEditedData({ ...post, photo_position: 'left' });
   };
   const sliderTypeRight = () => {
     setPost({ ...post, photo_position: 'right' });
-    setEditedData({ ...post, photo_position: 'right' });
   };
   const dateTrim = e => {
     const selectedData = e.target.value.toString();
@@ -101,16 +98,12 @@ export const News = ({ token }) => {
     const month = selectedData.substr(5, 2);
     const year = selectedData.substr(0, 4);
     setPost({ ...post, date_day: day, date_month: month, date_year: year });
-    setEditedData({
-      ...post,
-      date_day: day,
-      date_month: month,
-      date_year: year,
-    });
+    console.log(post);
   };
-  const submitModal = e => {
+
+  const submitModal = async e => {
     e.preventDefault();
-    addArticle(post);
+    await addArticle(post);
     setModal(!modal);
     setData([
       ...data,
@@ -128,12 +121,14 @@ export const News = ({ token }) => {
         favorite: post.favorite,
       },
     ]);
+    ref();
   };
 
-  const articleDelete = index => {
-    deleteArticle(index);
-    const newData = data.filter(e => e.id !== index);
-    setData(newData);
+  const articleDelete = async index => {
+    await deleteArticle(index);
+    ref();
+    // const newData = data.filter(e => e.id !== index);
+    // setData(newData);
   };
 
   const articleEdit = index => {
@@ -153,17 +148,16 @@ export const News = ({ token }) => {
       text3: newData[0].text3,
       favorite: newData[0].favorite,
     });
-    setModal(true);
     setEditModal(true);
+    setModal(true);
+    console.log(post);
   };
 
-  const submitEditedModal = e => {
+  const submitEditedModal = async e => {
     e.preventDefault();
     setModal(!modal);
-    setEditedData(post);
-    console.log(editedData);
-    editArticle(editedData, editedId);
-    console.log(data);
+    await editArticle(post, editedId);
+    ref();
   };
 
   const logOut = () => {
@@ -238,7 +232,6 @@ export const News = ({ token }) => {
                   placeholder="Wpisz tytuł"
                   onChange={e => {
                     setPost({ ...post, title: e.target.value });
-                    setEditedData({ ...post, title: e.target.value });
                   }}
                   required
                 ></input>
@@ -252,7 +245,6 @@ export const News = ({ token }) => {
                   placeholder="Wpisz tytuł"
                   onChange={e => {
                     setPost({ ...post, title: e.target.value });
-                    setEditedData({ ...post, title: e.target.value });
                   }}
                   required
                 ></input>
@@ -297,19 +289,40 @@ export const News = ({ token }) => {
               </div>
 
               <div className={styles.modalSmallWrapper}>
-                <button
-                  className={styles.modalFile}
-                  onClick={toogleUploadModal}
-                >
-                  Załącz zdjęcie
-                </button>
-
-                <input
-                  className={styles.modalData}
-                  type="date"
-                  name="date"
-                  onChange={dateTrim}
-                ></input>
+                {!editModal ? (
+                  <button
+                    className={styles.modalFile}
+                    onClick={toogleUploadModal}
+                  >
+                    Załącz zdjęcie
+                  </button>
+                ) : (
+                  <button
+                    className={styles.modalFile}
+                    onClick={toogleUploadModal}
+                  >
+                    Zmień zdjęcie
+                  </button>
+                )}
+                {!editModal ? (
+                  <input
+                    className={styles.modalData}
+                    type="date"
+                    name="date"
+                    onChange={dateTrim}
+                  ></input>
+                ) : (
+                  <input
+                    className={styles.modalData}
+                    type="date"
+                    name="date"
+                    defaultValue={
+                      editModal &&
+                      `${post.date_year}-${post.date_month}-${post.date_day}`
+                    }
+                    onChange={dateTrim}
+                  ></input>
+                )}
               </div>
               {!editModal ? (
                 <textarea
@@ -319,7 +332,6 @@ export const News = ({ token }) => {
                   placeholder="Wpisz zawartość pierwszego Paragrafu"
                   onChange={e => {
                     setPost({ ...post, text1: e.target.value });
-                    setEditedData({ ...post, text1: e.target.value });
                   }}
                   className={styles.modalParagraf}
                   required
@@ -333,7 +345,6 @@ export const News = ({ token }) => {
                   placeholder="Wpisz zawartość pierwszego Paragrafu"
                   onChange={e => {
                     setPost({ ...post, text1: e.target.value });
-                    setEditedData({ ...post, text1: e.target.value });
                   }}
                   className={styles.modalParagraf}
                   required
@@ -347,7 +358,6 @@ export const News = ({ token }) => {
                   placeholder="Wpisz zawartość drugiego Paragrafu (opcjonalnie)"
                   onChange={e => {
                     setPost({ ...post, text2: e.target.value });
-                    setEditedData({ ...post, text2: e.target.value });
                   }}
                   className={styles.modalParagraf}
                 ></textarea>
@@ -360,7 +370,6 @@ export const News = ({ token }) => {
                   placeholder="Wpisz zawartość drugiego Paragrafu (opcjonalnie)"
                   onChange={e => {
                     setPost({ ...post, text2: e.target.value });
-                    setEditedData({ ...post, text2: e.target.value });
                   }}
                   className={styles.modalParagraf}
                 ></textarea>
@@ -373,7 +382,6 @@ export const News = ({ token }) => {
                   placeholder="Wpisz zawartość trzeciego Paragrafu (opcjonalnie)"
                   onChange={e => {
                     setPost({ ...post, text3: e.target.value });
-                    setEditedData({ ...post, text3: e.target.value });
                   }}
                   className={styles.modalParagraf}
                 ></textarea>
@@ -386,7 +394,6 @@ export const News = ({ token }) => {
                   placeholder="Wpisz zawartość trzeciego Paragrafu (opcjonalnie)"
                   onChange={e => {
                     setPost({ ...post, text3: e.target.value });
-                    setEditedData({ ...post, text3: e.target.value });
                   }}
                   className={styles.modalParagraf}
                 ></textarea>
@@ -468,7 +475,6 @@ export const News = ({ token }) => {
                       <>
                         <div className={styles.newsImg}>
                           <img src={photo} alt="bike" />
-                          {/* <img src={require(`../images/${photo}`)} alt="bike" /> */}
                         </div>
                         <div className={styles.newsText}>
                           <p>{text1}</p>

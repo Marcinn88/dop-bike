@@ -44,7 +44,9 @@ export const editArticle = async (data, id) => {
       `https://65b15d5ed16d31d11bdec7f4.mockapi.io/articles/${id}`,
       {
         title: data.title,
-        date: data.date,
+        date_day: data.date_day,
+        date_month: data.date_month,
+        date_year: data.date_year,
         photo_position: data.photo_position,
         photo: data.photo,
         text1: data.text1,

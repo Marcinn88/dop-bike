@@ -349,7 +349,7 @@
     font-weight: bold;
   }
 
-  .modalFile{
+  .modalFile,.modalFileDisabled{
     border: 1px solid #ccc;
     background-color: #fff;
     width: 150px;
@@ -368,6 +368,11 @@
     padding: 0;
     margin: 0;
     cursor: pointer;
+  }
+  .modalFileDisabled{
+    cursor:no-drop;
+    background-color: #cacaca;
+
   }
   .modalInputFile{
     display: none;

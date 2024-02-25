@@ -116,25 +116,6 @@ export const Gallery = ({ token }) => {
     await addAlbum(newAlbum);
     await getAlbums();
     closeNewAlbumModal();
-    // ref();
-
-    // setAlbum({
-    //   ...album,
-    //   album: newAlbum.album,
-    //   description: newAlbum.description,
-    //   id: data[data.length].id,
-    // });
-    // console.log(album);
-
-    // let dataArray = {
-    //   album: newAlbum.album,
-    //   description: newAlbum.description,
-    //   hidden: false,
-    //   id: 'new',
-    //   main_id: '0',
-    //   photos: [],
-    // };
-    // data.push(dataArray);
   };
 
   const hideImage = (index, photo) => {

@@ -220,19 +220,34 @@ export const Gallery = ({ token }) => {
     setDelFactor(!delFactor);
   };
 
-  const openGalleryWindow = async id => {
+  const openAdminGalleryWindow = async id => {
     openGallery();
     const results = data.filter(el => el.id === id);
     setCurrentGallery(results[0]);
-    console.log('current gallery', currentGallery);
     setCurrentPhotoGallery(results[0].photos);
-    console.log('currentPhotoGallery', currentPhotoGallery);
     setActivePhoto(0);
   };
 
-  // const stepUp = () => {};
+  const openGalleryWindow = async id => {
+    openGallery();
+    const results = data.filter(el => el.id === id);
+    const filteredResults = results[0].photos.filter(el => el.hidden === false);
+    console.log('results', results);
+    console.log('filteredResults', filteredResults);
+    setCurrentGallery(results[0]);
+    setCurrentPhotoGallery(filteredResults);
+    setActivePhoto(0);
+  };
 
-  // const stepDown = () => {};
+  const stepUp = () => {
+    activePhoto === currentPhotoGallery.length - 1
+      ? setActivePhoto(currentPhotoGallery.length - 1)
+      : setActivePhoto(activePhoto + 1);
+  };
+
+  const stepDown = () => {
+    activePhoto === 0 ? setActivePhoto(0) : setActivePhoto(activePhoto - 1);
+  };
 
   return (
     <>
@@ -617,26 +632,48 @@ export const Gallery = ({ token }) => {
                 </p>
               </div>
               <div className={styles.galleryWindowWrapper}>
-                <button className={styles.galleryWindowBtn}>Poprzedni</button>
+                <button
+                  className={styles.galleryWindowBtn}
+                  onClick={() => {
+                    stepDown();
+                  }}
+                >
+                  Poprzedni
+                </button>
                 <div className={styles.galleryWindow}>
                   {currentPhotoGallery.length !== 0 ? (
                     <img
                       src={currentPhotoGallery[activePhoto].photo}
                       alt="Bike"
-                      className={styles.galleryWindow}
+                      className={styles.galleryWindowImage}
                     />
                   ) : (
                     <p>Brak zdjęć</p>
                   )}
                 </div>
-                <button className={styles.galleryWindowBtn}>Następny</button>
+                <button
+                  className={styles.galleryWindowBtn}
+                  onClick={() => {
+                    stepUp();
+                  }}
+                >
+                  Następny
+                </button>
               </div>
               <div className={styles.gallerySmallWindowWrapper}>
                 {currentPhotoGallery.map(({ hidden, photo }, index) => {
                   // const defImage = defaultPhoto;
                   return (
                     <div
-                      className={styles.gallerySmallWindow}
+                      className={
+                        activePhoto === index && hidden
+                          ? styles.gallerySmallActiveWindowHidden
+                          : activePhoto !== index && hidden
+                          ? styles.gallerySmallWindowHidden
+                          : activePhoto === index && !hidden
+                          ? styles.gallerySmallActiveWindow
+                          : styles.gallerySmallWindow
+                      }
                       onClick={() => {
                         setActivePhoto(index);
                       }}
@@ -644,7 +681,7 @@ export const Gallery = ({ token }) => {
                       <img
                         src={photo}
                         alt="motorbike"
-                        className={styles.gallerySmallWindow}
+                        className={styles.gallerySmallImage}
                       />
                     </div>
                   );
@@ -685,14 +722,18 @@ export const Gallery = ({ token }) => {
                   key={nanoid()}
                   className={styles.galleryElement}
                   onClick={() => {
-                    openGalleryWindow(id);
+                    token === 'admin'
+                      ? openAdminGalleryWindow(id)
+                      : openGalleryWindow(id);
                   }}
                 >
-                  <img
-                    className={styles.gallerySubTitle}
-                    src={photos.length > 0 ? photos[main_id].photo : defImage}
-                    alt="bike"
-                  />
+                  <div className={styles.galleryMiniatureWrapper}>
+                    <img
+                      className={styles.galleryMiniature}
+                      src={photos.length > 0 ? photos[main_id].photo : defImage}
+                      alt="bike"
+                    />
+                  </div>
                   <p className={styles.gallerySubTitle}>{album}</p>
                   <p className={styles.gallerySubText}>{description}</p>
                   <button className={styles.galleryBtn}>Otwórz</button>

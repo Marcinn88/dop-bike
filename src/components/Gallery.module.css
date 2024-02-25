@@ -582,7 +582,8 @@ color:rgb(172, 172, 172);
     position: relative;
 }
 
-.addGalleryModalFileUpladInput,.addGalleryModalFileUpladInputDisabled{
+.addGalleryModalFileUpladInput,
+.addGalleryModalFileUpladInputDisabled{
 	display: flex;
     font-family: 'Montserrat', sans-serif;
 	box-sizing: border-box;
@@ -600,7 +601,8 @@ color:rgb(172, 172, 172);
 }
 
 
-.addGalleryModalFileUpladInputBtn,.addGalleryModalFileUpladInputBtnDisabled{
+.addGalleryModalFileUpladInputBtn,
+.addGalleryModalFileUpladInputBtnDisabled{
     display: flex;
     font-family: 'Montserrat', sans-serif;
 	background-color: rgb(180, 180, 180);

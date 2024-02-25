@@ -38,17 +38,17 @@
     background-color: rgba(110, 110, 110, 0.411);
 }
 .shadowBox{
-    background-color: rgba(0, 0, 0, 0.767);
+    background-color: rgba(0, 0, 0, 0.95);
     backdrop-filter: blur(5px);
     position: fixed;
     top:0;
     left:0;
     width: 100%;
     height: 100%;
-    z-index: 4;
+    z-index: 5;
 }
 .uploadShadowBox{
-    background-color: rgba(0, 0, 0, 0.767);
+    background-color: rgba(0, 0, 0, 0.9);
     backdrop-filter: blur(5px);
     position: fixed;
     top:0;
@@ -64,11 +64,11 @@
     flex-direction: column;
     width: 60%;
     height: 90vh;
-    background-color: rgba(255, 255, 255, 0.76);
+    background-color: rgba(29, 29, 29, 0.8);
+    border: 1px solid rgba(117, 117, 117, 0.103);
     backdrop-filter: blur(5px);
-    border: none;
-    border-radius: 15px;
-    z-index: 5;
+    border-radius: 3px;
+    z-index: 6;
     left:20%;
     top:50px;
 }
@@ -76,32 +76,40 @@
     position: fixed;
     display: flex;
     align-items: center;
+    justify-content: center;
+    gap: 30px;
     flex-direction: column;
     width: 60%;
     height: 250px;
-    background-color: rgba(255, 255, 255, 0.76);
+    background-color: rgba(29, 29, 29, 0.8);
+    border: 1px solid rgba(117, 117, 117, 0.103);
+    border-radius: 3px;
     backdrop-filter: blur(5px);
-    border: none;
-    border-radius: 15px;
     z-index: 15;
     left:20%;
     top:50px;
+    color:white
   }
-
-.uploadFilePond{
-    height: 100px;
-    padding: 50px;
-    margin: 30px;
-    width: 800px;
+  .uploadModal input{
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
+    font-family: 'Montserrat', sans-serif;
+	  box-sizing: border-box;
+    background-color: rgb(41, 41, 41);
+    padding: 10px;
+	  height: 50px;
+    margin:10px;
+    max-width: 300px;
+	  justify-content: center;
+	  align-items: center;
+	  font-size: 16px;
+	  border: 1px solid rgba(0, 0, 0, 0.1);
+	  border-radius: 3px;
+	  transition: all 0.5s;
+  }
 
 .addNewsModalTitle{
     font-family: 'Oswald', sans-serif;
-    color:#000000b4
+    color:#b3b3b3b4
 }
 .addNewsModalBtns{
     display: flex;
@@ -124,16 +132,18 @@
     margin: 0;
     height: 40px;
     border: 1px solid rgb(199, 199, 199);
-    border-radius: 20px;
+    border-radius: 3px;
     text-align: center;
+    background-color: #adadad;
 }
 .modalData{
     width: 130px;
     height: 50px;
-    border-radius: 10px;
+    border-radius: 3px;
     border: 1px solid rgba(0, 0, 0, 0.37);
     font-family: 'Oswald';
     text-align: center;
+    background-color: #adadad;
 }
 .modalParagraf{
     width: 90%;
@@ -141,8 +151,9 @@
     margin: 0;
     height: 80px;
     border: 1px solid rgb(199, 199, 199);
-    border-radius: 20px;
+    border-radius: 3px;
     text-align: center;
+    background-color: #adadad;
 }
 .modalSmallWrapper{
     display: flex;
@@ -157,20 +168,18 @@
     align-items: center;
     width: 150px;
     height: 50px;
-    border-radius: 10px;
+    border-radius: 3px;
     border: 1px solid rgba(0, 0, 0, 0.37);
     font-family: 'Oswald';
     font-size: 15px;
     color: #000000;
     padding: 0;
     margin: 0;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(204, 204, 204);
     cursor: pointer;
     
 }
-/* input[type="file"] {
-  display: none;
-} */
+
 
 .newsTitleBox{
     background-color: rgba(114, 114, 114, 0.493);
@@ -209,7 +218,7 @@
   gap: 25px;
 }
 .newsBtn{
-  border-radius: 50px;
+  border-radius: 5px;
   width: 60px;
   cursor: pointer;
   color:white;
@@ -263,7 +272,7 @@
 }
 .newsImg img{
     max-width: 80%;
-    border-radius: 15px;
+    border-radius: 3px;
 }
 
 .sliderContainer {
@@ -276,7 +285,7 @@
   .switchImage{
     width: 250px;
     border: 1px solid rgb(199, 199, 199);
-    border-radius: 20px;
+    border-radius: 3px;
   }
   
   /* The switch - the box around the slider */
@@ -302,7 +311,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: white;
+    background-color: rgb(114, 114, 114);
     border: 1px solid #dfdfdf;
     -webkit-transition: 0.4s;
     transition: 0.4s;
@@ -335,23 +344,23 @@
   
   
 .greenText {
-    color: #1a1a1a;
+    color: #ffffff;
     font-weight: bold;
   }
   
   .redText {
-    color: #1a1a1a;
+    color: #ffffff;
     font-weight: bold;
   }
   
   .greyText {
-    color: #dfdfdf;
+    color: #000000;
     font-weight: bold;
   }
 
   .modalFile,.modalFileDisabled{
     border: 1px solid #ccc;
-    background-color: #fff;
+    background-color: #adadad;
     width: 150px;
     height: 50px;
     display: flex;
@@ -359,7 +368,7 @@
     cursor: pointer;
     justify-content: center;
     align-items: center;
-    border-radius: 10px;
+    border-radius: 3px;
     border: 1px solid rgba(0, 0, 0, 0.37);
     font-family: 'Oswald';
     font-style:normal;

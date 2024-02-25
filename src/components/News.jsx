@@ -6,7 +6,6 @@ import leftImage from '../images/left-img.jpg';
 import rightImage from '../images/right-img.jpg';
 import { getDay, getMonth, getDefYear } from '../services/DateFunctions';
 import { addArticle, deleteArticle, editArticle } from '../services/operations';
-// import { Resend } from 'resend';
 
 const mockApi = 'https://65b15d5ed16d31d11bdec7f4.mockapi.io';
 
@@ -169,15 +168,6 @@ export const News = ({ token }) => {
   };
   const openNewsLetter = () => {
     console.log('newsletter wyslany');
-
-    // const resend = new Resend('re_cv144UXn_Bn9bNTHDBVUFYwAsPUXLv3wx');
-
-    // resend.emails.send({
-    //   from: 'onboarding@resend.dev',
-    //   to: 'dopmaciej@gmail.com',
-    //   subject: 'Hello World',
-    //   html: '<p>Congrats on sending your <strong>first email</strong>!</p>',
-    // });
   };
 
   return (

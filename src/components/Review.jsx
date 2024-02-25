@@ -87,10 +87,10 @@ export const Review = ({ token }) => {
                 <>
                   {(token === 'admin' || verify === true) && (
                     <li
+                      key={nanoid()}
                       className={
                         verify ? styles.reviewListEl : styles.reviewListHiddenEl
                       }
-                      key={nanoid()}
                       id={id ?? nanoid()}
                     >
                       <div className={styles.reviewBtnBar}>

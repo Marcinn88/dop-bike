@@ -12,12 +12,7 @@ import ico_del from '../images/delete.png';
 import ico_hidden from '../images/hidden.png';
 import ico_unhidden from '../images/unhidden.png';
 
-import image1 from '../images/maciek.jpg';
-import image2 from '../images/maciek2.jpg';
-import image3 from '../images/maciek3.jpg';
-import image4 from '../images/maciek4.jpg';
-import image5 from '../images/motor.jpg';
-import image6 from '../images/ai-bike2.jpg';
+import defaultPhoto from '../images/default.jpg';
 
 export const Gallery = ({ token }) => {
   const [gallery, setGallery] = useState(false);
@@ -33,6 +28,9 @@ export const Gallery = ({ token }) => {
   const [selectName, setSelectName] = useState(`Wybierz album z listy`);
   const [placeholder, setPlaceholder] = useState('Wybierz album z listy');
   const [delFactor, setDelFactor] = useState(false);
+  const [currentGallery, setCurrentGallery] = useState({});
+  const [currentPhotoGallery, setCurrentPhotoGallery] = useState([]);
+  const [activePhoto, setActivePhoto] = useState(0);
 
   const ref = () => {
     window.location.reload(false);
@@ -114,24 +112,29 @@ export const Gallery = ({ token }) => {
     ref();
   };
 
-  const onAddNewAlbum = () => {
-    setAlbum({
-      ...album,
-      album: newAlbum.album,
-      description: newAlbum.description,
-    });
+  const onAddNewAlbum = async () => {
+    await addAlbum(newAlbum);
+    await getAlbums();
     closeNewAlbumModal();
-    addAlbum(newAlbum);
+    // ref();
 
-    let dataArray = {
-      album: newAlbum.album,
-      description: newAlbum.description,
-      hidden: false,
-      id: 'new',
-      main_id: '0',
-      photos: [],
-    };
-    data.push(dataArray);
+    // setAlbum({
+    //   ...album,
+    //   album: newAlbum.album,
+    //   description: newAlbum.description,
+    //   id: data[data.length].id,
+    // });
+    // console.log(album);
+
+    // let dataArray = {
+    //   album: newAlbum.album,
+    //   description: newAlbum.description,
+    //   hidden: false,
+    //   id: 'new',
+    //   main_id: '0',
+    //   photos: [],
+    // };
+    // data.push(dataArray);
   };
 
   const hideImage = (index, photo) => {
@@ -217,6 +220,20 @@ export const Gallery = ({ token }) => {
     setDelFactor(!delFactor);
   };
 
+  const openGalleryWindow = async id => {
+    openGallery();
+    const results = data.filter(el => el.id === id);
+    setCurrentGallery(results[0]);
+    console.log('current gallery', currentGallery);
+    setCurrentPhotoGallery(results[0].photos);
+    console.log('currentPhotoGallery', currentPhotoGallery);
+    setActivePhoto(0);
+  };
+
+  // const stepUp = () => {};
+
+  // const stepDown = () => {};
+
   return (
     <>
       {data && <></>}
@@ -268,7 +285,7 @@ export const Gallery = ({ token }) => {
                     <div className={styles.galleryElement}>
                       <img
                         className={styles.gallerySubTitle}
-                        src={image4}
+                        src={defaultPhoto}
                         alt="bike"
                       />
                       <p className={styles.gallerySubTitle}>
@@ -568,7 +585,7 @@ export const Gallery = ({ token }) => {
                         : onDelete();
                     }}
                   >
-                    Usuń Album{album.id}
+                    Usuń Album
                   </button>
                 )}
               </div>
@@ -594,25 +611,44 @@ export const Gallery = ({ token }) => {
                 +
               </button>
               <div className={styles.modalTextBox}>
-                <p className={styles.modalTitle}>Tytuł Galerii</p>
+                <p className={styles.modalTitle}>{currentGallery.album}</p>
                 <p className={styles.modalSubTitle}>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Doloribus qui corrupti vel quibusdam sit explicabo hic
-                  delectus.
+                  {currentGallery.description}
                 </p>
               </div>
               <div className={styles.galleryWindowWrapper}>
                 <button className={styles.galleryWindowBtn}>Poprzedni</button>
-                <div className={styles.galleryWindow}></div>
+                <div className={styles.galleryWindow}>
+                  {currentPhotoGallery.length !== 0 ? (
+                    <img
+                      src={currentPhotoGallery[activePhoto].photo}
+                      alt="Bike"
+                      className={styles.galleryWindow}
+                    />
+                  ) : (
+                    <p>Brak zdjęć</p>
+                  )}
+                </div>
                 <button className={styles.galleryWindowBtn}>Następny</button>
               </div>
               <div className={styles.gallerySmallWindowWrapper}>
-                <div className={styles.gallerySmallWindow}></div>
-                <div className={styles.gallerySmallWindow}></div>
-                <div className={styles.gallerySmallWindow}></div>
-                <div className={styles.gallerySmallWindow}></div>
-                <div className={styles.gallerySmallWindow}></div>
-                <div className={styles.gallerySmallWindow}></div>
+                {currentPhotoGallery.map(({ hidden, photo }, index) => {
+                  // const defImage = defaultPhoto;
+                  return (
+                    <div
+                      className={styles.gallerySmallWindow}
+                      onClick={() => {
+                        setActivePhoto(index);
+                      }}
+                    >
+                      <img
+                        src={photo}
+                        alt="motorbike"
+                        className={styles.gallerySmallWindow}
+                      />
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </>
@@ -642,84 +678,27 @@ export const Gallery = ({ token }) => {
         </p>
         <div className={styles.galleryMain}>
           <ul className={styles.galleryList}>
-            <li
-              className={styles.galleryElement}
-              onClick={() => {
-                openGallery();
-              }}
-            >
-              <img className={styles.gallerySubTitle} src={image1} alt="bike" />
-              <p className={styles.gallerySubTitle}>Wadowice - 2024</p>
-              <p className={styles.gallerySubText}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Doloribus qui corrupti vel quibusdam sit explicabo hic delectus.
-              </p>
-              <button className={styles.galleryBtn}>Otwórz</button>
-            </li>
-            <li
-              className={styles.galleryElement}
-              onClick={() => {
-                openGallery();
-              }}
-            >
-              <img className={styles.gallerySubTitle} src={image2} alt="bike" />
-              <p className={styles.gallerySubTitle}>Ciachcin - 2024</p>
-              <p className={styles.gallerySubText}>
-                Działo się!! Ciachcin to obowiązkowy punkt wizyty w trójmieście!
-              </p>
-              <button className={styles.galleryBtn}>Otwórz</button>
-            </li>
-            <li
-              className={styles.galleryElement}
-              onClick={() => {
-                openGallery();
-              }}
-            >
-              <img className={styles.gallerySubTitle} src={image3} alt="bike" />
-              <p className={styles.gallerySubTitle}>Sosnowiec - 2024</p>
-              <p className={styles.gallerySubText}>
-                Złomiarze go nienawidzą... Odkrył prosty sekret jak zarobić
-                milion złotych w 5 minut. Klinkij i przekonaj się sam.
-              </p>
-              <button className={styles.galleryBtn}>Otwórz</button>
-            </li>
-            <li
-              className={styles.galleryElement}
-              onClick={() => {
-                openGallery();
-              }}
-            >
-              <img className={styles.gallerySubTitle} src={image4} alt="bike" />
-              <p className={styles.gallerySubTitle}>Koszelówka - 2024</p>
-              <p className={styles.gallerySubText}>
-                Podobno jgdzieś jest tu jezioro. Ale czy na pewno?
-              </p>
-              <button className={styles.galleryBtn}>Otwórz</button>
-            </li>
-            <li
-              className={styles.galleryElement}
-              onClick={() => {
-                openGallery();
-              }}
-            >
-              <img className={styles.gallerySubTitle} src={image5} alt="bike" />
-              <p className={styles.gallerySubTitle}>Parking</p>
-              <p className={styles.gallerySubText}>
-                Foty z parkingu. Takie ooo
-              </p>
-              <button className={styles.galleryBtn}>Otwórz</button>
-            </li>
-            <li
-              className={styles.galleryElement}
-              onClick={() => {
-                openGallery();
-              }}
-            >
-              <img className={styles.gallerySubTitle} src={image6} alt="bike" />
-              <p className={styles.gallerySubTitle}>Tajne zdjęcia</p>
-              <p className={styles.gallerySubText}>Ściśle tajne i poufne.</p>
-              <button className={styles.galleryBtn}>Otwórz</button>
-            </li>
+            {data.map(({ album, description, main_id, photos, id }) => {
+              const defImage = defaultPhoto;
+              return (
+                <li
+                  key={nanoid()}
+                  className={styles.galleryElement}
+                  onClick={() => {
+                    openGalleryWindow(id);
+                  }}
+                >
+                  <img
+                    className={styles.gallerySubTitle}
+                    src={photos.length > 0 ? photos[main_id].photo : defImage}
+                    alt="bike"
+                  />
+                  <p className={styles.gallerySubTitle}>{album}</p>
+                  <p className={styles.gallerySubText}>{description}</p>
+                  <button className={styles.galleryBtn}>Otwórz</button>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </div>

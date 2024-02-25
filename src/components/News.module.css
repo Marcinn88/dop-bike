@@ -8,7 +8,8 @@
     position: relative;
 }
 .addNewsBtn,
-.loBtn{
+.loBtn,
+.sendNewsBtn{
     position: fixed;
     display: flex;
     justify-content: center;
@@ -29,10 +30,15 @@
     left:30px;
     transition: all 0.5s;
 }
-.loBtn{
+.sendNewsBtn{
   top:120px;
+  font-size: 10px;
+}
+.loBtn{
+  top:190px;
   font-size: 15px;
 }
+.sendNewsBtn:hover,
 .addNewsBtn:hover,
 .loBtn:hover{
     background-color: rgba(110, 110, 110, 0.411);
